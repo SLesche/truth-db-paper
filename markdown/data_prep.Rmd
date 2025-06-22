@@ -47,7 +47,7 @@ study_overview <- query_db(
 full_data <- query_db(
   conn,
   all_argument,
-  c("default", "statement_text", "statement_accuracy", "statementset_id", "statementset_publication", "within_description", "between_description", "repetition_time", "n_statements", "phase"),
+  c("default", "study_id", "publication_id", "statement_text", "statement_accuracy", "statementset_id", "statementset_publication", "within_description", "between_description", "repetition_time", "n_statements", "phase"),
   "observation_table"
 )
 

@@ -2,7 +2,6 @@
 editor_options:
   chunk_output_type: console
 ---
-<!-- # Library calls -->
 ```{r data-analysis-setup}
 library(tidyverse)
 library(data.table)
@@ -12,9 +11,24 @@ library(afex)
 
 
 ```{r}
+full_data <- data.table::fread("markdown/data/full_data.csv")
+
 analysis_data <- full_data %>% 
   filter(phase == "test") %>% 
   filter(!is.na(repeated), !is.na(response))
+
+has_complete_data <- analysis_data %>% 
+  count(procedure_id, subject, repeated) %>% 
+  count(procedure_id, subject) %>% 
+  mutate(
+    has_complete_data = ifelse(n == 2, 1, 0)
+  )
+
+analysis_data <- analysis_data %>% 
+  left_join(
+    ., has_complete_data
+  ) %>% 
+  filter(has_complete_data == 1)
 ```
 
 ```{r}
@@ -33,22 +47,85 @@ run_simple_aov <- function(data) {
   )
 }
 
+run_lme4 <- function(data){
+  lme4::lmer(response ~ repeated + (1 | subject), data = data)
+}
+
 results <- analysis_data %>% 
-  nest(.by = procedure_id) %>% 
+  nest(.by = c(procedure_id, repetition_time, n_statements)) %>% 
   mutate(
-    aov_data = map(data, prep_aov)
-  ) %>% 
+    aov_data = map(data, prep_aov),
+  )
+  
+results <- results %>% 
   mutate(
     n_trials = map_dbl(data, nrow),
     n_subjects = map_dbl(data, ~length(unique(.$subject))),
     aov_results = map(aov_data, run_simple_aov)
   )
 
-summary(simple_aov)
-effectsize::omega_squared(simple_aov)
-effectsize::eta_squared(simple_aov)
+results <- results %>% 
+  mutate(
+    eta_sq = map_dbl(aov_results, ~effectsize::eta_squared(.) %>% pull(Eta2_partial)),
+    omega_sq = map_dbl(aov_results, ~effectsize::omega_squared(.) %>% pull(Omega2_partial))
+  )
+
+results <- results %>% 
+  mutate(
+    mlm = map(data, run_lme4)
+  )
+
+results$eta_sq %>% hist(breaks = 10)
+results$omega_sq %>% hist()
+
 
 ```
 
 
+```{r}
+effect_by_subject <- analysis_data %>% 
+  group_by(subject, repeated, n_statements, repetition_time, procedure_id) %>% 
+  summarize(
+    mean_resp = mean(response, na.rm = TRUE)
+  ) %>% 
+  pivot_wider(
+    names_from = "repeated",
+    names_prefix = "repeated_",
+    values_from = "mean_resp"
+  ) %>% 
+  mutate(
+    effect = repeated_1 - repeated_0,
+    combination = interaction(subject, procedure_id),
+  ) %>% 
+  ungroup()
+
+effect_by_subject %>% 
+  ggplot(
+    aes(
+      x = fct_reorder(combination, effect),
+      y = effect,
+    )
+  )+
+  geom_point()+
+  geom_hline(yintercept = effect_by_subject %>% pull(effect) %>% mean(na.rm = TRUE),
+             col = "red")+
+  labs(
+    x = "Subject",
+    y = "Truth Effect"
+  )
+
+effect_by_subject %>% 
+  count(procedure_id, effect > 0) %>%
+  pivot_wider(
+    names_from = "effect > 0",
+    values_from = n,
+    names_prefix = "eff_present"
+  ) %>% 
+  mutate(
+    n_subjects = eff_presentTRUE + eff_presentFALSE,
+    percent_showing = eff_presentTRUE  / (eff_presentTRUE + eff_presentFALSE)
+  ) %>% 
+  pull(percent_showing) %>% 
+  hist()
+```
 
