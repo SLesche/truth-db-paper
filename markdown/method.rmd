@@ -1,15 +1,22 @@
 # Method
-The Method section is usually a good place to start embedding your data-child documents
-```{r method-source-data-prep, child = "markdown/data_prep.rmd"}
-```
+## The Truth Effect Database (TED)
+Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on [Github](https://github.com/SLesche/truth-db). 
 
-```{r method-source-data-anal, child = "markdown/data_analysis.rmd"}
-```
-Describe your method here. You can embed pictured and reference their label (see Figure \@ref(fig:method-example-fig)). You need to call `\@ref(TYPE:CHUNK-NAME)` to embed reference the output of an r chunk.
+The database is implemented using Structured Query Language (SQL), spefically *SQLite* [@sqlite2020hipp]. A key advantage of SQLite is its serverless architecture—data is stored in a single, sharable file, allowing researchers to download, interact with, and modify the database locally without the need for a dedicated database server.
 
-```{r method-example-fig, fig.cap = 'Plot of mpg over wt', results = 'asis'}
-car_plot
-```
+As a relational database system, SQLite supports the use of multiple interconnected tables. This structure enables efficient organization of complex data relationships. For instance, each publication may include several studies, which themselves involve multiple experimental conditions. By organizing data across discrete, normalized tables—rather than in a single flat file—the database minimizes redundancy and enhances both storage efficiency and query performance.
 
+The design of our database is illustrated in Figure **SOMETHING**. Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a *publication_table* and raw data at the lowest level in the *observation_table*. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
 
-You can also refer in inline code to data objects. We used the dataset `mtcars` for our analysis. It consists of data of `r nrow(mtcars)` cars. The syntax "r command" in backticks will evaluate the command using your R-engine.
+We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only understanding that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database. 
+### Data Submission
+To ease the process of submitting data to the database, we built a [website](https://slesche.github.io/truth-db/data-submission.html) that guides users through the submission process and checks submitted information for inconsistencies or errors. This website is designed to minimize both the effort of submitting new data to the database as well as identify potential errors in the submission process. **Hier fehlt mir noch irgendwas**
+
+### Data Extraction
+We provide the R package *acdcquery* [@R-acdcquery] to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can define filter arguments using `add_argument()` and request specific variables from any table in the database using `query_db()`. The R package will automatically construct the necessary SQL query and return the filtered data with the selected columns to the user. A detailed user guide on using the R package to interact with our database can be found on the databases [GitHub](https://github.com/SLesche/truth-db).
+
+### Data Selection
+Data selection was based on earlier work by @hendersonReproducibleSystematicMap2022 who identified 17 publications with accessible raw data and extended by our own literature search using the same search terms to include the years 2022-2025. In addition, we reached out to colleagues and asked them for freely available data sets. 
+
+### Example Analysis
+To demonstrate the benefits of the database, we will run **FILL HERE**

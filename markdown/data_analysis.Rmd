@@ -6,37 +6,49 @@ editor_options:
 ```{r data-analysis-setup}
 library(tidyverse)
 library(data.table)
+library(lme4)
+library(afex)
 ```
 
-```{r data-analysis-data}
-# data_cil <- rio::import("mydata.rdata")
+
+```{r}
+analysis_data <- full_data %>% 
+  filter(phase == "test") %>% 
+  filter(!is.na(repeated), !is.na(response))
 ```
 
-```{r data-get-car-with-best-mpg}
-best_car <- data_cil %>% 
-  slice_max(mpg, n = 1) %>% 
-  select(car, mpg, disp)
+```{r}
+prep_aov <- function(data){
+  data %>% 
+    group_by(subject, repeated) %>% 
+    summarize(mean_resp = mean(response, na.rm = FALSE))
+}
 
-best_cars_table <- data_cil %>% 
-  slice_max(mpg, n = 5) %>% 
-  select(car, mpg, disp)
-```
-
-```{r data-analysis-plot}
-car_plot <- data %>% 
-  ggplot(
-    aes(
-      x = mpg,
-      y = wt
-    )
-  )+
-  geom_point(aes(color = factor(cyl)))+
-  geom_smooth(method = "lm", se = FALSE, color = "black", linetype = "dashed")+
-  theme_classic()+
-  labs(
-    x = "Miles Per Gallon",
-    y = "Weight in Tons",
-    color = "Number of Cylinders"
+run_simple_aov <- function(data) {
+  aov_ez(
+    id = "subject",
+    dv = "mean_resp",
+    within = "repeated",
+    data = data
   )
+}
+
+results <- analysis_data %>% 
+  nest(.by = procedure_id) %>% 
+  mutate(
+    aov_data = map(data, prep_aov)
+  ) %>% 
+  mutate(
+    n_trials = map_dbl(data, nrow),
+    n_subjects = map_dbl(data, ~length(unique(.$subject))),
+    aov_results = map(aov_data, run_simple_aov)
+  )
+
+summary(simple_aov)
+effectsize::omega_squared(simple_aov)
+effectsize::eta_squared(simple_aov)
+
 ```
+
+
 

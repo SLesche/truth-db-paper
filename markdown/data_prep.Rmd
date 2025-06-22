@@ -6,23 +6,52 @@ editor_options:
 ```{r data-prep-setup}
 library(tidyverse)
 library(data.table)
+library(acdcquery)
 ```
 
-```{r data-prep-functions}
+```{r}
+conn <- connect_to_db("./markdown/data/ted.db")
 
+all_argument <- list() %>% 
+  add_argument(
+    conn,
+    "publication_id",
+    "greater",
+    "0"
+  )
+
+phase_argument <- list() %>% 
+  add_argument(
+    conn,
+    "phase",
+    "equal",
+    "test"
+  )
 ```
 
-```{r data-prep-importing}
-data <- mtcars
+```{r}
+publications_overview <- query_db(
+  conn,
+  all_argument,
+  "default",
+  "publication_table"
+)
+
+study_overview <- query_db(
+  conn,
+  all_argument,
+  "default",
+  "study_table"
+)
+
+full_data <- query_db(
+  conn,
+  all_argument,
+  c("default", "statement_text", "statement_accuracy", "statementset_id", "statementset_publication", "within_description", "between_description", "repetition_time", "n_statements", "phase"),
+  "observation_table"
+)
+
+write.csv(full_data, "./markdown/data/full_data.csv")
 ```
 
-```{r data-prep-filter-cil}
-data_cil <- data %>% 
-  filter(cyl == 8) %>% 
-  rownames_to_column(var = "car")
-```
-
-```{r data-prep-save}
-# rio::export(data_cil, "mydata.rdata")
-```
 

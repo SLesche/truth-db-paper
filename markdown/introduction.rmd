@@ -1,26 +1,21 @@
 # Introduction
-The introduction to your paper goes here. Just write plain-text for normal purposes. This can be printed in **bold** by using `**bold**` or _italic_ by using `_italic_`. Citations are added using the syntax `@author2000` for inline citations or the syntax `[@author200]` for citations in paragraph [@R-papaja]. These will be printed in the Reference Sections.
+The open science movement has emerged in response to growing concerns about the replicability, transparency, and efficiency of scientific research [@ioannidis2005most; @nosek2015promoting; @munafo2017manifesto]. At its core, open science promotes practices that make research processes and outputs accessible, verifiable, and reusable. Practices such as preregistration, data sharing, and open materials aim to increase the trustworthiness of findings and to foster a more cumulative, collaborative scientific enterprise. These practices, coupled with platforms like the Open Science Framework - OSF [@fosterOpenScienceFramework2017], have played a pivotal role in advancing openness through tools that support study registration, version control, and public sharing of data and materials. Transparency, once rare, is increasingly becoming the norm [@bauer2022psychological].
 
-## Sub-headers
-Subheades can be defined using multiple `#`-Symbols. This is a level-two header
+However, while transparency has improved markedly, efficiency and reusability have lagged behind. Research materials and datasets are often siloed within individual project pages, tailored to host single studies. As a result, even when data are technically open, they are rarely standardized in ways that facilitate reuse, integration, or cumulative analysis. Current open data practices focus primarily on the first two aspects of the FAIR (Findable, Accessible, Interoperable, and Reusable) principles of data sharing [@wilkinson2016fair], while neglecting the latter. For example, the OSF is well-suited to documenting and finding individual projects, but its structure does not support the aggregation or harmonization of data across multiple related studies. In addition to structural limitations, researchers' practices like inconsistent file formats, project-specific codebooks, and divergent analytic pipelines continue to hinder interoperability.
 
-### Level three
+This inconsistency not only limits replicability, but also reusability. Should a researcher be interested in estimating an effect size, developing a new computational model or simply re-analyzing existing data instead of collecting an entirely new sample, they have to comb through OSF, pray for existing codebooks and hope for decipherable raw data. This is both tedious and often unsuccessful [@cruwell2023s; @hardwicke2021analytic]. However, reusability greatly improves scientific efficiency. It saves resources otherwise wasted by planning and collecting an entirely new set of data and helps efficiently allocate public resources as well as participants' and researchers' time.
 
-#### Level four
+We argue that to make research outputs genuinely reusable, not just transparent, structure is essential. Reusability requires standardized organization: consistent variable naming, common data schemas, uniform documentation practices, and clear, accessible codebooks. In neuroscience, this principle has been successfully realized through the Brain Imaging Data Structure - BIDS [@gorgolewski2016brain], which provides a framework for organizing and annotating neuroimaging data. BIDS has enabled not just more efficient sharing, but also reproducible pipelines, automated analyses, and collaborative efforts at scale [@poldrack2024past].
 
-##### Don't use this please
+Structured approaches like BIDS are now gaining traction in cognitive psychology. The Attentional Control Database (ACDC; Haaf et al., in press) introduced a trial-level database for data from attentional control experiments, providing standardized variable names, metadata, and analysis-ready formats that streamline cross-study comparisons. Similarly, the FEARBASE project is building a large-scale, open-access repository for fear conditioning studies, adopting a shared structure to ensure comparability and long-term usability (Lohnsdorf & Ehlers, 2025). Crucially, there is increasing institutional support for the development of infrastructure enabling data reuse. For example, the German research foundation *DFG* issued an open funding call for projects developing infrastructure for scientific data management (DFG; *Förderprogramm Informationsinfrastrukturen für Forschungsdaten*). These projects spearhead a changing culture of data-reusability but so far represent the exception, rather than the norm.
 
-## Tinytex
-To compile to PDF, you need a LaTeX installation on your machine. The easiest way to achieve this is to use `tinytex`. To compile to word you will need to have any Word-distribution on your machine.
+We believe that there is great potential in the development of structured databases integrating trial level data. Large and structured collections of raw data have several key applications, extending the general principle of data-reusability. They enable living meta-analyses that can update automatically as new data are added; allow researchers to find relevant raw data based on task characteristics or participant variables; facilitate the straightforward replication of published findings; and enable power analyses using pooled datasets from comparable studies.
 
-```{r echo = TRUE, eval = FALSE}
-install.packages("tinytex")
+Beyond these direct applications, structured datasets also support the development of new methods and models. Trial-level repositories allow for benchmarking existing analytic tools, training machine learning models, and exploring novel statistical approaches.
 
-tinytex::install_tinytex()
-```
+### The present study
+In this spirit, we introduce a centralized, trial-level database for the illusory truth effect. This database is designed not only with structured organization in mind, but also with an emphasis on ease of use. Particular attention has been given to lowering the barrier for data submission through an intuitive entry-mask, as well as to enabling simple data extraction via an R package. Our aim is to create a living, extensible resource that supports both contributors and users: researchers can add new studies with minimal friction, and others can search, filter, and analyze trial-level data without having to clean or realign disparate datasets. By combining structure with usability, this resource is intended to foster cumulative research on the illusory truth effect and to serve as a model for reusable psychological data infrastructures more broadly.
 
-## Compiling
-To create a pdf or word. **description here**
-
-## Working Directory Root
-Explain where working directory root is
+### The illusory truth effect
+Here a section why we chose the ITE, what it is and why its important
+Hint at the Innenministerium

@@ -14,12 +14,13 @@ library(papaja)
 library(tidyverse)
 library(rmarkdown)
 library(knitr)
+library(acdcquery)
 
 r_refs("markdown/r-references.bib")
 
 r_citations <- cite_r(
   file = "markdown/r-references.bib",
-  pkgs = c("papaja", "tidyverse", "knitr"),
+  pkgs = c("papaja", "tidyverse", "knitr", "acdcquery"),
   omit = FALSE,
   footnote = TRUE
   )
