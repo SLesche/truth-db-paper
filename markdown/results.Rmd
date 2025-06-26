@@ -1,10 +1,56 @@
-# Results
+# Overview of TED
 ```{r method-source-data-prep, child = "markdown/data_prep.rmd"}
 ```
 ```{r method-source-data-anal, child = "markdown/data_analysis.rmd"}
 ```
 
-We conducted our analysis using `r r_citations$r`. `r r_citations$pkgs`.
+All analysis were conducted using `r r_citations$r`. `r r_citations$pkgs`.
 
 In the current version of the manuscript, we included `r nrow(study_overview)` data sets from `r nrow(publications_overview)` publications, spanning `r length(unique(full_data$subject))` participants contributing `r nrow(full_data)` trials. A complete list of the included publications can be found in the appendix **REFERENCE**.
+
+The publications included in this database span from the year `r min(publications_overview$conducted)` to `r max(publications_overview$conducted)`. The complete data spans `r nrow(procedure_data)` measurement sessions, `r sum(prodedure_data$repetition_location == "lab")` of which were conducted in the lab and `r sum(prodedure_data$repetition_location == "online")` online.
+
+```{r}
+age_data <- study_overview %>% 
+  mutate(participant_age = ifelse(participant_age == 99, NA, participant_age)) %>% 
+  filter(!is.na(participant_age), !is.na(n_participants))
+```
+
+Sample composition ranged from `r min(study_overview$n_participants, na.rm = TRUE)` to `r max(study_overview$n_participants, na.rm = TRUE)` participants. On average, studies included `r mean(study_overview$n_participants, na.rm = TRUE)` participants ($\mu_{age} =$ `r weighted.mean(age_data$participant_age, age_data$n_participants, na.rm = TRUE)`,$\sigma_{age} =$ `r DescTools::SD(age_data$participant_age, weights = age_data$n_participants, na.rm = TRUE)`).
+
+```{r}
+analysis_data$repetition_time_days = analysis_data$repetition_time/ (24*60)
+
+# Big LM Model
+model_0 <- lme4::lmer(response ~ repeated + statement_accuracy + repeated:statement_accuracy + repeated:truth_instructions + (1 | procedure_id) + (1 | subject), data = analysis_data)
+
+summary(model_0)
+```
+
+```{r}
+# Descriptively
+
+split_by_truth_instructions <- analysis_data %>% 
+  group_by(truth_instruction_timing, repeated) %>% 
+  summarize(
+    mean_resp = mean(response, na.rm = TRUE),
+    sd_resp = sd(response, na.rm = TRUE),
+    n = n(),
+    n_studies = length(unique(study_id)),
+
+  ) %>% 
+  filter(!is.na(repeated))
+
+split_by_repetition_instructions <- analysis_data %>% 
+  group_by(repetition_instruction_timing, repeated) %>% 
+  summarize(
+    mean_resp = mean(response, na.rm = TRUE),
+    sd_resp = sd(response, na.rm = TRUE),
+    n = n(),
+    n_studies = length(unique(study_id)),
+  ) %>% 
+  filter(!is.na(repeated))
+```
+
+
 

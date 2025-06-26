@@ -18,5 +18,5 @@ We provide the R package *acdcquery* [@R-acdcquery] to simplify the process of e
 ### Data Selection
 Data selection was based on earlier work by @hendersonReproducibleSystematicMap2022 who identified 17 publications with accessible raw data and extended by our own literature search using the same search terms to include the years 2022-2025. In addition, we reached out to colleagues and asked them for freely available data sets. 
 
-### Example Analysis
-To demonstrate the benefits of the database, we will run **FILL HERE**
+### Data Analysis 
+**something about the meta-analysis we will run here**

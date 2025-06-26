@@ -15,7 +15,24 @@ full_data <- data.table::fread("markdown/data/full_data.csv")
 
 analysis_data <- full_data %>% 
   filter(phase == "test") %>% 
-  filter(!is.na(repeated), !is.na(response))
+  filter(!is.na(repeated), !is.na(response)) %>% 
+  mutate(
+    truth_instruction_timing = ifelse(
+      truth_instruction_timing == "",
+      "none",
+      truth_instruction_timing
+    ),
+    repetition_instruction_timing = ifelse(
+      repetition_instruction_timing == "",
+      "none",
+      repetition_instruction_timing
+    ),
+    repetition_time_type = case_when(
+      repetition_time <= 5 ~ "immediate",
+      repetition_time > 5 & repetition_time <= 60 ~ "delay",
+      repetition_time > 60*24 ~ "next_day"
+    )
+  )
 
 has_complete_data <- analysis_data %>% 
   count(procedure_id, subject, repeated) %>% 
@@ -32,6 +49,40 @@ analysis_data <- analysis_data %>%
 ```
 
 ```{r}
+dichotomous_data <- analysis_data %>% 
+  filter(truth_rating_scale == "dichotomous")
+
+scale_data <- analysis_data %>% 
+  filter(truth_rating_scale != "dichotomous")
+```
+
+```{r}
+model_full_dichotomous <- glmer(
+  response ~ repeated + statement_accuracy + truth_instruction_timing:repeated +
+    repetition_time_type + repetition_instruction_timing:repeated + repetition_instruction_timing:truth_instruction_timing:repeated +
+    (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
+
+model_0_dichotomous <- glmer(
+  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
+
+model_0_likert <- lmer(
+  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = scale_data
+)
+
+summary(model_0_dichotomous)
+summary(model_0_likert)
+```
+
+
+
+```{r, eval = FALSE}
 prep_aov <- function(data){
   data %>% 
     group_by(subject, repeated) %>% 
@@ -78,13 +129,24 @@ results <- results %>%
 results$eta_sq %>% hist(breaks = 10)
 results$omega_sq %>% hist()
 
-
+procedure_data <- query_db(
+  conn,
+  list() %>% 
+    add_argument(
+      conn,
+      "procedure_id",
+      "greater",
+      "0"
+    ),
+  "default",
+  "procedure_table"
+)
 ```
 
 
-```{r}
+```{r, eval = FALSE}
 effect_by_subject <- analysis_data %>% 
-  group_by(subject, repeated, n_statements, repetition_time, procedure_id) %>% 
+  group_by(subject, repeated, n_statements, repetition_time, truth_instructions, truth_instruction_timing, repetition_instruction_timing, repetition_instructions, procedure_id) %>% 
   summarize(
     mean_resp = mean(response, na.rm = TRUE)
   ) %>% 
@@ -107,7 +169,7 @@ effect_by_subject %>%
     )
   )+
   geom_point()+
-  geom_hline(yintercept = effect_by_subject %>% pull(effect) %>% mean(na.rm = TRUE),
+  geom_hline(yintercept = 0,
              col = "red")+
   labs(
     x = "Subject",
@@ -126,6 +188,6 @@ effect_by_subject %>%
     percent_showing = eff_presentTRUE  / (eff_presentTRUE + eff_presentFALSE)
   ) %>% 
   pull(percent_showing) %>% 
-  hist()
+  hist(breaks = 20)
 ```
 
