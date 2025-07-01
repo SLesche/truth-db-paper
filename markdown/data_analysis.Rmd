@@ -76,8 +76,15 @@ model_0_likert <- lmer(
   data = scale_data
 )
 
+model_1_likert <- lmer(
+  response ~ repeated + statement_accuracy + truth_instruction_timing:repeated + repetition_instruction_timing:repeated + truth_instruction_timing:statement_accuracy + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = scale_data
+)
+
 summary(model_0_dichotomous)
 summary(model_0_likert)
+summary(model_1_likert)
+
 ```
 
 
