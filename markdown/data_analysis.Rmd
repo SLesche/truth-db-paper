@@ -7,8 +7,8 @@ library(tidyverse)
 library(data.table)
 library(lme4)
 library(afex)
+library(brms)
 ```
-
 
 ```{r}
 full_data <- data.table::fread("markdown/data/full_data.csv")
@@ -32,6 +32,28 @@ analysis_data <- full_data %>%
       repetition_time > 5 & repetition_time <= 60 ~ "delay",
       repetition_time > 60*24 ~ "next_day"
     )
+  ) %>% 
+  mutate(
+    truth_instruction_timing = fct_relevel(
+      factor(truth_instruction_timing),
+      "none",
+      "exposure", 
+      "test",
+      "both"
+    ),
+    repetition_instruction_timing = fct_relevel(
+      factor(repetition_instruction_timing),
+      "none",
+      "exposure", 
+      "test",
+      "both"
+    ),
+    repetition_time_type = fct_relevel(
+      factor(repetition_time_type),
+      "immediate",
+      "delay", 
+      "next_day"
+    ),
   )
 
 has_complete_data <- analysis_data %>% 
@@ -45,10 +67,17 @@ analysis_data <- analysis_data %>%
   left_join(
     ., has_complete_data
   ) %>% 
-  filter(has_complete_data == 1)
-```
+  filter(has_complete_data == 1) 
 
-```{r}
+prop_true <- analysis_data %>% 
+  group_by(statement_id) %>% 
+  summarize(
+    proportion_true = mean(response, na.rm = TRUE)
+  )
+  
+analysis_data <- analysis_data %>% 
+  left_join(prop_true)
+
 dichotomous_data <- analysis_data %>% 
   filter(truth_rating_scale == "dichotomous")
 
@@ -57,36 +86,59 @@ scale_data <- analysis_data %>%
 ```
 
 ```{r}
-model_full_dichotomous <- glmer(
-  response ~ repeated + statement_accuracy + truth_instruction_timing:repeated +
-    repetition_time_type + repetition_instruction_timing:repeated + repetition_instruction_timing:truth_instruction_timing:repeated +
-    (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-  data = dichotomous_data,
-  family = binomial()
-)
 
-model_0_dichotomous <- glmer(
-  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+# Convert to factor (if not already)
+scale_data$repeated <- factor(scale_data$repeated)
+scale_data$statement_accuracy <- factor(scale_data$statement_accuracy)
+scale_data$repetition_time_type <- factor(scale_data$repetition_time_type)
+scale_data$truth_instruction_timing <- factor(scale_data$truth_instruction_timing)
+scale_data$repetition_instruction_timing <- factor(scale_data$repetition_instruction_timing)
+
+# Apply effect coding (sum-to-zero contrasts)
+# contrasts(scale_data$statement_accuracy) <- contr.sum(length(levels(scale_data$statement_accuracy)))
+contrasts(scale_data$repetition_time_type) <- contr.sum(length(levels(scale_data$repetition_time_type)))
+contrasts(scale_data$truth_instruction_timing) <- contr.sum(length(levels(scale_data$truth_instruction_timing)))
+contrasts(scale_data$repetition_instruction_timing) <- contr.sum(length(levels(scale_data$repetition_instruction_timing)))
+
+model_full_dichotomous <- glmer(
+  response ~ repeated + statement_accuracy + proportion_true + repetition_time_type:repeated + truth_instruction_timing:repeated + repetition_instruction_timing:repeated + truth_instruction_timing:statement_accuracy + (1 | subject),
   data = dichotomous_data,
   family = binomial()
 )
+summary(model_full_dichotomous)
+
+performance::r2_nakagawa(model_full_dichotomous)
+# 
+# model_0_dichotomous <- glmer(
+#   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+#   data = dichotomous_data,
+#   family = binomial()
+# )
 
 model_0_likert <- lmer(
   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
   data = scale_data
 )
 
-model_1_likert <- lmer(
-  response ~ repeated + statement_accuracy + truth_instruction_timing:repeated + repetition_instruction_timing:repeated + truth_instruction_timing:statement_accuracy + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+model_full_likert <- lmer(
+  response ~ repeated + statement_accuracy + proportion_true + repetition_time_type:repeated + truth_instruction_timing:repeated + repetition_instruction_timing:repeated + truth_instruction_timing:statement_accuracy + (1 | subject),
   data = scale_data
 )
 
-summary(model_0_dichotomous)
 summary(model_0_likert)
-summary(model_1_likert)
+summary(model_full_likert)
+
+performance::r2_nakagawa(model_0_likert)
 
 ```
 
+```{r}
+bayesian_model <- brms::brm(
+  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = scale_data
+)
+
+```
 
 
 ```{r, eval = FALSE}
