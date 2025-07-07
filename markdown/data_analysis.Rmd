@@ -86,6 +86,39 @@ scale_data <- analysis_data %>%
 ```
 
 ```{r}
+model_check_dichotomous <- glmer(
+  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
+
+summary(model_check_dichotomous)
+
+model_re_dichotomous <- glmer(
+  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
+
+summary(model_re_dichotomous)
+
+model_check_likert <- lmer(
+  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+  data = scale_data,
+)
+
+summary(model_check_likert)
+
+model_re_likert <- lmer(
+  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+  data = scale_data,
+  REML = FALSE
+)
+
+summary(model_re_likert)
+```
+
+```{r}
 
 # Convert to factor (if not already)
 scale_data$repeated <- factor(scale_data$repeated)
@@ -139,7 +172,7 @@ bayesian_model <- brms::brm(
 )
 
 ```
-
+-
 
 ```{r, eval = FALSE}
 prep_aov <- function(data){
