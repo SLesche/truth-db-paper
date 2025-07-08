@@ -105,6 +105,7 @@ summary(model_re_dichotomous)
 model_check_likert <- lmer(
   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
   data = scale_data,
+  REML = FALSE
 )
 
 summary(model_check_likert)
@@ -116,6 +117,11 @@ model_re_likert <- lmer(
 )
 
 summary(model_re_likert)
+
+save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rdata")
+save(model_check_likert, file = "./markdown/data/model_check_likert.Rdata")
+save(model_re_dichotomous, file = "./markdown/data/model_re_dichotomous.Rdata")
+save(model_re_likert, file = "./markdown/data/model_re_likert.Rdata")
 ```
 
 ```{r}
@@ -164,15 +170,6 @@ summary(model_full_likert)
 performance::r2_nakagawa(model_0_likert)
 
 ```
-
-```{r}
-bayesian_model <- brms::brm(
-  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-  data = scale_data
-)
-
-```
--
 
 ```{r, eval = FALSE}
 prep_aov <- function(data){
