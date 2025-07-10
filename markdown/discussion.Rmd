@@ -1,2 +1,16 @@
 # Discussion
-Here you can discuss your results.
+Show ease of use, highlight this 
+
+Show results from variance decomposition of truth effect and the impact of repetition timing
+
+discuss selection bias in initial study sample. Discuss how we hope others can contribute, this needs to be added to the database description aswell (a text on how we deal with people submitting data).
+
+Discuss certain technical aspects (selection of variables) implementation of data structure
+
+Discuss the important aspect of longevity! Highlight what could be done in the future with more funding (dedicated server, team review)
+
+Discuss funding DFG, Innenministerium
+
+Discuss data ürincipiles such as FAIR, as directed by DFG 
+
+Discuss incentives for data submission (maybe add to introduction aswell)

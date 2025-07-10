@@ -99,6 +99,9 @@ knitr::opts_chunk$set(ft.keepnext = TRUE,
 set.seed(1234)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed) # this adds random seed to all chunks
 knitr::opts_chunk$set(autodep = TRUE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+
 knitr::dep_auto()
 ```
 

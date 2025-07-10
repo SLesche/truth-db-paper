@@ -29,7 +29,7 @@ phase_argument <- list() %>%
   )
 ```
 
-```{r}
+```{r, message=FALSE, echo = FALSE}
 publications_overview <- query_db(
   conn,
   all_argument,
@@ -44,6 +44,19 @@ study_overview <- query_db(
   "study_table"
 )
 
+procedure_data <- query_db(
+  conn,
+  list() %>% 
+    add_argument(
+      conn,
+      "procedure_id",
+      "greater",
+      "0"
+    ),
+  "default",
+  "procedure_table"
+)
+
 full_data <- query_db(
   conn,
   all_argument,
@@ -51,7 +64,7 @@ full_data <- query_db(
   "observation_table"
 )
 
-data.table::fwrite(full_data, "./markdown/data/full_data.csv")
+# data.table::fwrite(full_data, "./markdown/data/full_data.csv")
 ```
 
 

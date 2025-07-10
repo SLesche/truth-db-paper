@@ -86,6 +86,12 @@ scale_data <- analysis_data %>%
 ```
 
 ```{r}
+
+load(file = "./markdown/data/model_check_dichotomous.Rdata")
+load(file = "./markdown/data/model_check_likert.Rdata")
+load(file = "./markdown/data/model_re_dichotomous.Rdata")
+load(file = "./markdown/data/model_re_likert.Rdata")
+
 model_check_dichotomous <- glmer(
   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
   data = dichotomous_data,
@@ -122,6 +128,19 @@ save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rd
 save(model_check_likert, file = "./markdown/data/model_check_likert.Rdata")
 save(model_re_dichotomous, file = "./markdown/data/model_re_dichotomous.Rdata")
 save(model_re_likert, file = "./markdown/data/model_re_likert.Rdata")
+
+# Retentions-Intervall Länge noch mit aufnehmen?
+
+model_re_likert <- brms::brm(
+  bf(response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+     sigma ~ repetition_instruction_timing),
+  data = scale_data,
+  warmup = 1000,
+  iter = 2000,
+  thin = 1,
+  chains = 2, cores = 2, 
+  control = list(adapt_delta = 0.95)
+)
 ```
 
 ```{r}
@@ -217,19 +236,6 @@ results <- results %>%
 
 results$eta_sq %>% hist(breaks = 10)
 results$omega_sq %>% hist()
-
-procedure_data <- query_db(
-  conn,
-  list() %>% 
-    add_argument(
-      conn,
-      "procedure_id",
-      "greater",
-      "0"
-    ),
-  "default",
-  "procedure_table"
-)
 ```
 
 
