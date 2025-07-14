@@ -86,108 +86,131 @@ scale_data <- analysis_data %>%
 ```
 
 ```{r}
+procedure_data %>% 
+  count()
+# Timing and Existince of repetition instructions, number of presented statements
+# presentation type / repetition type
 
-load(file = "./markdown/data/model_check_dichotomous.Rdata")
-load(file = "./markdown/data/model_check_likert.Rdata")
-load(file = "./markdown/data/model_re_dichotomous.Rdata")
-load(file = "./markdown/data/model_re_likert.Rdata")
+study_overview %>% 
+  count()
 
+# Number of participants, age, laboratory status, scale
+```
+
+
+```{r}
 model_check_dichotomous <- glmer(
   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
   data = dichotomous_data,
   family = binomial()
 )
 
-summary(model_check_dichotomous)
+model_nosubject_re_dichotomous <- glmer(
+  response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
 
-model_re_dichotomous <- glmer(
+model_nostatement_re_dichotomous <- glmer(
+  response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
+
+model_noprocedure_re_dichotomous <- glmer(
+  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
+  data = dichotomous_data,
+  family = binomial()
+)
+
+model_full_re_dichotomous <- glmer(
   response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
   data = dichotomous_data,
   family = binomial()
 )
 
-summary(model_re_dichotomous)
-
-model_check_likert <- lmer(
+## Scale data
+model_check_scale <- lmer(
   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-  data = scale_data,
+  data = scale_data, 
   REML = FALSE
 )
 
-summary(model_check_likert)
+model_nosubject_re_scale <- lmer(
+  response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+  data = scale_data, 
+  REML = FALSE
+)
 
-model_re_likert <- lmer(
+model_nostatement_re_scale <- lmer(
+  response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
+  data = scale_data, 
+  REML = FALSE
+)
+
+model_noprocedure_re_scale <- lmer(
+  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
+  data = scale_data, 
+  REML = FALSE
+)
+
+model_full_re_scale <- lmer(
   response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = scale_data,
+  data = scale_data, 
   REML = FALSE
 )
-
-summary(model_re_likert)
 
 save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rdata")
-save(model_check_likert, file = "./markdown/data/model_check_likert.Rdata")
-save(model_re_dichotomous, file = "./markdown/data/model_re_dichotomous.Rdata")
-save(model_re_likert, file = "./markdown/data/model_re_likert.Rdata")
+save(model_check_scale, file = "./markdown/data/model_check_scale.Rdata")
+save(model_nosubject_re_dichotomous, file = "./markdown/data/model_nosubject_re_dichotomous.Rdata")
+save(model_nosubject_re_scale, file = "./markdown/data/model_nosubject_re_scale.Rdata")
+save(model_nostatement_re_dichotomous, file = "./markdown/data/model_nostatement_re_dichotomous.Rdata")
+save(model_nostatement_re_scale, file = "./markdown/data/model_nostatement_re_scale.Rdata")
+save(model_noprocedure_re_dichotomous, file = "./markdown/data/model_noprocedure_re_dichotomous.Rdata")
+save(model_noprocedure_re_scale, file = "./markdown/data/model_noprocedure_re_scale.Rdata")
+save(model_full_re_dichotomous, file = "./markdown/data/model_full_re_dichotomous.Rdata")
+save(model_full_re_scale, file = "./markdown/data/model_full_re_scale.Rdata")
 
-# Retentions-Intervall Länge noch mit aufnehmen?
+anova(
+  model_check_scale, 
+  model_nosubject_re_scale,
+  model_noprocedure_re_scale, 
+  model_nostatement_re_scale,
+  model_full_re_scale
+  )
 
-model_re_likert <- brms::brm(
-  bf(response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-     sigma ~ repetition_instruction_timing),
-  data = scale_data,
-  warmup = 1000,
-  iter = 2000,
-  thin = 1,
-  chains = 2, cores = 2, 
-  control = list(adapt_delta = 0.95)
+anova(
+  model_check_dichotomous, 
+  model_nosubject_re_dichotomous,
+  model_noprocedure_re_dichotomous, 
+  model_nostatement_re_dichotomous,
+  model_full_re_dichotomous
 )
 ```
 
+
 ```{r}
-
-# Convert to factor (if not already)
-scale_data$repeated <- factor(scale_data$repeated)
-scale_data$statement_accuracy <- factor(scale_data$statement_accuracy)
-scale_data$repetition_time_type <- factor(scale_data$repetition_time_type)
-scale_data$truth_instruction_timing <- factor(scale_data$truth_instruction_timing)
-scale_data$repetition_instruction_timing <- factor(scale_data$repetition_instruction_timing)
-
-# Apply effect coding (sum-to-zero contrasts)
-# contrasts(scale_data$statement_accuracy) <- contr.sum(length(levels(scale_data$statement_accuracy)))
-contrasts(scale_data$repetition_time_type) <- contr.sum(length(levels(scale_data$repetition_time_type)))
-contrasts(scale_data$truth_instruction_timing) <- contr.sum(length(levels(scale_data$truth_instruction_timing)))
-contrasts(scale_data$repetition_instruction_timing) <- contr.sum(length(levels(scale_data$repetition_instruction_timing)))
-
-model_full_dichotomous <- glmer(
-  response ~ repeated + statement_accuracy + proportion_true + repetition_time_type:repeated + truth_instruction_timing:repeated + repetition_instruction_timing:repeated + truth_instruction_timing:statement_accuracy + (1 | subject),
-  data = dichotomous_data,
-  family = binomial()
-)
-summary(model_full_dichotomous)
-
-performance::r2_nakagawa(model_full_dichotomous)
-# 
-# model_0_dichotomous <- glmer(
-#   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-#   data = dichotomous_data,
-#   family = binomial()
-# )
-
-model_0_likert <- lmer(
-  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-  data = scale_data
+# Retentions-Intervall Länge noch mit aufnehmen?
+model_re_likert_sameday <- lmer(
+  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+  data = scale_data %>% filter(repetition_time <= 180),
+  REML = FALSE
 )
 
-model_full_likert <- lmer(
-  response ~ repeated + statement_accuracy + proportion_true + repetition_time_type:repeated + truth_instruction_timing:repeated + repetition_instruction_timing:repeated + truth_instruction_timing:statement_accuracy + (1 | subject),
-  data = scale_data
+model_re_likert_later <- lmer(
+  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+  data = scale_data %>% filter(repetition_time > 180),
+  REML = FALSE
 )
 
-summary(model_0_likert)
-summary(model_full_likert)
+summary(model_re_likert_sameday)
+summary(model_re_likert_later)
 
-performance::r2_nakagawa(model_0_likert)
+VarCorr(model_re_likert_sameday)
+VarCorr(model_re_likert_later)
 
+save(model_re_likert_sameday, file = "./markdown/data/model_re_likert_sameday.Rdata")
+save(model_re_likert_later, file = "./markdown/data/model_re_likert_later.Rdata")
 ```
 
 ```{r, eval = FALSE}
@@ -237,52 +260,3 @@ results <- results %>%
 results$eta_sq %>% hist(breaks = 10)
 results$omega_sq %>% hist()
 ```
-
-
-```{r, eval = FALSE}
-effect_by_subject <- analysis_data %>% 
-  group_by(subject, repeated, n_statements, repetition_time, truth_instructions, truth_instruction_timing, repetition_instruction_timing, repetition_instructions, procedure_id) %>% 
-  summarize(
-    mean_resp = mean(response, na.rm = TRUE)
-  ) %>% 
-  pivot_wider(
-    names_from = "repeated",
-    names_prefix = "repeated_",
-    values_from = "mean_resp"
-  ) %>% 
-  mutate(
-    effect = repeated_1 - repeated_0,
-    combination = interaction(subject, procedure_id),
-  ) %>% 
-  ungroup()
-
-effect_by_subject %>% 
-  ggplot(
-    aes(
-      x = fct_reorder(combination, effect),
-      y = effect,
-    )
-  )+
-  geom_point()+
-  geom_hline(yintercept = 0,
-             col = "red")+
-  labs(
-    x = "Subject",
-    y = "Truth Effect"
-  )
-
-effect_by_subject %>% 
-  count(procedure_id, effect > 0) %>%
-  pivot_wider(
-    names_from = "effect > 0",
-    values_from = n,
-    names_prefix = "eff_present"
-  ) %>% 
-  mutate(
-    n_subjects = eff_presentTRUE + eff_presentFALSE,
-    percent_showing = eff_presentTRUE  / (eff_presentTRUE + eff_presentFALSE)
-  ) %>% 
-  pull(percent_showing) %>% 
-  hist(breaks = 20)
-```
-
