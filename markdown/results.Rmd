@@ -18,3 +18,10 @@ age_data <- study_overview %>%
 
 Sample composition ranged from `r min(study_overview$n_participants, na.rm = TRUE)` to `r max(study_overview$n_participants, na.rm = TRUE)` participants. On average, studies included `r mean(study_overview$n_participants, na.rm = TRUE)` participants ($\mu_{age} =$ `r weighted.mean(age_data$participant_age, age_data$n_participants, na.rm = TRUE)`,$\sigma_{age} =$ `r DescTools::SD(age_data$participant_age, weights = age_data$n_participants, na.rm = TRUE)`).
 
+Plot with study overview
+
+Something about the number of statements
+Something about the repetition_time distribution
+Plot with procedure overview
+
+Then the models

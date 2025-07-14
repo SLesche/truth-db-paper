@@ -86,15 +86,119 @@ scale_data <- analysis_data %>%
 ```
 
 ```{r}
-procedure_data %>% 
-  count()
-# Timing and Existince of repetition instructions, number of presented statements
-# presentation type / repetition type
-
 study_overview %>% 
   count()
 
 # Number of participants, age, laboratory status, scale
+long_study_data <- study_overview %>% 
+  mutate_all(as.character) %>% 
+  select(truth_rating_scale, truth_rating_steps, filler_task_yesno) %>% 
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+plot_study_data <- long_study_data %>%
+  count(variable, value) %>% 
+  mutate(
+    value = fct_relevel(
+      factor(value),
+      "101", "range", "likert", "11", "6", "5", "4", "dichotomous", "2"
+    )
+  )
+
+ggplot(plot_study_data, aes(x = variable, y = n, fill = value)) +
+  geom_bar(stat = "identity") +
+  geom_text(
+    aes(label = value),
+    position = position_stack(vjust = 0.5),
+    color = "black",
+    size = 3
+  ) +
+  labs(
+    title = "Breakdown of Procedure Variables",
+    x = NULL,
+    y = "Count"
+  ) +
+  scale_fill_grey(start = 0.3, end = 0.8) +  # Adjust range for lighter/darker contrast
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5)
+  )+
+  coord_flip()
+
+# Reshape data to long format
+long_procedure_data <- procedure_data %>%
+  filter(phase == "test") %>% 
+  select(
+    repetition_instructions, repetition_instruction_timing,
+    truth_instructions, truth_instruction_timing,
+    presentation_type, repetition_type, repetition_location,
+    percent_repeated
+    ) %>%  # Add more vars if needed
+  mutate_all(as.character) %>% 
+  mutate(
+    repetition_instructions = ifelse(
+      repetition_instructions == "1", "yes", "no"
+    ),
+    repetition_instruction_timing = ifelse(
+      repetition_instruction_timing == "",
+      "none", repetition_instruction_timing
+    ),
+    truth_instructions = ifelse(
+      truth_instructions == "1", "yes", "no"
+    ),
+    truth_instruction_timing = ifelse(
+      truth_instruction_timing == "",
+      "none", truth_instruction_timing
+    ),
+    percent_repeated = case_when(
+      percent_repeated %in% c("66", "67", "66.67") ~ "66",
+      TRUE ~percent_repeated
+    )
+  ) %>% 
+  mutate(
+    truth_instruction_timing = fct_relevel(
+      factor(truth_instruction_timing),
+      "both", "exposure", "test", "none"
+    ),
+    repetition_instruction_timing = fct_relevel(
+      factor(repetition_instruction_timing),
+      "both", "exposure", "test", "none"
+    )
+  ) %>% 
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
+
+# Count combinations of variable and value
+plot_procedure_data <- long_procedure_data %>%
+  count(variable, value) %>% 
+  mutate(
+    value = fct_relevel(
+      factor(value),
+      "no", "none", "yes", "both", "exposure", "test", 
+      "100", "67", "66.67", "66", "50", "46.67", "33", "0"
+    )
+  )
+
+# Plot
+ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
+  geom_bar(stat = "identity") +
+  geom_text(
+    aes(label = value),
+    position = position_stack(vjust = 0.5),
+    color = "black",
+    size = 3
+  ) +
+  labs(
+    title = "Breakdown of Procedure Variables",
+    x = NULL,
+    y = "Count"
+  ) +
+  scale_fill_grey(start = 0.3, end = 0.8) +  # Adjust range for lighter/darker contrast
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(hjust = 0.5)
+  )+
+  coord_flip()
 ```
 
 
@@ -133,30 +237,35 @@ model_full_re_dichotomous <- glmer(
 model_check_scale <- lmer(
   response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
   data = scale_data, 
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
   REML = FALSE
 )
 
 model_nosubject_re_scale <- lmer(
   response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
   data = scale_data, 
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
   REML = FALSE
 )
 
 model_nostatement_re_scale <- lmer(
   response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
   data = scale_data, 
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
   REML = FALSE
 )
 
 model_noprocedure_re_scale <- lmer(
   response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
   data = scale_data, 
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
   REML = FALSE
 )
 
 model_full_re_scale <- lmer(
   response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
   data = scale_data, 
+  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
   REML = FALSE
 )
 
