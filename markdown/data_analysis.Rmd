@@ -6,13 +6,14 @@ editor_options:
 library(tidyverse)
 library(data.table)
 library(lme4)
-library(afex)
-library(brms)
+# library(afex)
+# library(brms)
+library(sjPlot)
+
+compute_new = FALSE
 ```
 
 ```{r}
-full_data <- data.table::fread("markdown/data/full_data.csv")
-
 analysis_data <- full_data %>% 
   filter(phase == "test") %>% 
   filter(!is.na(repeated), !is.na(response)) %>% 
@@ -86,9 +87,6 @@ scale_data <- analysis_data %>%
 ```
 
 ```{r}
-study_overview %>% 
-  count()
-
 # Number of participants, age, laboratory status, scale
 long_study_data <- study_overview %>% 
   mutate_all(as.character) %>% 
@@ -104,7 +102,7 @@ plot_study_data <- long_study_data %>%
     )
   )
 
-ggplot(plot_study_data, aes(x = variable, y = n, fill = value)) +
+study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
     aes(label = paste0(value, " (", n, ")")),
@@ -113,7 +111,7 @@ ggplot(plot_study_data, aes(x = variable, y = n, fill = value)) +
     size = 3
   ) +
   labs(
-    title = "Breakdown of Procedure Variables",
+    title = "Breakdown of Study Variables",
     x = NULL,
     y = "Count"
   ) +
@@ -153,7 +151,8 @@ long_procedure_data <- procedure_data %>%
     percent_repeated = case_when(
       percent_repeated %in% c("66", "67", "66.67") ~ "66",
       TRUE ~percent_repeated
-    )
+    ),
+    repetition_type = ifelse(repetition_type == "some exact, some semantic (incongruent)", "mixed", repetition_type)
   ) %>% 
   mutate(
     truth_instruction_timing = fct_relevel(
@@ -173,13 +172,13 @@ plot_procedure_data <- long_procedure_data %>%
   mutate(
     value = fct_relevel(
       factor(value),
-      "no", "none", "yes", "both", "exposure", "test", 
-      "100", "67", "66.67", "66", "50", "46.67", "33", "0"
+      "paraphrase", "exact","no", "none", "yes", "both", "exposure", "test", 
+      "100", "67", "66.67", "66", "50", "46.67", "33", "0", "mixed"
     )
   )
 
 # Plot
-ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
+procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
     aes(label = paste0(value, " (", n, ")")),
@@ -203,84 +202,97 @@ ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
 
 
 ```{r}
-model_check_dichotomous <- glmer(
-  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-  data = dichotomous_data,
-  family = binomial()
-)
+if (compute_new == TRUE){
+  model_check_dichotomous <- glmer(
+    response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+    data = dichotomous_data,
+    family = binomial()
+  )
+  
+  model_nosubject_re_dichotomous <- glmer(
+    response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = dichotomous_data,
+    family = binomial()
+  )
+  
+  model_nostatement_re_dichotomous <- glmer(
+    response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
+    data = dichotomous_data,
+    family = binomial()
+  )
+  
+  model_noprocedure_re_dichotomous <- glmer(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
+    data = dichotomous_data,
+    family = binomial()
+  )
+  
+  model_full_re_dichotomous <- glmer(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = dichotomous_data,
+    family = binomial()
+  )
+  
+  ## Scale data
+  model_check_scale <- lmer(
+    response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
+    data = scale_data, 
+    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
+    REML = TRUE
+  )
+  
+  model_nosubject_re_scale <- lmer(
+    response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = scale_data, 
+    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
+    REML = TRUE
+  )
+  
+  model_nostatement_re_scale <- lmer(
+    response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
+    data = scale_data, 
+    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
+    REML = TRUE
+  )
+  
+  model_noprocedure_re_scale <- lmer(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
+    data = scale_data, 
+    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
+    REML = TRUE
+  )
+  
+  model_full_re_scale <- lmer(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = scale_data, 
+    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
+    REML = TRUE
+  )
+  
+  save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rdata")
+  save(model_check_scale, file = "./markdown/data/model_check_scale.Rdata")
+  save(model_nosubject_re_dichotomous, file = "./markdown/data/model_nosubject_re_dichotomous.Rdata")
+  save(model_nosubject_re_scale, file = "./markdown/data/model_nosubject_re_scale.Rdata")
+  save(model_nostatement_re_dichotomous, file = "./markdown/data/model_nostatement_re_dichotomous.Rdata")
+  save(model_nostatement_re_scale, file = "./markdown/data/model_nostatement_re_scale.Rdata")
+  save(model_noprocedure_re_dichotomous, file = "./markdown/data/model_noprocedure_re_dichotomous.Rdata")
+  save(model_noprocedure_re_scale, file = "./markdown/data/model_noprocedure_re_scale.Rdata")
+  save(model_full_re_dichotomous, file = "./markdown/data/model_full_re_dichotomous.Rdata")
+  save(model_full_re_scale, file = "./markdown/data/model_full_re_scale.Rdata")   
+} else {
+  load(file = "./markdown/data/model_check_dichotomous.Rdata")
+  load(file = "./markdown/data/model_check_scale.Rdata")
+  load(file = "./markdown/data/model_nosubject_re_dichotomous.Rdata")
+  load(file = "./markdown/data/model_nosubject_re_scale.Rdata")
+  load(file = "./markdown/data/model_nostatement_re_dichotomous.Rdata")
+  load(file = "./markdown/data/model_nostatement_re_scale.Rdata")
+  load(file = "./markdown/data/model_noprocedure_re_dichotomous.Rdata")
+  load(file = "./markdown/data/model_noprocedure_re_scale.Rdata")
+  load(file = "./markdown/data/model_full_re_dichotomous.Rdata")
+  load(file = "./markdown/data/model_full_re_scale.Rdata") 
+}
 
-model_nosubject_re_dichotomous <- glmer(
-  response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = dichotomous_data,
-  family = binomial()
-)
-
-model_nostatement_re_dichotomous <- glmer(
-  response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
-  data = dichotomous_data,
-  family = binomial()
-)
-
-model_noprocedure_re_dichotomous <- glmer(
-  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
-  data = dichotomous_data,
-  family = binomial()
-)
-
-model_full_re_dichotomous <- glmer(
-  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = dichotomous_data,
-  family = binomial()
-)
-
-## Scale data
-model_check_scale <- lmer(
-  response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-  data = scale_data, 
-  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-  REML = FALSE
-)
-
-model_nosubject_re_scale <- lmer(
-  response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = scale_data, 
-  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-  REML = FALSE
-)
-
-model_nostatement_re_scale <- lmer(
-  response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
-  data = scale_data, 
-  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-  REML = FALSE
-)
-
-model_noprocedure_re_scale <- lmer(
-  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
-  data = scale_data, 
-  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-  REML = FALSE
-)
-
-model_full_re_scale <- lmer(
-  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = scale_data, 
-  control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-  REML = FALSE
-)
-
-save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rdata")
-save(model_check_scale, file = "./markdown/data/model_check_scale.Rdata")
-save(model_nosubject_re_dichotomous, file = "./markdown/data/model_nosubject_re_dichotomous.Rdata")
-save(model_nosubject_re_scale, file = "./markdown/data/model_nosubject_re_scale.Rdata")
-save(model_nostatement_re_dichotomous, file = "./markdown/data/model_nostatement_re_dichotomous.Rdata")
-save(model_nostatement_re_scale, file = "./markdown/data/model_nostatement_re_scale.Rdata")
-save(model_noprocedure_re_dichotomous, file = "./markdown/data/model_noprocedure_re_dichotomous.Rdata")
-save(model_noprocedure_re_scale, file = "./markdown/data/model_noprocedure_re_scale.Rdata")
-save(model_full_re_dichotomous, file = "./markdown/data/model_full_re_dichotomous.Rdata")
-save(model_full_re_scale, file = "./markdown/data/model_full_re_scale.Rdata")
-
-anova(
+model_comp_scale <- anova(
   model_check_scale, 
   model_nosubject_re_scale,
   model_noprocedure_re_scale, 
@@ -288,39 +300,78 @@ anova(
   model_full_re_scale
   )
 
-anova(
+model_comp_dichotomous <- anova(
   model_check_dichotomous, 
   model_nosubject_re_dichotomous,
   model_noprocedure_re_dichotomous, 
   model_nostatement_re_dichotomous,
   model_full_re_dichotomous
 )
+
+tab_model(
+  model_check_scale,
+  model_full_re_scale,
+  model_nosubject_re_scale,
+  model_noprocedure_re_scale,
+  model_nostatement_re_scale,
+  show.re.var = TRUE,  # Show random effect variances
+  show.icc = TRUE,     # Show ICC
+  show.loglik = TRUE,
+  show.aic = TRUE,
+  show.bic = TRUE,
+  dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
+  title = "Multilevel Model Comparison: Scale Data"
+)
+
+tab_model(
+  model_check_dichotomous, 
+  model_nosubject_re_dichotomous,
+  model_noprocedure_re_dichotomous, 
+  model_nostatement_re_dichotomous,
+  model_full_re_dichotomous
+  # show.re.var = TRUE,  # Show random effect variances
+  # # show.icc = TRUE,     # Show ICC
+  # show.loglik = TRUE,
+  # show.aic = TRUE,
+  # show.bic = TRUE,
+  # dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
+  # title = "Multilevel Model Comparison: Scale Data"
+)
 ```
 
 
 ```{r}
-# Retentions-Intervall Länge noch mit aufnehmen?
-model_re_likert_sameday <- lmer(
-  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = scale_data %>% filter(repetition_time <= 180),
-  REML = FALSE
-)
+if (compute_new == TRUE){
+  # Retentions-Intervall Länge noch mit aufnehmen?
+  model_re_likert_sameday <- lmer(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = scale_data %>% filter(repetition_time <= 180),
+    REML = FALSE
+  )
+  
+  model_re_likert_later <- lmer(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = scale_data %>% filter(repetition_time > 180),
+    REML = FALSE
+  )
+  
+  # summary(model_re_likert_sameday)
+  # summary(model_re_likert_later)
+  # 
+  # VarCorr(model_re_likert_sameday)
+  # VarCorr(model_re_likert_later)
+  
+  save(model_re_likert_sameday, file = "./markdown/data/model_re_likert_sameday.Rdata")
+  save(model_re_likert_later, file = "./markdown/data/model_re_likert_later.Rdata")
+} else {
+  load(file = "./markdown/data/model_re_likert_sameday.Rdata")
+  load(file = "./markdown/data/model_re_likert_later.Rdata")
+}
 
-model_re_likert_later <- lmer(
-  response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-  data = scale_data %>% filter(repetition_time > 180),
-  REML = FALSE
-)
-
-summary(model_re_likert_sameday)
-summary(model_re_likert_later)
-
-VarCorr(model_re_likert_sameday)
-VarCorr(model_re_likert_later)
-
-save(model_re_likert_sameday, file = "./markdown/data/model_re_likert_sameday.Rdata")
-save(model_re_likert_later, file = "./markdown/data/model_re_likert_later.Rdata")
 ```
+
+
+
 
 ```{r, eval = FALSE}
 prep_aov <- function(data){

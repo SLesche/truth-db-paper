@@ -20,13 +20,6 @@ all_argument <- list() %>%
     "0"
   )
 
-phase_argument <- list() %>% 
-  add_argument(
-    conn,
-    "phase",
-    "equal",
-    "test"
-  )
 ```
 
 ```{r, message=FALSE, echo = FALSE}
@@ -49,9 +42,9 @@ procedure_data <- query_db(
   list() %>% 
     add_argument(
       conn,
-      "procedure_id",
-      "greater",
-      "0"
+      "phase",
+      "equal",
+      "test"
     ),
   "default",
   "procedure_table"
