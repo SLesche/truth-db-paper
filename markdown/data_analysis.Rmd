@@ -238,35 +238,35 @@ if (compute_new == TRUE){
     response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
     data = scale_data, 
     control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = TRUE
+    REML = FALSE
   )
   
   model_nosubject_re_scale <- lmer(
     response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
     data = scale_data, 
     control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = TRUE
+    REML = FALSE
   )
   
   model_nostatement_re_scale <- lmer(
     response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
     data = scale_data, 
     control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = TRUE
+    REML = FALSE
   )
   
   model_noprocedure_re_scale <- lmer(
     response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
     data = scale_data, 
     control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = TRUE
+    REML = FALSE
   )
   
   model_full_re_scale <- lmer(
     response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
     data = scale_data, 
     control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = TRUE
+    REML = FALSE
   )
   
   save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rdata")
