@@ -3,9 +3,11 @@ Show ease of use, highlight this
 
 Show results from variance decomposition of truth effect and the impact of repetition timing
 
-discuss selection bias in initial study sample. Discuss how we hope others can contribute, this needs to be added to the database description aswell (a text on how we deal with people submitting data).
+discuss selection bias in initial study sample. 
 
 Discuss how results from repetition timing might also be related to this selection bias?
+
+Discuss how we hope others can contribute, this needs to be added to the database description aswell (a text on how we deal with people submitting data).
 
 Discuss the important aspect of longevity! Highlight what could be done in the future with more funding (dedicated server, team review)
 
