@@ -6,7 +6,7 @@
 
 All analysis were conducted using `r r_citations$r`. `r r_citations$pkgs`.
 
-In the current version of the manuscript, we included `r nrow(study_overview)` studies from `r nrow(publications_overview)` publications, spanning `r length(unique(full_data$subject))` participants contributing `r nrow(full_data)` trials. A complete list of the included publications can be found in Table **table with refs, studies, trials here**.
+In the current version of the manuscript, we included `r nrow(study_overview) %>% apa_num()` studies from `r nrow(publications_overview) %>% apa_num()` publications, spanning `r length(unique(full_data$subject)) %>% apa_num()` participants contributing `r nrow(full_data) %>% apa_num()` trials. A complete list of the included publications can be found in Table **table with refs, studies, trials here**.
 
 ```{r}
 age_data <- study_overview %>% 
@@ -29,7 +29,7 @@ participant in the judgment session and in `r print_freq_percent(sum(procedure_d
 procedure_overview_plot
 ```
 
-Detailed information on the statements presented is available for **FILTER HERE** out of N studies. Statement text is avaiable for N trials out of X trials (percentage). Response times are available for X trials (percentage).
+Detailed information on the statements presented is available for `r study_overview %>% filter(statementset_id != 1) %>% nrow()` out of `r study_overview %>% nrow()` studies. Data on the accuracy of a statement is available for `r (length(analysis_data$statement_accuracy[which(!is.na(analysis_data$statement_accuracy))]) / nrow(analysis_data)) %>% print_freq_percent()` of trials, the detailed statement text is available for `r (length(analysis_data$statement_text[which(!is.na(analysis_data$statement_text))]) / nrow(analysis_data)) %>% print_freq_percent()` of trials, and response times are available for `r (length(analysis_data$rt[which(!is.na(analysis_data$rt))]) / nrow(analysis_data)) %>% print_freq_percent()` of trials.
 
 ## Multi-level Modelling
 
@@ -40,7 +40,7 @@ We fit five models per dataset. A baseline model with only random intercepts. A 
 We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-type responses (e.g., 1–5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a "true" judgment.
 
 ### Dichotomous Truth Judgments
-The analysis was based on `r nrow(dichotomous_data)` trials nested within `r length(unique(dichotomous_data$subject))` subjects, `r length(unique(dichotomous_data$statement_id))` statements, and `r length(unique(dichotomous_data$procedure_id))` procedures.
+The analysis was based on `r nrow(dichotomous_data) %>% apa_num()` trials nested within `r length(unique(dichotomous_data$subject)) %>% apa_num()` subjects, `r length(unique(dichotomous_data$statement_id)) %>% apa_num()` statements, and `r length(unique(dichotomous_data$procedure_id)) %>% apa_num()` procedures.
 
 (ref:model-comp-dichotomous) Overview of Information Criteria. Models...
 ```{r model-comp-dichotomous,  tab.cap = paste("(ref:model-comp-dichotomous)"), out.width="90%"}
@@ -52,7 +52,7 @@ All models that included a random effect of repetition at any level outperformed
 The model incorporating random effects at all hierarchical levels provided the best overall fit. Compared to the model excluding random effects of statements, it demonstrated a slightly lower AIC and a marginally higher BIC. This is attributable to the minimal variance observed in the repetition effect at the statement level. Notably, the variance of the random effect of repetition was highest at the subject level, followed by the procedure level.
 
 ### Scale Truth Judgments
-The analysis was based on `r nrow(scale_data)` trials nested within `r length(unique(scale_data$subject))` subjects, `r length(unique(scale_data$statement_id))` statements, and `r length(unique(scale_data$procedure_id))` procedures.
+The analysis was based on `r nrow(scale_data) %>% apa_num()` trials nested within `r length(unique(scale_data$subject)) %>% apa_num()` subjects, `r length(unique(scale_data$statement_id)) %>% apa_num()` statements, and `r length(unique(scale_data$procedure_id)) %>% apa_num()` procedures.
 
 We employed the "bobyqa" optimizer, as some models initially failed to converge, and estimated the models using full maximum likelihood. An overview of the information criteria for all evaluated models is presented in Table \@ref(tab:model-comp-scale).
 
