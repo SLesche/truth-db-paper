@@ -22,7 +22,7 @@ affiliation:
   - id            : "1"
     institution   : "Ruprecht-Karls-University Heidelberg"
   - id            : "2"
-    institution   : "University Freiburg"
+    institution   : "Albert-Ludwigs-University Freiburg"
   # add a second id using this syntax
 
 authornote: |

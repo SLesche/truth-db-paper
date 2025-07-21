@@ -45,20 +45,39 @@ We analyzed the dichotomous and Likert-type response formats separately due to d
 ### Dichotomous Truth Judgments
 The analysis was based on `r nrow(dichotomous_data)` trials nested within `r length(unique(dichotomous_data$subject))` subjects, `r length(unique(dichotomous_data$statement_id))` statements, and `r length(unique(dichotomous_data$procedure_id))` procedures.
 
-here is the model comparison
+(ref:model-comp-dichotomous) Overview of Information Criteria. Models...
+```{r model-comp-dichotomous,  tab.cap = paste("(ref:model-comp-dichotomous)"), out.width="90%"}
+papaja::apa_table(model_comp_dichotomous)
+```
 
-No random effect on statement seems to be best, which makes sense when seeing the full model.
--> Almost no between statement variance in the repetition effect.
+All models that included a random effect of repetition at any level outperformed the baseline model with only random intercepts. Detailed model comparisons, based on information criteria, are presented in Table \@ref(tab:model-comp-dichotomous).
+
+The model incorporating random effects at all hierarchical levels provided the best overall fit. Compared to the model excluding random effects of statements, it demonstrated a slightly lower AIC and a marginally higher BIC. This is attributable to the minimal variance observed in the repetition effect at the statement level. Notably, the variance of the random effect of repetition was highest at the subject level, followed by the procedure level.
 
 ### Scale Truth Judgments
 The analysis was based on `r nrow(scale_data)` trials nested within `r length(unique(scale_data$subject))` subjects, `r length(unique(scale_data$statement_id))` statements, and `r length(unique(scale_data$procedure_id))` procedures.
 
-We use the "bobqy" optimizer as some models did not converge initially
-Was based on x trials, nested in y subject and z procedures. 
-here is the model comparison
+We employed the "bobyqa" optimizer, as some models initially failed to converge, and estimated the models using full maximum likelihood. An overview of the information criteria for all evaluated models is presented in Table \@ref(tab:model-comp-scale).
 
-The full model is best
--> But still - Almost no between statement variance in the repetition effect.
+(ref:model-comp-scale) Overview of Information Criteria. Models...
+```{r model-comp-scale,  tab.cap = paste("(ref:model-comp-scale)"), out.width="90%"}
+papaja::apa_table(model_comp_scale)
+```
 
-Then, using the scale data (as we had more trials here) split by repetition time (same-day vs not)
-Here, the variance between subject is reduced in later
+The model including random effects at all hierarchical levels provided the best overall fit, exhibiting improved AIC and BIC values compared to the model that excluded random effects of statements. As in the dichotomous analysis, the variance of the repetition effect was near zero at the statement level, while being most pronounced at the subject level.
+
+To further explore the influence of temporal delay between the exposure and judgment phases on interindividual variability in the repetition effect, we stratified the data. Specifically, we re-estimated the multilevel model (with random effects at all levels) separately for judgments made on the same day as the exposure phase and for those made on a subsequent day.
+
+The results of this model can be found in table **table!**
+
+Model Sameday
+```{r}
+model_re_likert_sameday
+```
+
+Model Later
+```{r}
+model_re_likert_later
+```
+
+The variance of the random effect of repetition was higher in the data containing truth judgments from the same day as the exposure phase (number 1) vs. (number 2).

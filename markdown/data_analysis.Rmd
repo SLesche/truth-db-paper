@@ -308,35 +308,35 @@ model_comp_dichotomous <- anova(
   model_full_re_dichotomous
 )
 
-tab_model(
-  model_check_scale,
-  model_full_re_scale,
-  model_nosubject_re_scale,
-  model_noprocedure_re_scale,
-  model_nostatement_re_scale,
-  show.re.var = TRUE,  # Show random effect variances
-  show.icc = TRUE,     # Show ICC
-  show.loglik = TRUE,
-  show.aic = TRUE,
-  show.bic = TRUE,
-  dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
-  title = "Multilevel Model Comparison: Scale Data"
-)
-
-tab_model(
-  model_check_dichotomous, 
-  model_nosubject_re_dichotomous,
-  model_noprocedure_re_dichotomous, 
-  model_nostatement_re_dichotomous,
-  model_full_re_dichotomous
-  # show.re.var = TRUE,  # Show random effect variances
-  # # show.icc = TRUE,     # Show ICC
-  # show.loglik = TRUE,
-  # show.aic = TRUE,
-  # show.bic = TRUE,
-  # dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
-  # title = "Multilevel Model Comparison: Scale Data"
-)
+# tab_model(
+#   model_check_scale,
+#   model_full_re_scale,
+#   model_nosubject_re_scale,
+#   model_noprocedure_re_scale,
+#   model_nostatement_re_scale,
+#   show.re.var = TRUE,  # Show random effect variances
+#   show.icc = TRUE,     # Show ICC
+#   show.loglik = TRUE,
+#   show.aic = TRUE,
+#   show.bic = TRUE,
+#   dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
+#   title = "Multilevel Model Comparison: Scale Data"
+# )
+# 
+# tab_model(
+#   model_check_dichotomous, 
+#   model_nosubject_re_dichotomous,
+#   model_noprocedure_re_dichotomous, 
+#   model_nostatement_re_dichotomous,
+#   model_full_re_dichotomous
+#   # show.re.var = TRUE,  # Show random effect variances
+#   # # show.icc = TRUE,     # Show ICC
+#   # show.loglik = TRUE,
+#   # show.aic = TRUE,
+#   # show.bic = TRUE,
+#   # dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
+#   # title = "Multilevel Model Comparison: Scale Data"
+# )
 ```
 
 
@@ -367,11 +367,7 @@ if (compute_new == TRUE){
   load(file = "./markdown/data/model_re_likert_sameday.Rdata")
   load(file = "./markdown/data/model_re_likert_later.Rdata")
 }
-
 ```
-
-
-
 
 ```{r, eval = FALSE}
 prep_aov <- function(data){
