@@ -1,23 +1,32 @@
 # Discussion
-In this paper, we introduce the Truth-Effect Database (TED), an open source database containing truth judgments from over 10.000 participants in a standardized format. This standardization allows data to be interoperable and reusable, thus ensuring FAIR data in truth effect research.
+In this paper, we introduce the Truth-Effect Database (TED), a large-scale, open-access repository of trial-level data on truth judgments. TED is designed to support cumulative, reproducible research on the truth effect by standardizing and centralizing data from a wide range of studies. With contributions from over 10,000 participants, our database offers a comprehensive resource for researchers interested in understanding how repetition and related factors influence perceptions of truth.
 
-Data is structured unsing SQL, tables
+Our goal in developing TED was to address key challenges in open research data: the fragmentation of data across studies, the lack of standard formats for sharing experimental data, and the resulting lack of interoperability and reusability. To meet these challenges, we provide a structured SQL-based schema that organizes data at multiple levels—including publications, studies, participants, and individual trials. This structure allows for fine-grained analysis while maintaining consistency across diverse datasets.
 
-We have information on publications, studies, participants, trials
+We also provide tools to facilitate access and use of the database. In particular, the R package `acdcquery` allows users to extract data with flexible filtering criteria, supporting both simple and complex queries. Additionally, we have developed a web-based data entry interface that automatically checks for consistency and flags incorrect variable names or entries. This helps maintain high standards for incoming data and ensures that TED remains a reliable resource for the community, while simplifying the submission process and lowering the barrier to entry.
 
-Data can be easily extracted using the R package `acdcquery`. This allows for simple definition of filter criteria and extraction.
+To illustrate the analytical potential of TED, we conducted multilevel models estimating random effects at the subject, statement, and publication levels to investigate where variance in the truth effect originates. This approach is only feasible with a dataset of TED’s size and granularity.
 
-Data entry can be done unsing WEBSITE, which automatically checks consistencies and flags incorrect variable names / entries
+In both the Likert-scale and dichotomous truth judgment data, we found that the random effect of repetition on the statement level showed very little variance. This suggests that specific properties of individual statements (e.g., their semantic content or plausibility) have limited influence on the magnitude of the truth effect. However, statement-level variance in random intercepts was relatively large. This is consistent with expectations: some statements are objectively easier to judge as true or false, while others are more ambiguous, leading to baseline differences in overall truth ratings.
 
-This large scale database allows fine-grained re-analysis of a large number of studies.
+We also observed substantial variance in the publication-level random effect of repetition. This is unsurprising, as studies varied considerably in design features such as the number of statements, delay between exposure and judgment, or whether participants were warned about repetition. Nevertheless, the publication-level variance in the effect of repetition was smaller than at the subject level.
 
-To illustrate this, we conducted...
+Indeed, the largest variance in the truth effect emerged at the subject level, indicating substantial individual differences in susceptibility to the repetition effect. This finding aligns with growing interest in understanding the psychological traits or cognitive mechanisms that moderate the truth effect at the individual level. Some studies **include studies here**. 
 
-Show results from variance decomposition of truth effect and the impact of repetition timing
+However, efforts to predict individual differences in the truth effect have so far produced mixed results **studies**. 
 
-discuss selection bias in initial study sample. 
+This, it remains an open question whether the variability in the truth effect reflects reliable, trait-like differences. TED provides a promising platform for revisiting the question of reliable individual differences in the truth effect in future work.
 
-Discuss how results from repetition timing might also be related to this selection bias?
+Lastly, we explored whether the magnitude of variance in the repetition effect differed depending on the delay between exposure and judgment—a key procedural variable in truth effect research. Based on prior studies **include study**, we expected variability in the truth effect to be greater when the exposure and judgment occur on the same day, as repetition-based fluency is likely more salient in short-delay conditions.
+
+In line with this expectation, we found that the variance in the random effect of repetition was indeed larger when judgments were made on the same day as exposure, compared to when judgments were delayed to a later day. 
+**Interpretation **
+
+However, these exploratory results should be interpreted cautiously. We did not statistically test the delay-related differences for significance, and the analysis did not control for potential confounding factors such as sample composition, procedural variation, or other study-level covariates.
+
+Taken together, these initial analyses demonstrate TED’s utility for modeling complex interactions and variance structures that would be difficult to assess using single-study datasets. The open, extensible nature of TED ensures that these questions can be revisited and refined as the database continues to grow. We see this as a first step toward more nuanced investigations of the truth effect grounded in large-scale, reproducible data.
+
+## Future research
 
 Discuss how we hope others can contribute, this needs to be added to the database description aswell (a text on how we deal with people submitting data).
 
@@ -27,5 +36,9 @@ Discuss data principiles such as FAIR, as directed by DFG
 
 Discuss incentives for data submission (maybe add to introduction aswell)
 
+## Conclusion
+Shortly, we have db, we figured out that subject-level variance in the repetition effect should be looked at in more detail.
+
+This db allows:
 Give a short outline of what could be done with the database (broad, like in the grant proposal:
 living meta-analyses, power simulations, etc.)

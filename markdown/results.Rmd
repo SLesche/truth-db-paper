@@ -29,16 +29,13 @@ participant in the judgment session and in `r print_freq_percent(sum(procedure_d
 procedure_overview_plot
 ```
 
-Something about the makeup of statements and how much data is available here.
-Something about how much rt data is available
+Detailed information on the statements presented is available for **FILTER HERE** out of N studies. Statement text is avaiable for N trials out of X trials (percentage). Response times are available for X trials (percentage).
 
 ## Multi-level Modelling
 
 To illustrate the benefits of our large collection of trial-level data, we applied multilevel models predicting truth judgments with repetition as a fixed effect and varying intercepts at the subject, statement, and procedure levels.
 
 We fit five models per dataset. A baseline model with only random intercepts. A full model including random intercepts and random slopes for repetition across all grouping factors. Three reduced models, each excluding the random slope of repetition for one grouping factor (subject, statement, or procedure). 
-
-With what optimization strategy were the models conducted - Full MAximum likelihood (FML)
 
 We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-type responses (e.g., 1–5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a "true" judgment.
 
