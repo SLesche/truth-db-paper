@@ -1,5 +1,17 @@
 # Discussion
-Show ease of use, highlight this 
+In this paper, we introduce the Truth-Effect Database (TED), an open source database containing truth judgments from over 10.000 participants in a standardized format. This standardization allows data to be interoperable and reusable, thus ensuring FAIR data in truth effect research.
+
+Data is structured unsing SQL, tables
+
+We have information on publications, studies, participants, trials
+
+Data can be easily extracted using the R package `acdcquery`. This allows for simple definition of filter criteria and extraction.
+
+Data entry can be done unsing WEBSITE, which automatically checks consistencies and flags incorrect variable names / entries
+
+This large scale database allows fine-grained re-analysis of a large number of studies.
+
+To illustrate this, we conducted...
 
 Show results from variance decomposition of truth effect and the impact of repetition timing
 
