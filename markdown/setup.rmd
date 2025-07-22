@@ -6,7 +6,7 @@
 
 ```{r setup-libraries}
 # think about calling renv here to make sure everyone has the same packages installed
-list.of.packages <- c("tidyverse", "rmarkdown", "papaja", "knitr", "lme4", "brms")
+list.of.packages <- c("tidyverse", "rmarkdown", "papaja", "knitr", "lme4")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
