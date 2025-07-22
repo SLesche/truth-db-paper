@@ -9,9 +9,9 @@ As a relational database system, SQLite supports the use of multiple interconnec
 The design of our database is illustrated in Figure \@ref(fig:database-overview-plot). Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a *publication_table* and raw data at the lowest level in the *observation_table*. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
 
 (ref:database-overview-plot) Overview of TED Structure
-```{r database-overview-plot,  fig.cap = paste("(ref:database-overview-plot)"), out.width="90%"}
+```{r database-overview-plot,  fig.cap = paste("(ref:database-overview-plot)"), out.width="100%"}
 knitr::include_graphics(
- path = "./markdown/data/ted-overview.png"
+ path = "./images/ted-overview.png"
 )
 ```
 

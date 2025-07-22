@@ -39,7 +39,7 @@ study_overview <- query_db(
 
 procedure_data <- query_db(
   conn,
-  list() %>% 
+  all_argument %>% 
     add_argument(
       conn,
       "phase",

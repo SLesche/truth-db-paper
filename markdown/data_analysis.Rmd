@@ -90,7 +90,15 @@ scale_data <- analysis_data %>%
 # Number of participants, age, laboratory status, scale
 long_study_data <- study_overview %>% 
   mutate_all(as.character) %>% 
-  select(truth_rating_scale, truth_rating_steps, filler_task_yesno) %>% 
+  mutate(filler_task_type = case_when(
+    filler_task_type == "" ~ "",
+    filler_task_type == 0 ~ "non-verbal",
+    filler_task_type == 1 ~ "verbal"
+  )) %>% 
+  mutate(
+    filler_task_yesno = ifelse(filler_task_yesno == 1, "yes", "no")
+  ) %>% 
+  select(truth_rating_scale, truth_rating_steps, filler_task_yesno, filler_task_type) %>% 
   pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
 
 plot_study_data <- long_study_data %>%
@@ -108,7 +116,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
     aes(label = paste0(value, " (", n, ")")),
     position = position_stack(vjust = 0.5),
     color = "black",
-    size = 3
+    size = 2.5
   ) +
   labs(
     title = "Breakdown of Study Variables",
@@ -116,12 +124,15 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
     y = "Count"
   ) +
   scale_fill_grey(start = 0.3, end = 0.8) +  # Adjust range for lighter/darker contrast
-  theme_minimal(base_size = 14) +
+  theme_minimal(base_size = 11) +
   theme(
     legend.position = "none",
     plot.title = element_text(hjust = 0.5)
   )+
   coord_flip()
+
+ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9, scale = 0.4)
+
 
 # Reshape data to long format
 long_procedure_data <- procedure_data %>%
@@ -184,7 +195,7 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
     aes(label = paste0(value, " (", n, ")")),
     position = position_stack(vjust = 0.5),
     color = "black",
-    size = 3
+    size = 2.5
   ) +
   labs(
     title = "Breakdown of Procedure Variables",
@@ -192,12 +203,15 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
     y = "Count"
   ) +
   scale_fill_grey(start = 0.3, end = 0.8) +  # Adjust range for lighter/darker contrast
-  theme_minimal(base_size = 14) +
+  theme_minimal(base_size = 11) +
   theme(
     legend.position = "none",
     plot.title = element_text(hjust = 0.5)
   )+
   coord_flip()
+
+ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9, scale = 0.4)
+
 ```
 
 

@@ -18,15 +18,15 @@ Sample composition ranged from `r min(study_overview$n_participants, na.rm = TRU
 
 (ref:study-overview-plot) Overview of Study-related variables in TED
 ```{r study-overview-plot,  fig.cap = paste("(ref:study-overview-plot)"), out.width="90%"}
-study_overview_plot
+knitr::include_graphics("images/study_overview_plot.png")
 ```
 
 On average, studies employed `r mean(procedure_data$n_statements)` ($SD =$ `r sd(procedure_data$n_statements)`) statements per 
 participant in the judgment session and in `r print_freq_percent(sum(procedure_data$percent_repeated == 50) / nrow(procedure_data))` of procedure settings exactly 50% of statements were repeated. Of `r nrow(procedure_data)` judgment phases, `r print_freq_percent(sum(procedure_data$repetition_time < 180) / nrow(procedure_data))` were conducted on the same day as the exposure phase. The average delay between exposure and judgment phase if both were conducted on the same day was `r procedure_data %>% filter(repetition_time < 180) %>% pull(repetition_time) %>% mean()` minutes. The average delay between exposure and judgment phase, given the judgment phase was conducted at least one day after the exposure phase, was `r round((procedure_data %>% filter(repetition_time > 180) %>% pull(repetition_time) %>% mean())/(60*24), 2)` days. An overview of the delay between exposure and judgment phase is provided in Figure **Here figure**. An overview of additional variables pertaining to the procedure of the included studies can be found in Figure \@ref(fig:procedure-overview-plot).
 
 (ref:procedure-overview-plot) Overview of Procedure-related variables in TED
-```{r procedure-overview-plot,  fig.cap = paste("(ref:procedure-overview-plot)"), out.width="90%"}
-procedure_overview_plot
+```{r procedure-overview-plot,  fig.cap = paste("(ref:procedure-overview-plot)"), out.width="100%"}
+knitr::include_graphics("images/procedure_overview_plot.png")
 ```
 
 Detailed information on the statements presented is available for `r study_overview %>% filter(statementset_id != 1) %>% nrow()` out of `r study_overview %>% nrow()` studies. Data on the accuracy of a statement is available for `r (length(analysis_data$statement_accuracy[which(!is.na(analysis_data$statement_accuracy))]) / nrow(analysis_data)) %>% print_freq_percent()` of trials, the detailed statement text is available for `r (length(analysis_data$statement_text[which(!is.na(analysis_data$statement_text))]) / nrow(analysis_data)) %>% print_freq_percent()` of trials, and response times are available for `r (length(analysis_data$rt[which(!is.na(analysis_data$rt))]) / nrow(analysis_data)) %>% print_freq_percent()` of trials.
@@ -43,7 +43,7 @@ We analyzed the dichotomous and Likert-type response formats separately due to d
 The analysis was based on `r nrow(dichotomous_data) %>% apa_num()` trials nested within `r length(unique(dichotomous_data$subject)) %>% apa_num()` subjects, `r length(unique(dichotomous_data$statement_id)) %>% apa_num()` statements, and `r length(unique(dichotomous_data$procedure_id)) %>% apa_num()` procedures.
 
 (ref:model-comp-dichotomous) Overview of Information Criteria. Models...
-```{r model-comp-dichotomous,  tab.cap = paste("(ref:model-comp-dichotomous)"), out.width="90%"}
+```{r model-comp-dichotomous,  tab.cap = paste("(ref:model-comp-dichotomous)"), out.width="100%"}
 papaja::apa_table(model_comp_dichotomous)
 ```
 
