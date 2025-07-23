@@ -1,9 +1,4 @@
 # Results
-```{r method-source-data-prep, child = "markdown/data_prep.rmd"}
-```
-```{r method-source-data-anal, child = "markdown/data_analysis.rmd"}
-```
-
 All analysis were conducted using `r r_citations$r`. `r r_citations$pkgs`.
 
 In the current version of the manuscript, we included `r nrow(study_overview) %>% apa_num()` studies from `r nrow(publications_overview) %>% apa_num()` publications, spanning `r length(unique(full_data$subject)) %>% apa_num()` participants contributing `r nrow(full_data) %>% apa_num()` trials. A complete list of the included publications can be found in Table **table with refs, studies, trials here**.
