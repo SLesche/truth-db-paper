@@ -1,6 +1,6 @@
 # Method
 ## The Truth Effect Database (TED)
-Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on [Github](https://github.com/SLesche/truth-effect-database). 
+Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on Github (https://github.com/SLesche/truth-effect-database). 
 
 The database is implemented using Structured Query Language (SQL), specifically *SQLite* [@sqlite2020hipp]. A key advantage of SQLite is its serverless architecture—data is stored in a single, shareable file, allowing researchers to download, interact with, and modify the database locally without the need for a dedicated database server.
 
@@ -21,10 +21,41 @@ We argue that while the use of a relational database adds some complexity, it al
 To ease the process of submitting data to the database, we built a website (https://slesche.github.io/truth-effect-database/) that guides users through the submission process and checks submitted information for inconsistencies or errors. This website is designed to minimize both the effort of submitting new data to the database as well as identify potential errors in the submission process.
 
 ### Data Extraction
-We provide the R package *acdcquery* [@R-acdcquery] to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can define filter arguments using `add_argument()` and request specific variables from any table in the database using `query_db()`. The R package will automatically construct the necessary SQL query and return the filtered data with the selected columns to the user. A detailed user guide on using the R package to interact with our database can be found on the databases GitHub (https://github.com/SLesche/truth-effect-database).
+We provide the R package *acdcquery* [@R-acdcquery] to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can define filter arguments using `add_argument()` and request specific variables from any table in the database using `query_db()`. 
+
+For example, users may request all available trial-level data from studies with greater than 200 participants from the test phase using the code below:
+
+```{r, eval = FALSE, echo = TRUE}
+library(acdcquery)
+
+conn <- connect_to_db("path/to/ted.db")
+
+arguments <- list() %>% 
+  add_argument(
+    conn,
+    "n_participants",
+    "greater",
+    200
+  ) %>% 
+  add_argument(
+    conn,
+    "phase",
+    "equal",
+    "test"
+  )
+
+results <- query_db(
+  conn, 
+  arguments,
+  target_vars = "default", # Returns all variables in target_table
+  target_table = "observation table"
+)
+```
+
+The R package will automatically construct the necessary SQL query and return the filtered data with the selected columns to the user. A detailed user guide on using the R package to interact with our database can be found on the databases GitHub (https://github.com/SLesche/truth-effect-database).
 
 ### Data Selection
-We included only data from studies specifically focused on the repetition-based illusory truth effect. To qualify for inclusion, studies had to involve participants making truth judgments about visual or auditory stimuli, with a subset of those stimuli having been presented previously to allow for repetition effects. Our data selection process was based in part on the work of @hendersonReproducibleSystematicMap2022, who identified 17 publications with accessible raw data. We extended this dataset through an updated literature search using the same search terms to cover the period from 2022 to 2025. Additionally, we contacted colleagues directly to request openly available datasets, further expanding the scope of included studies.
+We included only data from studies specifically focused on the repetition-based illusory truth effect. To qualify for inclusion, studies had to involve participants making truth judgments about visual or auditory stimuli, with a subset of those stimuli having been presented previously to allow for repetition effects. Our data selection process was based in part on the work of @hendersonReproducibleSystematicMap2022, who identified 17 publications with accessible raw data. Additionally, we contacted colleagues directly to request openly available datasets, further expanding the scope of included studies.
 
 ### Data Analysis 
 To illustrate the analytical potential of TED, we conducted a multilevel model predicting truth judgments, incorporating both fixed and random effects of repetition at the statement, subject, and procedure (i.e., study) levels. The scale and structure of TED enable us to estimate the variance in the repetition effect simultaneously across all three levels. This approach allows us to determine whether the size of the truth effect varies more substantially across individuals, across experimental procedures, or across the specific statements used.

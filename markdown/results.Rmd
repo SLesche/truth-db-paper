@@ -22,7 +22,14 @@ knitr::include_graphics("images/study_overview_plot.png")
 ```
 
 On average, studies employed `r mean(procedure_data$n_statements)` ($SD =$ `r sd(procedure_data$n_statements)`) statements per 
-participant in the judgment session and in `r print_freq_percent(sum(procedure_data$percent_repeated == 50) / nrow(procedure_data))` of procedure settings exactly 50% of statements were repeated. Of `r nrow(procedure_data)` judgment phases, `r print_freq_percent(sum(procedure_data$repetition_time < 180) / nrow(procedure_data))` were conducted on the same day as the exposure phase. The average delay between exposure and judgment phase if both were conducted on the same day was `r procedure_data %>% filter(repetition_time < 180) %>% pull(repetition_time) %>% mean()` minutes. The average delay between exposure and judgment phase, given the judgment phase was conducted at least one day after the exposure phase, was `r round((procedure_data %>% filter(repetition_time > 180) %>% pull(repetition_time) %>% mean())/(60*24), 2)` days. An overview of the delay between exposure and judgment phase is provided in Figure **Here figure**. An overview of additional variables pertaining to the procedure of the included studies can be found in Figure \@ref(fig:procedure-overview-plot).
+participant in the judgment session and in `r print_freq_percent(sum(procedure_data$percent_repeated == 50) / nrow(procedure_data))` of procedure settings exactly 50% of statements were repeated. Of `r nrow(procedure_data)` judgment phases, `r print_freq_percent(sum(procedure_data$repetition_time < 180) / nrow(procedure_data))` were conducted on the same day as the exposure phase. The average delay between exposure and judgment phase if both were conducted on the same day was `r procedure_data %>% filter(repetition_time < 180) %>% pull(repetition_time) %>% mean()` minutes. The average delay between exposure and judgment phase, given the judgment phase was conducted at least one day after the exposure phase, was `r round((procedure_data %>% filter(repetition_time > 180) %>% pull(repetition_time) %>% mean())/(60*24), 2)` days. An overview of additional variables pertaining to the procedure of the included studies can be found in Figure \@ref(fig:procedure-overview-plot).
+
+<!-- An overview of the delay between exposure and judgment phase is provided in Figure \@ref(fig:delay-overview-plot).  -->
+
+<!-- (ref:delay-overview-plot) Overview of delay between exposure and test phase -->
+<!-- ```{r delay-overview-plot, fig.cap = paste("(ref:delay-overview-plot)"), out.width="100%"} -->
+<!-- knitr::include_graphics("images/delay_overview_plot.png") -->
+<!-- ``` -->
 
 (ref:procedure-overview-plot) Overview of Procedure-related variables in TED
 ```{r procedure-overview-plot,  fig.cap = paste("(ref:procedure-overview-plot)"), out.width="100%"}

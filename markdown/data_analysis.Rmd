@@ -214,6 +214,34 @@ ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, w
 
 ```
 
+```{r}
+# Split into short and long delays
+df_short <- procedure_data %>%
+  filter(repetition_time <= 1440) %>%
+  mutate(delay_minutes = repetition_time)
+
+df_long <-procedure_data %>%
+  filter(repetition_time > 1440) %>%
+  mutate(delay_days = repetition_time / 1440)
+
+# Plot 1: Short delays (in minutes)
+p1 <- ggplot(df_short, aes(x = delay_minutes)) +
+  geom_histogram(binwidth = 2, fill = "steelblue", color = "white", alpha = 0.8) +
+  scale_x_continuous(name = "Delay (minutes)") +
+  labs(title = "Short Delays (< 1d)", y = "Count") +
+  theme_minimal()
+
+# Plot 2: Long delays (in days)
+p2 <- ggplot(df_long, aes(x = delay_days)) +
+  geom_histogram(binwidth = 1, fill = "darkgreen", color = "white", alpha = 0.8) +
+  scale_x_continuous(name = "Delay (days)") +
+  labs(title = "Long Delays (> 1d)", y = "Count") +
+  theme_minimal()
+
+delay_plot <- gridExtra::grid.arrange(p1, p2, ncol = 2)
+
+```
+
 
 ```{r}
 if (compute_new == TRUE){
