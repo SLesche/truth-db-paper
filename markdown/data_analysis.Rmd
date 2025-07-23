@@ -214,7 +214,7 @@ ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, w
 
 ```
 
-```{r}
+```{r, eval = FALSE}
 # Split into short and long delays
 df_short <- procedure_data %>%
   filter(repetition_time <= 1440) %>%

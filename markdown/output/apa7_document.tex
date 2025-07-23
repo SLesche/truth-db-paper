@@ -1,0 +1,691 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+  man,floatsintext]{apa7}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+% Make \paragraph and \subparagraph free-standing
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{english}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+% Manuscript styling
+\usepackage{upgreek}
+\captionsetup{font=singlespacing,justification=justified}
+
+% Table formatting
+\usepackage{longtable}
+\usepackage{lscape}
+% \usepackage[counterclockwise]{rotating}   % Landscape page setup for large tables
+\usepackage{multirow}		% Table styling
+\usepackage{tabularx}		% Control Column width
+\usepackage[flushleft]{threeparttable}	% Allows for three part tables with a specified notes section
+\usepackage{threeparttablex}            % Lets threeparttable work with longtable
+
+% Create new environments so endfloat can handle them
+% \newenvironment{ltable}
+%   {\begin{landscape}\centering\begin{threeparttable}}
+%   {\end{threeparttable}\end{landscape}}
+\newenvironment{lltable}{\begin{landscape}\centering\begin{ThreePartTable}}{\end{ThreePartTable}\end{landscape}}
+
+% Enables adjusting longtable caption width to table width
+% Solution found at http://golatex.de/longtable-mit-caption-so-breit-wie-die-tabelle-t15767.html
+\makeatletter
+\newcommand\LastLTentrywidth{1em}
+\newlength\longtablewidth
+\setlength{\longtablewidth}{1in}
+\newcommand{\getlongtablewidth}{\begingroup \ifcsname LT@\roman{LT@tables}\endcsname \global\longtablewidth=0pt \renewcommand{\LT@entry}[2]{\global\advance\longtablewidth by ##2\relax\gdef\LastLTentrywidth{##2}}\@nameuse{LT@\roman{LT@tables}} \fi \endgroup}
+
+% \setlength{\parindent}{0.5in}
+% \setlength{\parskip}{0pt plus 0pt minus 0pt}
+
+% Overwrite redefinition of paragraph and subparagraph by the default LaTeX template
+% See https://github.com/crsh/papaja/issues/292
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\itshape\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
+% \usepackage{etoolbox}
+\makeatletter
+\patchcmd{\HyOrg@maketitle}
+  {\section{\normalfont\normalsize\abstractname}}
+  {\section*{\normalfont\normalsize\abstractname}}
+  {}{\typeout{Failed to patch abstract.}}
+\patchcmd{\HyOrg@maketitle}
+  {\section{\protect\normalfont{\@title}}}
+  {\section*{\protect\normalfont{\@title}}}
+  {}{\typeout{Failed to patch title.}}
+\makeatother
+
+\usepackage{xpatch}
+\makeatletter
+\xapptocmd\appendix
+  {\xapptocmd\section
+    {\addcontentsline{toc}{section}{\appendixname\ifoneappendix\else~\theappendix\fi\\: #1}}
+    {}{\InnerPatchFailed}%
+  }
+{}{\PatchFailed}
+\keywords{keyword, more keyword, crazy keyword\newline\indent Word count: X}
+\usepackage{csquotes}
+\makeatletter
+\renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries\typesectitle}}
+
+\renewcommand{\subparagraph}[1]{\@startsection{subparagraph}{5}{1em}%
+  {0\baselineskip \@plus 0.2ex \@minus 0.2ex}%
+  {-\z@\relax}%
+  {\normalfont\normalsize\bfseries\itshape\hspace{\parindent}{#1}\textit{\addperi}}{\relax}}
+\makeatother
+
+\raggedbottom
+
+\usepackage{hhline}
+
+\setlength{\parskip}{0pt}
+
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Introducing the Truth Effect Database (TED) - an open trial-level database promoting FAIR data in truth effect research},
+  pdfauthor={Sven Lesche1 \& Annika Stump2},
+  pdflang={en-EN},
+  pdfkeywords={keyword, more keyword, crazy keyword},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Introducing the Truth Effect Database (TED) - an open trial-level database promoting FAIR data in truth effect research}
+\author{Sven Lesche\textsuperscript{1} \& Annika Stump\textsuperscript{2}}
+\date{}
+
+
+\shorttitle{Introducing TED}
+
+\authornote{
+
+Author Notes go here.
+
+The authors made the following contributions. Sven Lesche: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing; Annika Stump: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing.
+
+Correspondence concerning this article should be addressed to Sven Lesche, Hauptstraße 47-51, 69117 Heidelberg. E-mail: \href{mailto:sven.lesche@psychologie.uni-heidelberg.de}{\nolinkurl{sven.lesche@psychologie.uni-heidelberg.de}}
+
+}
+
+\affiliation{\vspace{0.5cm}\textsuperscript{1} Ruprecht-Karls-University Heidelberg\\\textsuperscript{2} Albert-Ludwigs-University Freiburg}
+
+\abstract{%
+One or two sentences providing a \textbf{basic introduction} to the field, comprehensible to a scientist in any discipline.
+
+Two to three sentences of \textbf{more detailed background}, comprehensible to scientists in related disciplines.
+
+One sentence clearly stating the \textbf{general problem} being addressed by this particular study.
+
+One sentence summarizing the main result (with the words ``\textbf{here we show}'' or their equivalent).
+
+Two or three sentences explaining what the \textbf{main result} reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
+
+One or two sentences to put the results into a more \textbf{general context}.
+
+Two or three sentences to provide a \textbf{broader perspective}, readily comprehensible to a scientist in any discipline.
+}
+
+
+
+\begin{document}
+\maketitle
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+The open science movement has emerged in response to growing concerns about the replicability, transparency, and efficiency of scientific research (\protect\hyperlink{ref-ioannidis2005most}{Ioannidis, 2005}; \protect\hyperlink{ref-munafo2017manifesto}{Munafò et al., 2017}; \protect\hyperlink{ref-nosek2015promoting}{Nosek et al., 2015}). At its core, open science promotes practices that make research processes and outputs accessible, verifiable, and reusable. Practices such as preregistration, data sharing, and open materials aim to increase the trustworthiness of findings and to foster a more cumulative, collaborative scientific enterprise. These practices, coupled with platforms like the Open Science Framework - OSF (\protect\hyperlink{ref-fosterOpenScienceFramework2017}{Foster \& Deardorff, 2017}), have played a pivotal role in advancing openness through tools that support study registration, version control, and public sharing of data and materials. Transparency, once rare, is increasingly becoming the norm (\protect\hyperlink{ref-bauer2022psychological}{Bauer, 2022}).
+
+However, while transparency has improved markedly, efficiency and reusability have lagged behind. Research materials and datasets are often siloed within individual project pages, tailored to host single studies. As a result, even when data are technically open, they are rarely standardized in ways that facilitate reuse, integration, or cumulative analysis. Current open data practices focus primarily on the first two aspects of the FAIR (Findable, Accessible, Interoperable, and Reusable) principles of data sharing (\protect\hyperlink{ref-wilkinson2016fair}{Wilkinson et al., 2016}), while neglecting the latter. For example, the OSF is well-suited to documenting and finding individual projects, but its structure does not support the aggregation or harmonization of data across multiple related studies. In addition to structural limitations, researchers' practices like inconsistent file formats, project-specific codebooks, and divergent analytic pipelines continue to hinder interoperability.
+
+This inconsistency not only limits replicability, but also reusability. Should a researcher be interested in estimating an effect size, developing a new computational model or simply re-analyzing existing data instead of collecting an entirely new sample, they have to comb through OSF, pray for existing codebooks and hope for decipherable raw data. This is both tedious and often unsuccessful (\protect\hyperlink{ref-cruwell2023s}{Crüwell et al., 2023}; \protect\hyperlink{ref-hardwicke2021analytic}{Hardwicke et al., 2021}). However, reusability greatly improves scientific efficiency. It saves resources otherwise wasted by planning and collecting an entirely new set of data and helps efficiently allocate public resources as well as participants' and researchers' time.
+
+We argue that to make research outputs genuinely reusable, not just transparent, structure is essential. Reusability requires standardized organization: consistent variable naming, common data schemas, uniform documentation practices, and clear, accessible codebooks. In neuroscience, this principle has been successfully realized through the Brain Imaging Data Structure - BIDS (\protect\hyperlink{ref-gorgolewski2016brain}{Gorgolewski et al., 2016}), which provides a framework for organizing and annotating neuroimaging data. BIDS has enabled not just more efficient sharing, but also reproducible pipelines, automated analyses, and collaborative efforts at scale (\protect\hyperlink{ref-poldrack2024past}{Poldrack et al., 2024}).
+
+Structured approaches like BIDS are now gaining traction in cognitive psychology. The Attentional Control Data Collection (ACDC; \textbf{Haaf et al., in press}) introduced a trial-level database for data from attentional control experiments, providing standardized variable names, metadata, and analysis-ready formats that streamline cross-study comparisons. Similarly, the FEARBASE project is building a large-scale, open-access repository for fear conditioning studies, adopting a shared structure to ensure comparability and long-term usability (\textbf{Lohnsdorf \& Ehlers, 2025}). Crucially, there is increasing institutional support for the development of infrastructure enabling data reuse. For example, the German research foundation \emph{DFG} issued an open funding call for projects developing infrastructure for scientific data management (DFG; \emph{Förderprogramm Informationsinfrastrukturen für Forschungsdaten}). These projects spearhead a changing culture of data-reusability but so far represent the exception, rather than the norm.
+
+We believe that there is great potential in the development of structured databases integrating trial level data. Large and structured collections of raw data have several key applications, extending the general principle of data-reusability. They enable living meta-analyses that can update automatically as new data are added; allow researchers to find relevant raw data based on task characteristics or participant variables; facilitate the straightforward replication of published findings; and enable power analyses using pooled datasets from comparable studies.
+
+Beyond these direct applications, structured datasets also support the development of new methods and models. Trial-level repositories allow for benchmarking existing analytic tools, training machine learning models, and exploring novel statistical approaches.
+
+\hypertarget{the-present-study}{%
+\subsubsection{The present study}\label{the-present-study}}
+
+In this spirit, we introduce a centralized, trial-level database for the illusory truth effect, drawing on resources and lessons learned from developing ACDC \textbf{cite!!}. The truth-effect database (TED) is designed not only with structured organization in mind, but also with an emphasis on ease of use. Particular attention has been given to lowering the barrier for data submission through an intuitive entry-mask, as well as to enabling simple data extraction via an R package. Our aim is to create a living, extensible resource that supports both contributors and users: researchers can add new studies with minimal friction, and others can search, filter, and analyze trial-level data without having to clean or realign disparate datasets. By combining structure with usability, this resource is intended to foster cumulative research on the illusory truth effect and to serve as a model for reusable psychological data infrastructures more broadly.
+
+\hypertarget{the-illusory-truth-effect}{%
+\subsubsection{The illusory truth effect}\label{the-illusory-truth-effect}}
+
+Here a section why we chose the ITE, what it is and why its important
+Hint at the Innenministerium
+
+\hypertarget{method}{%
+\section{Method}\label{method}}
+
+\hypertarget{the-truth-effect-database-ted}{%
+\subsection{The Truth Effect Database (TED)}\label{the-truth-effect-database-ted}}
+
+Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on Github (\url{https://github.com/SLesche/truth-effect-database}).
+
+The database is implemented using Structured Query Language (SQL), specifically \emph{SQLite} (\protect\hyperlink{ref-sqlite2020hipp}{Hipp, 2020}). A key advantage of SQLite is its serverless architecture---data is stored in a single, shareable file, allowing researchers to download, interact with, and modify the database locally without the need for a dedicated database server.
+
+As a relational database system, SQLite supports the use of multiple interconnected tables. This structure enables efficient organization of complex data relationships. For instance, each publication may include several studies, which themselves involve multiple experimental conditions. By organizing data across discrete, normalized tables---rather than in a single flat file---the database minimizes redundancy and enhances both storage efficiency and query performance.
+
+The design of our database is illustrated in Figure \ref{fig:database-overview-plot}. Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a \emph{publication\_table} and raw data at the lowest level in the \emph{observation\_table}. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
+
+
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{./images/ted-overview} \caption{Overview of TED Structure}\label{fig:database-overview-plot}
+\end{figure}
+
+We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only understanding that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database.
+
+\hypertarget{data-submission}{%
+\subsubsection{Data Submission}\label{data-submission}}
+
+To ease the process of submitting data to the database, we built a website (\url{https://slesche.github.io/truth-effect-database/}) that guides users through the submission process and checks submitted information for inconsistencies or errors. This website is designed to minimize both the effort of submitting new data to the database as well as identify potential errors in the submission process.
+
+\hypertarget{data-extraction}{%
+\subsubsection{Data Extraction}\label{data-extraction}}
+
+We provide the R package \emph{acdcquery} (\protect\hyperlink{ref-R-acdcquery}{Lesche, 2025}) to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can define filter arguments using \texttt{add\_argument()} and request specific variables from any table in the database using \texttt{query\_db()}.
+
+For example, users may request all available trial-level data from studies with greater than 200 participants from the test phase using the code below:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(acdcquery)}
+
+\NormalTok{conn }\OtherTok{\textless{}{-}} \FunctionTok{connect\_to\_db}\NormalTok{(}\StringTok{"path/to/ted.db"}\NormalTok{)}
+
+\NormalTok{arguments }\OtherTok{\textless{}{-}} \FunctionTok{list}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{add\_argument}\NormalTok{(}
+\NormalTok{    conn,}
+    \StringTok{"n\_participants"}\NormalTok{,}
+    \StringTok{"greater"}\NormalTok{,}
+    \DecValTok{200}
+\NormalTok{  ) }\SpecialCharTok{\%\textgreater{}\%} 
+  \FunctionTok{add\_argument}\NormalTok{(}
+\NormalTok{    conn,}
+    \StringTok{"phase"}\NormalTok{,}
+    \StringTok{"equal"}\NormalTok{,}
+    \StringTok{"test"}
+\NormalTok{  )}
+
+\NormalTok{results }\OtherTok{\textless{}{-}} \FunctionTok{query\_db}\NormalTok{(}
+\NormalTok{  conn, }
+\NormalTok{  arguments,}
+  \AttributeTok{target\_vars =} \StringTok{"default"}\NormalTok{, }\CommentTok{\# Returns all variables in target\_table}
+  \AttributeTok{target\_table =} \StringTok{"observation table"}
+\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+The R package will automatically construct the necessary SQL query and return the filtered data with the selected columns to the user. A detailed user guide on using the R package to interact with our database can be found on the databases GitHub (\url{https://github.com/SLesche/truth-effect-database}).
+
+\hypertarget{data-selection}{%
+\subsubsection{Data Selection}\label{data-selection}}
+
+We included only data from studies specifically focused on the repetition-based illusory truth effect. To qualify for inclusion, studies had to involve participants making truth judgments about visual or auditory stimuli, with a subset of those stimuli having been presented previously to allow for repetition effects. Our data selection process was based in part on the work of Henderson et al. (\protect\hyperlink{ref-hendersonReproducibleSystematicMap2022}{2022}), who identified 17 publications with accessible raw data. Additionally, we contacted colleagues directly to request openly available datasets, further expanding the scope of included studies.
+
+\hypertarget{data-analysis}{%
+\subsubsection{Data Analysis}\label{data-analysis}}
+
+To illustrate the analytical potential of TED, we conducted a multilevel model predicting truth judgments, incorporating both fixed and random effects of repetition at the statement, subject, and procedure (i.e., study) levels. The scale and structure of TED enable us to estimate the variance in the repetition effect simultaneously across all three levels. This approach allows us to determine whether the size of the truth effect varies more substantially across individuals, across experimental procedures, or across the specific statements used.
+
+\hypertarget{results}{%
+\section{Results}\label{results}}
+
+\begin{verbatim}
+## [1] "Querying through observation table. Query times may be longer."
+\end{verbatim}
+
+\includegraphics{C:/Users/Sven/Documents/research/truth-db-paper/markdown/output/apa7_document_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+All analysis were conducted using R {[}Version 4.2.2; R Core Team (\protect\hyperlink{ref-R-base}{2022}){]}\footnote{We, furthermore, used the R-packages \emph{acdcquery} (Version 1.0.1; \protect\hyperlink{ref-R-acdcquery}{Lesche, 2025}), \emph{brms} (\protect\hyperlink{ref-R-brms_a}{Bürkner, 2017}, \protect\hyperlink{ref-R-brms_b}{2018}, \protect\hyperlink{ref-R-brms_c}{2021}), \emph{knitr} (Version 1.42; \protect\hyperlink{ref-R-knitr}{Xie, 2015}), \emph{lme4} (Version 1.1.32; \protect\hyperlink{ref-R-lme4}{Bates et al., 2015}), \emph{papaja} (Version 0.1.1; \protect\hyperlink{ref-R-papaja}{Aust \& Barth, 2022}), and \emph{tidyverse} (Version 2.0.0; \protect\hyperlink{ref-R-tidyverse}{Wickham et al., 2019}).}.
+
+.
+
+In the current version of the manuscript, we included 48 studies from 21 publications, spanning 9983 participants contributing 525844 trials. A complete list of the included publications can be found in Table \textbf{table with refs, studies, trials here}.
+
+Sample composition ranged from 29 to 949 participants. On average, studies included 212.17 participants (\(\mu_{age} =\) 32.49,\(\sigma_{age} =\) 7.20). An overview of the rating scale usage for truth judgments and the use of a filler task over all included studies can be found in Figure \ref{fig:study-overview-plot}.
+
+
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{images/study_overview_plot} \caption{Overview of Study-related variables in TED}\label{fig:study-overview-plot}
+\end{figure}
+
+On average, studies employed 66.49 (\(SD =\) 41.51) statements per
+participant in the judgment session and in 85.71 \% of procedure settings exactly 50\% of statements were repeated. Of 70 judgment phases, 71.43 \% were conducted on the same day as the exposure phase. The average delay between exposure and judgment phase if both were conducted on the same day was 4.80 minutes. The average delay between exposure and judgment phase, given the judgment phase was conducted at least one day after the exposure phase, was 6.65 days. An overview of additional variables pertaining to the procedure of the included studies can be found in Figure \ref{fig:procedure-overview-plot}.
+
+
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{images/procedure_overview_plot} \caption{Overview of Procedure-related variables in TED}\label{fig:procedure-overview-plot}
+\end{figure}
+
+Detailed information on the statements presented is available for 45 out of 48 studies. Data on the accuracy of a statement is available for 83.58 \% of trials, the detailed statement text is available for 69.90 \% of trials, and response times are available for 24.31 \% of trials.
+
+\hypertarget{multi-level-modelling}{%
+\subsection{Multi-level Modelling}\label{multi-level-modelling}}
+
+To illustrate the benefits of our large collection of trial-level data, we applied multilevel models predicting truth judgments with repetition as a fixed effect and random intercepts and slopes at the subject, statement, and procedure levels.
+
+We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-type responses (e.g., 1--5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a ``true'' judgment.
+
+We fit five models per dataset. A baseline model with only random intercepts. A full model including random intercepts and random slopes for repetition across all grouping factors. And three reduced models, each excluding the random slope of repetition for one grouping factor (subject, statement, or procedure).
+
+\hypertarget{dichotomous-truth-judgments}{%
+\subsubsection{Dichotomous Truth Judgments}\label{dichotomous-truth-judgments}}
+
+The analysis was based on 112399 trials nested within 1576 subjects, 997 statements, and 14 procedures.
+
+
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:model-comp-dichotomous}}
+
+\begin{tabular}{lllllllll}
+\toprule
+ & \multicolumn{1}{c}{npar} & \multicolumn{1}{c}{AIC} & \multicolumn{1}{c}{BIC} & \multicolumn{1}{c}{logLik} & \multicolumn{1}{c}{deviance} & \multicolumn{1}{c}{Chisq} & \multicolumn{1}{c}{Df} & \multicolumn{1}{c}{Pr(>Chisq)}\\
+\midrule
+model\_check\_dichotomous & 5.00 & 131,915.86 & 131,964.01 & -65,952.93 & 131,905.86 & NA & NA & NA\\
+model\_nosubject\_re\_dichotomous & 9.00 & 131,743.99 & 131,830.66 & -65,862.99 & 131,725.99 & 179.87 & 4.00 & 0.00\\
+model\_noprocedure\_re\_dichotomous & 9.00 & 130,994.35 & 131,081.02 & -65,488.17 & 130,976.35 & 749.64 & 0.00 & NA\\
+model\_nostatement\_re\_dichotomous & 9.00 & 130,937.61 & 131,024.28 & -65,459.80 & 130,919.61 & 56.74 & 0.00 & NA\\
+model\_full\_re\_dichotomous & 11.00 & 130,934.97 & 131,040.90 & -65,456.48 & 130,912.97 & 6.64 & 2.00 & 0.04\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+All models that included a random effect of repetition at any level outperformed the baseline model with only random intercepts. Detailed model comparisons, based on information criteria, are presented in Table \ref{tab:model-comp-dichotomous}.
+
+The model incorporating random effects at all hierarchical levels provided the best overall fit \textbf{here, fit indices!}. Compared to the model excluding random effects of statements, it demonstrated a slightly lower AIC and a marginally higher BIC. This is attributable to the minimal variance observed in the repetition effect at the statement level. Notably, the variance of the random effect of repetition was highest at the subject level, followed by the procedure level.
+
+\hypertarget{scale-truth-judgments}{%
+\subsubsection{Scale Truth Judgments}\label{scale-truth-judgments}}
+
+The analysis was based on 335462 trials nested within 6378 subjects, 1663 statements, and 47 procedures.
+
+We employed the ``bobyqa'' optimizer, as some models initially failed to converge, and estimated the models using full maximum likelihood. An overview of the information criteria for all evaluated models is presented in Table \ref{tab:model-comp-scale}.
+
+
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:model-comp-scale}}
+
+\begin{tabular}{lllllllll}
+\toprule
+ & \multicolumn{1}{c}{npar} & \multicolumn{1}{c}{AIC} & \multicolumn{1}{c}{BIC} & \multicolumn{1}{c}{logLik} & \multicolumn{1}{c}{deviance} & \multicolumn{1}{c}{Chisq} & \multicolumn{1}{c}{Df} & \multicolumn{1}{c}{Pr(>Chisq)}\\
+\midrule
+model\_check\_scale & 6.00 & 82,220.60 & 82,284.94 & -41,104.30 & 82,208.60 & NA & NA & NA\\
+model\_nosubject\_re\_scale & 10.00 & 76,088.85 & 76,196.08 & -38,034.42 & 76,068.85 & 6,139.76 & 4.00 & 0.00\\
+model\_noprocedure\_re\_scale & 10.00 & 69,974.52 & 70,081.76 & -34,977.26 & 69,954.52 & 6,114.32 & 0.00 & NA\\
+model\_nostatement\_re\_scale & 10.00 & 69,205.50 & 69,312.73 & -34,592.75 & 69,185.50 & 769.02 & 0.00 & NA\\
+model\_full\_re\_scale & 12.00 & 68,957.01 & 69,085.69 & -34,466.51 & 68,933.01 & 252.49 & 2.00 & 0.00\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+The model including random effects at all hierarchical levels provided the best overall fit \textbf{here, fit indices!!}, exhibiting improved AIC and BIC values compared to the model that excluded random effects of statements. As in the dichotomous analysis, the variance of the repetition effect was near zero at the statement level, while being most pronounced at the subject level.
+
+To further explore the influence of temporal delay between the exposure and judgment phases on interindividual variability in the repetition effect, we stratified the data. Specifically, we re-estimated the multilevel model (with random effects at all levels) separately for judgments made on the same day as the exposure phase and for those made on a subsequent day.
+
+The results of this model can be found in table \textbf{table!}
+
+Fit indices and effect sizes of these models. Variance measures here, too.
+
+Model Sameday
+
+\begin{verbatim}
+## Linear mixed model fit by maximum likelihood  ['lmerMod']
+## Formula: response ~ repeated + (1 + repeated | subject) + (1 + repeated |  
+##     statement_id) + (1 + repeated | procedure_id)
+##    Data: scale_data %>% filter(repetition_time <= 180)
+##       AIC       BIC    logLik  deviance  df.resid 
+##  58089.80  58215.03 -29032.90  58065.80    251760 
+## Random effects:
+##  Groups       Name        Std.Dev. Corr 
+##  subject      (Intercept) 0.08765       
+##               repeated    0.11473  -0.20
+##  statement_id (Intercept) 0.14378       
+##               repeated    0.02567  -0.39
+##  procedure_id (Intercept) 0.04136       
+##               repeated    0.07676  -0.28
+##  Residual                 0.26055       
+## Number of obs: 251772, groups:  
+## subject, 5783; statement_id, 1331; procedure_id, 33
+## Fixed Effects:
+## (Intercept)     repeated  
+##     0.50909      0.09176  
+## optimizer (nloptwrap) convergence code: 0 (OK) ; 0 optimizer warnings; 1 lme4 warnings
+\end{verbatim}
+
+Model Later
+
+\begin{verbatim}
+## Linear mixed model fit by maximum likelihood  ['lmerMod']
+## Formula: response ~ repeated + (1 + repeated | subject) + (1 + repeated |  
+##     statement_id) + (1 + repeated | procedure_id)
+##    Data: scale_data %>% filter(repetition_time > 180)
+##       AIC       BIC    logLik  deviance  df.resid 
+## 10121.914 10233.932 -5048.957 10097.914     83678 
+## Random effects:
+##  Groups       Name        Std.Dev. Corr 
+##  subject      (Intercept) 0.07323       
+##               repeated    0.07048  0.04 
+##  statement_id (Intercept) 0.12034       
+##               repeated    0.02854  -0.21
+##  procedure_id (Intercept) 0.03184       
+##               repeated    0.04206  -0.16
+##  Residual                 0.24810       
+## Number of obs: 83690, groups:  
+## subject, 1246; statement_id, 804; procedure_id, 14
+## Fixed Effects:
+## (Intercept)     repeated  
+##     0.50578      0.06057
+\end{verbatim}
+
+The variance of the random effect of repetition was higher in the data containing truth judgments from the same day as the exposure phase (number 1) vs.~(number 2).
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+In this paper, we introduce the Truth-Effect Database (TED), a large-scale, open-access repository of trial-level data on truth judgments. TED is designed to support cumulative, reproducible research on the truth effect by standardizing and centralizing data from a wide range of studies. With contributions from over 10,000 participants, our database offers a comprehensive resource for researchers interested in understanding how repetition and related factors influence truth judgments.
+
+Our goal in developing TED was to address key challenges in open research data: the fragmentation of data across studies, the lack of standard formats for sharing experimental data, and the resulting lack of interoperability and reusability \textbf{citations here}. To meet these challenges, we provide a structured SQL-based schema that organizes data at multiple levels---including publications, studies, participants, and individual trials. This structure allows for fine-grained analysis while maintaining consistency across diverse datasets.
+
+We also provide tools to facilitate access and use of the database. In particular, the R package \texttt{acdcquery} \textbf{cite!!} allows users to extract data with flexible filtering criteria, supporting both simple and complex queries. Additionally, we have developed a web-based data entry interface that automatically checks for consistency and flags incorrect variable names or entries (\url{https://slesche.github.io/truth-effect-database/}). This helps maintain high standards for incoming data and ensures that TED remains a reliable resource for the community, while simplifying the submission process and lowering the barrier to entry.
+
+To illustrate the analytical potential of TED, we conducted multilevel models estimating random effects at the subject, statement, and publication levels to investigate where variance in the truth effect originates. This approach is only feasible with a dataset of TED's size and granularity.
+
+In both the Likert-scale and dichotomous truth judgment data, we found that the random slopes of repetition on the statement level showed very little variance. This suggests that specific properties of individual statements (e.g., their semantic content or plausibility) have limited influence on the magnitude of the truth effect. However, statement-level variance in random intercepts was relatively large. This is consistent with expectations: some statements are objectively easier to judge as true or false, while others are more ambiguous, leading to baseline differences in overall truth ratings.
+
+We also observed substantial variance in the publication-level random effect of repetition. This is unsurprising, as studies varied considerably in design features such as the number of statements, delay between exposure and judgment, or whether participants were warned about repetition. Nevertheless, the publication-level variance in the effect of repetition was smaller than at the subject level.
+
+Indeed, the largest variance in the truth effect emerged at the subject level, indicating substantial individual differences in susceptibility to the repetition effect. This finding aligns with growing interest in understanding the psychological traits or cognitive mechanisms that moderate the truth effect at the individual level. Some studies \textbf{include studies here}.
+
+However, efforts to predict individual differences in the truth effect have so far produced mixed results \textbf{studies}.
+
+Thus, it remains an open question whether the variability in the truth effect reflects reliable, trait-like differences. TED provides a promising platform for revisiting the question of reliable individual differences in the truth effect in future work.
+
+Lastly, we explored whether the magnitude of variance in the repetition effect differed depending on the delay between exposure and judgment---a key procedural variable in truth effect research. Based on prior studies \textbf{include study}, we expected variability in the truth effect to be greater when the exposure and judgment occur on the same day, as repetition-based fluency is likely more salient in short-delay conditions.
+
+\textbf{also the overall size of truth effect here?}
+In line with this expectation, we found that the variance in the random effect of repetition was indeed larger when judgments were made on the same day as exposure, compared to when judgments were delayed to a later day.
+\textbf{Interpretation }
+
+However, these exploratory results should be interpreted cautiously. We did not test the delay-related differences for significance, and the analysis did not control for potential confounding factors such as sample composition, procedural variation, or other study-level covariates. \textbf{Something, in time with more data, this will become more representative. But it already points in one direction}
+
+Taken together, these initial analyses demonstrate TED's utility for modeling complex interactions and variance structures that would be difficult to assess using single-study data. The open, extensible nature of TED ensures that these questions can be revisited and refined as the database continues to grow. We see this as a first step toward more nuanced investigations of the truth effect grounded in large-scale, reproducible data.
+
+\hypertarget{future-research}{%
+\subsection{Future research}\label{future-research}}
+
+TED offers a unique foundation for advancing research through open, cumulative, and reproducible science. As the database grows in scope and depth, we anticipate several promising directions for future research and methodological development that TED is particularly well-positioned to support.
+
+One immediate application lies in enabling living meta-analyses of truth effect data that can evolve as new studies are contributed. Closely related, TED can support customized power analyses based on empirical variance from real experimental data. Researchers designing new studies can use TED's trial-level data to simulate expected effects based on previously collected data with similar study characteristics, improving the precision and efficiency of future study planning.
+
+TED's reproducibility potential lies in its ability to support both the replication and reanalysis of existing studies using openly available, trial-level data. Researchers can directly replicate earlier truth effect experiments by matching procedural details drawn from the database, or they can reanalyze existing datasets to test new hypotheses, apply alternative statistical models, or verify published results. This facilitates both direct and conceptual replications and provides a foundation for transparent, data-driven reassessment of prior findings.
+
+Beyond replication, TED also enables the development of formal cognitive models of the truth effect. With detailed trial-level data and metadata on procedural variables, researchers can test and compare models such as drift diffusion models, multinomial processing tree models, or signal detection accounts of truth judgments. The scale and granularity of TED make it possible to fit hierarchical models across subjects, statements, or studies, and to split data into independent training and testing sets---supporting robust model evaluation and cross-validation. This opens the door for developing and benchmarking cognitive theories of truth judgments with strong empirical support.
+
+Importantly, these efforts are supported by TED's intentional focus on long-term sustainability. The database is built with minimal reliance on proprietary infrastructure or paid software. All tools and data are hosted on open platforms, primarily GitHub, and contributions are made through transparent, version-controlled workflows. This lightweight architecture was chosen to promote longevity and ensure that TED remains accessible and modifiable regardless of funding cycles or institutional changes.
+
+To ensure proper attribution and foster community investment, users of TED data are expected to cite all original publications corresponding to the datasets they use. In return, contributions to TED not only extend the utility of existing research but also amplify the visibility of individual studies, creating a mutually reinforcing incentive structure for both data sharing and reuse.
+
+As TED continues to grow, we encourage researchers not only to contribute data but also to build on TED's infrastructure itself. TED itself is an extension of the Attentional Control Data Collection (ACDC) \textbf{cite!!} project, improving on data submission and ease-of-use and can as a blueprint and jumping-off point for future database development. All aspects of the project---including the SQL schema, submission interface, R extraction package, and the interactive overview website---are open source and fully forkable. Researchers are invited to reuse or adapt these components to develop similar infrastructures for other domains of psychological or behavioral science. In doing so, TED can help establish a broader culture of open, scalable, and sustainable data practices in experimental research.
+
+Taken together, these features position TED as a platform for cumulative science: one that supports rigorous replication, sophisticated cognitive modeling, empirical synthesis, and infrastructure reusability while lowering the barriers to collaboration and long-term research development.
+
+\hypertarget{conclusion}{%
+\subsection{Conclusion}\label{conclusion}}
+
+In this paper, we introduced the Truth-Effect Database (TED), a structured, large-scale resource for cumulative research on truth judgments. TED includes not only standardized, trial-level data but also open tools for user interaction, including a submission interface, a data exploration website, and an R package for flexible data extraction.
+
+We illustrated the utility of TED through initial multilevel analyses, which highlighted substantial subject-level variance in the truth effect. This finding points to the need for further theoretical and empirical work on individual differences in susceptibility to repetition.
+
+Beyond this first demonstration, TED provides the foundation for a wide range of future research. These include living meta-analyses that evolve as new data are added, simulation-based power analyses informed by real-world variance, rigorous replication and reanalysis of existing studies, and the development of formal cognitive models. As an open and extensible infrastructure, TED also serves as a blueprint for sustainable, community-driven database development in psychological science.
+
+\newpage
+
+\hypertarget{references}{%
+\section{References}\label{references}}
+
+\hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
+\leavevmode\vadjust pre{\hypertarget{ref-R-papaja}{}}%
+Aust, F., \& Barth, M. (2022). \emph{{papaja}: {Prepare} reproducible {APA} journal articles with {R Markdown}}. \url{https://github.com/crsh/papaja}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-lme4}{}}%
+Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2015). Fitting linear mixed-effects models using {lme4}. \emph{Journal of Statistical Software}, \emph{67}(1), 1--48. \url{https://doi.org/10.18637/jss.v067.i01}
+
+\leavevmode\vadjust pre{\hypertarget{ref-bauer2022psychological}{}}%
+Bauer, P. J. (2022). \emph{Psychological science stepping up a level} (No. 2; Vol. 33, pp. 179--183). SAGE Publications Sage CA: Los Angeles, CA.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-brms_a}{}}%
+Bürkner, P.-C. (2017). {brms}: An {R} package for {Bayesian} multilevel models using {Stan}. \emph{Journal of Statistical Software}, \emph{80}(1), 1--28. \url{https://doi.org/10.18637/jss.v080.i01}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-brms_b}{}}%
+Bürkner, P.-C. (2018). Advanced {Bayesian} multilevel modeling with the {R} package {brms}. \emph{The R Journal}, \emph{10}(1), 395--411. \url{https://doi.org/10.32614/RJ-2018-017}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-brms_c}{}}%
+Bürkner, P.-C. (2021). Bayesian item response modeling in {R} with {brms} and {Stan}. \emph{Journal of Statistical Software}, \emph{100}(5), 1--54. \url{https://doi.org/10.18637/jss.v100.i05}
+
+\leavevmode\vadjust pre{\hypertarget{ref-cruwell2023s}{}}%
+Crüwell, S., Apthorp, D., Baker, B. J., Colling, L., Elson, M., Geiger, S. J., Lobentanzer, S., Monéger, J., Patterson, A., Schwarzkopf, D. S., et al. (2023). What's in a badge? {A} computational reproducibility investigation of the open data badge policy in one issue of {Psychological Science}. \emph{Psychological Science}, \emph{34}(4), 512--522.
+
+\leavevmode\vadjust pre{\hypertarget{ref-fosterOpenScienceFramework2017}{}}%
+Foster, E. D., \& Deardorff, A. (2017). Open {Science Framework} ({OSF}). \emph{Journal of the Medical Library Association}, \emph{105}(2). \url{https://doi.org/10.5195/jmla.2017.88}
+
+\leavevmode\vadjust pre{\hypertarget{ref-gorgolewski2016brain}{}}%
+Gorgolewski, K. J., Auer, T., Calhoun, V. D., Craddock, R. C., Das, S., Duff, E. P., Flandin, G., Ghosh, S. S., Glatard, T., Halchenko, Y. O., et al. (2016). The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. \emph{Scientific Data}, \emph{3}(1), 1--9.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hardwicke2021analytic}{}}%
+Hardwicke, T. E., Bohn, M., MacDonald, K., Hembacher, E., Nuijten, M. B., Peloquin, B. N., DeMayo, B. E., Long, B., Yoon, E. J., \& Frank, M. C. (2021). Analytic reproducibility in articles receiving open data badges at the journal {Psychological Science}: {An} observational study. \emph{Royal Society Open Science}, \emph{8}(1), 201494.
+
+\leavevmode\vadjust pre{\hypertarget{ref-hendersonReproducibleSystematicMap2022}{}}%
+Henderson, E. L., Westwood, S. J., \& Simons, D. J. (2022). A reproducible systematic map of research on the illusory truth effect. \emph{Psychonomic Bulletin \& Review}, \emph{29}(3), 1065--1088. \url{https://doi.org/10.3758/s13423-021-01995-w}
+
+\leavevmode\vadjust pre{\hypertarget{ref-sqlite2020hipp}{}}%
+Hipp, R. D. (2020). \emph{{SQLite}} (Version 3.31.1).
+
+\leavevmode\vadjust pre{\hypertarget{ref-ioannidis2005most}{}}%
+Ioannidis, J. P. (2005). Why most published research findings are false. \emph{PLoS Medicine}, \emph{2}(8), e124.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-acdcquery}{}}%
+Lesche, S. (2025). \emph{Acdcquery: Query the attentional control data collection}. \url{https://github.com/SLesche/acdc-query}
+
+\leavevmode\vadjust pre{\hypertarget{ref-munafo2017manifesto}{}}%
+Munafò, M. R., Nosek, B. A., Bishop, D. V., Button, K. S., Chambers, C. D., Percie du Sert, N., Simonsohn, U., Wagenmakers, E.-J., Ware, J. J., \& Ioannidis, J. P. (2017). A manifesto for reproducible science. \emph{Nature Human Behaviour}, \emph{1}(1), 0021.
+
+\leavevmode\vadjust pre{\hypertarget{ref-nosek2015promoting}{}}%
+Nosek, B. A., Alter, G., Banks, G. C., Borsboom, D., Bowman, S. D., Breckler, S. J., Buck, S., Chambers, C. D., Chin, G., Christensen, G., et al. (2015). Promoting an open research culture. \emph{Science}, \emph{348}(6242), 1422--1425.
+
+\leavevmode\vadjust pre{\hypertarget{ref-poldrack2024past}{}}%
+Poldrack, R. A., Markiewicz, C. J., Appelhoff, S., Ashar, Y. K., Auer, T., Baillet, S., Bansal, S., Beltrachini, L., Benar, C. G., Bertazzoli, G., et al. (2024). The past, present, and future of the brain imaging data structure ({BIDS}). \emph{Imaging Neuroscience}, \emph{2}, 1--19.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
+R Core Team. (2022). \emph{R: A language and environment for statistical computing}. R Foundation for Statistical Computing. \url{https://www.R-project.org/}
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-tidyverse}{}}%
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., \ldots{} Yutani, H. (2019). Welcome to the {tidyverse}. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+\leavevmode\vadjust pre{\hypertarget{ref-wilkinson2016fair}{}}%
+Wilkinson, M. D., Dumontier, M., Aalbersberg, Ij. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.-W., da Silva Santos, L. B., Bourne, P. E., et al. (2016). The {FAIR Guiding Principles} for scientific data management and stewardship. \emph{Scientific Data}, \emph{3}(1), 1--9.
+
+\leavevmode\vadjust pre{\hypertarget{ref-R-knitr}{}}%
+Xie, Y. (2015). \emph{Dynamic documents with {R} and knitr} (2nd ed.). Chapman; Hall/CRC. \url{https://yihui.org/knitr/}
+
+\end{CSLReferences}
+
+\newpage
+
+\hypertarget{appendix-appendix}{%
+\appendix}
+
+
+\hypertarget{talking-about-appendices}{%
+\section{Talking about appendices}\label{talking-about-appendices}}
+
+
+\end{document}
