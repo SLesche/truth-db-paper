@@ -47,7 +47,7 @@ The analysis was based on `r nrow(dichotomous_data) %>% apa_num()` trials nested
 (ref:model-comp-dichotomous) Overview of Information Criteria for Multi-Level Models of Dichotomous Truth Judgments
 
 ```{r model-comp-dichotomous,  tab.cap = paste("(ref:model-comp-dichotomous)"), out.width="100%"}
-papaja::apa_table(model_comp_dichotomous, note = "A note testing")
+papaja::apa_table(model_comp_dichotomous, note = "All models included random intercepts at all levels: subject, statement, and procedure. The first model included only random intercepts and the full model included random slopes at all levels. The other three models excluded random slopes at one of the three levels.")
 ```
 
 All models that included a random slope of repetition at any level outperformed the baseline model with only random intercepts. Detailed model comparisons, based on information criteria, are presented in Table \@ref(tab:model-comp-dichotomous).
@@ -61,7 +61,7 @@ We employed the "bobyqa" optimizer, as some models initially failed to converge,
 
 (ref:model-comp-scale) Overview of Information Criteria for Multi-Level Models of Likert-Scale Truth Judgments
 ```{r model-comp-scale,  tab.cap = paste("(ref:model-comp-scale)"), out.width="90%"}
-papaja::apa_table(model_comp_scale, note = "A note testing")
+papaja::apa_table(model_comp_scale, note = "Models were estimated using full maximum likelihood and the 'bobyqa' optimizer. All models included random intercepts at all levels: subject, statement, and procedure. The first model included only random intercepts and the full model included random slopes at all levels. The other three models excluded random slopes at one of the three levels.")
 ```
 
 The model including random slopes at all hierarchical levels provided the best overall fit, exhibiting improved AIC and BIC values compared to the model that excluded random effects of statements. As expected, the model again indicated a significant fixed effect of repetition ($b =$ `r model_summary_scale$Coefficient[2] %>% apa_num()`, $95\% \ CI =$ `r paste0("[", model_summary_scale$CI_low[2] %>% apa_num(), ", ", model_summary_scale$CI_high[2] %>% apa_num(), "]")`, $p$ `r model_summary_scale$p[2] %>% apa_p()`). Similarly, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r model_summary_scale$Coefficient[6] %>% apa_num()`), followed by the procedure level ($\sigma =$ `r model_summary_scale$Coefficient[8] %>% apa_num()`), and the statement level ($\sigma =$ `r model_summary_scale$Coefficient[7] %>% apa_num()`).
