@@ -44,35 +44,38 @@ We fit five models per dataset. A baseline model with only random intercepts. A 
 ### Dichotomous Truth Judgments
 The analysis was based on `r nrow(dichotomous_data) %>% apa_num()` trials nested within `r length(unique(dichotomous_data$subject)) %>% apa_num()` subjects, `r length(unique(dichotomous_data$statement_id)) %>% apa_num()` statements, and `r length(unique(dichotomous_data$procedure_id)) %>% apa_num()` procedures.
 
-(ref:model-comp-dichotomous) Overview of Information Criteria. Models...
+(ref:model-comp-dichotomous) Overview of Information Criteria for Multi-Level Models of Dichotomous Truth Judgments
 
 ```{r model-comp-dichotomous,  tab.cap = paste("(ref:model-comp-dichotomous)"), out.width="100%"}
-papaja::apa_table(model_comp_dichotomous)
+papaja::apa_table(model_comp_dichotomous, note = "A note testing")
 ```
 
-All models that included a random effect of repetition at any level outperformed the baseline model with only random intercepts. Detailed model comparisons, based on information criteria, are presented in Table \@ref(tab:model-comp-dichotomous).
+All models that included a random slope of repetition at any level outperformed the baseline model with only random intercepts. Detailed model comparisons, based on information criteria, are presented in Table \@ref(tab:model-comp-dichotomous).
 
-The model incorporating random effects at all hierarchical levels provided the best overall fit **here, fit indices!**. Compared to the model excluding random effects of statements, it demonstrated a slightly lower AIC and a marginally higher BIC. This is attributable to the minimal variance observed in the repetition effect at the statement level. Notably, the variance of the random effect of repetition was highest at the subject level, followed by the procedure level.
+The model incorporating random slopes at all hierarchical levels provided the best overall fit. Compared to the model excluding random slopes of statements, it demonstrated a slightly lower AIC and a marginally higher BIC. This is attributable to the minimal variance observed in the repetition effect at the statement level. As expected, the model indicated a significant fixed effect of repetition ($OR =$ `r model_summary_dichotomous$Coefficient[2] %>% apa_num()`, $95\% \ CI =$ `r paste0("[", model_summary_dichotomous$CI_low[2] %>% apa_num(), ", ", model_summary_dichotomous$CI_high[2] %>% apa_num(), "]")`, $p$ `r model_summary_dichotomous$p[2] %>% apa_p()`). Notably, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r model_summary_dichotomous$Coefficient[6] %>% apa_num()`), followed by the procedure level ($\sigma =$ `r model_summary_dichotomous$Coefficient[8] %>% apa_num()`), and the statement level ($\sigma =$ `r model_summary_dichotomous$Coefficient[7] %>% apa_num()`).
 
 ### Scale Truth Judgments
 The analysis was based on `r nrow(scale_data) %>% apa_num()` trials nested within `r length(unique(scale_data$subject)) %>% apa_num()` subjects, `r length(unique(scale_data$statement_id)) %>% apa_num()` statements, and `r length(unique(scale_data$procedure_id)) %>% apa_num()` procedures.
 
 We employed the "bobyqa" optimizer, as some models initially failed to converge, and estimated the models using full maximum likelihood. An overview of the information criteria for all evaluated models is presented in Table \@ref(tab:model-comp-scale).
 
-(ref:model-comp-scale) Overview of Information Criteria. Models...
+(ref:model-comp-scale) Overview of Information Criteria for Multi-Level Models of Likert-Scale Truth Judgments
 ```{r model-comp-scale,  tab.cap = paste("(ref:model-comp-scale)"), out.width="90%"}
-papaja::apa_table(model_comp_scale)
+papaja::apa_table(model_comp_scale, note = "A note testing")
 ```
 
-The model including random effects at all hierarchical levels provided the best overall fit **here, fit indices!!**, exhibiting improved AIC and BIC values compared to the model that excluded random effects of statements. As in the dichotomous analysis, the variance of the repetition effect was near zero at the statement level, while being most pronounced at the subject level.
+The model including random slopes at all hierarchical levels provided the best overall fit, exhibiting improved AIC and BIC values compared to the model that excluded random effects of statements. As expected, the model again indicated a significant fixed effect of repetition ($b =$ `r model_summary_scale$Coefficient[2] %>% apa_num()`, $95\% \ CI =$ `r paste0("[", model_summary_scale$CI_low[2] %>% apa_num(), ", ", model_summary_scale$CI_high[2] %>% apa_num(), "]")`, $p$ `r model_summary_scale$p[2] %>% apa_p()`). Similarly, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r model_summary_scale$Coefficient[6] %>% apa_num()`), followed by the procedure level ($\sigma =$ `r model_summary_scale$Coefficient[8] %>% apa_num()`), and the statement level ($\sigma =$ `r model_summary_scale$Coefficient[7] %>% apa_num()`).
 
-To further explore the influence of temporal delay between the exposure and judgment phases on interindividual variability in the repetition effect, we stratified the data. Specifically, we re-estimated the multilevel model (with random effects at all levels) separately for judgments made on the same day as the exposure phase and for those made on a subsequent day.
+To further explore the influence of temporal delay between the exposure and judgment phases on inter-individual variability in the repetition effect, we stratified the data. Specifically, we re-estimated the multilevel model (with random slopes at all levels) separately for judgments made on the same day as the exposure phase and for those made on a subsequent day.
 
-The results of this model can be found in table **table!**
+The same-day model was based on `r nrow(scale_data %>% filter(repetition_time <= 180)) %>% apa_num()` trials nested within `r length(unique(scale_data %>% filter(repetition_time <= 180) %>% pull(subject))) %>% apa_num()` subjects, `r length(unique(scale_data %>% filter(repetition_time <= 180) %>% pull(statement_id))) %>% apa_num()` statements, and `r length(unique(scale_data %>% filter(repetition_time <= 180) %>% pull(procedure_id))) %>% apa_num()` procedures. The model again indicated a significant fixed effect of repetition ($b =$ `r model_summary_sameday$Coefficient[2] %>% apa_num()`, $95\% \ CI =$ `r paste0("[", model_summary_sameday$CI_low[2] %>% apa_num(), ", ", model_summary_sameday$CI_high[2] %>% apa_num(), "]")`, $p$ `r model_summary_sameday$p[2] %>% apa_p()`). The standard deviation of the random slopes at subject level was $\sigma =$ `r model_summary_sameday$Coefficient[6] %>% apa_num()`.
 
-Fit indices and effect sizes of these models. Variance measures here, too.
+The later-day model was based on `r nrow(scale_data %>% filter(repetition_time > 180)) %>% apa_num()` trials nested within `r length(unique(scale_data %>% filter(repetition_time > 180) %>% pull(subject))) %>% apa_num()` subjects, `r length(unique(scale_data %>% filter(repetition_time > 180) %>% pull(statement_id))) %>% apa_num()` statements, and `r length(unique(scale_data %>% filter(repetition_time > 180) %>% pull(procedure_id))) %>% apa_num()` procedures. The model indicated a significant fixed effect of repetition ($b =$ `r model_summary_later$Coefficient[2] %>% apa_num()`, $95\% \ CI =$ `r paste0("[", model_summary_later$CI_low[2] %>% apa_num(), ", ", model_summary_later$CI_high[2] %>% apa_num(), "]")`, $p$ `r model_summary_later$p[2] %>% apa_p()`). The standard deviation of the random slopes at subject level was $\sigma =$ `r model_summary_later$Coefficient[6] %>% apa_num()`.
 
-Model Sameday
+
+**Nochmal der ganze output, falls du noch etwas anderes haben willst?**
+
+Model sameday
 ```{r}
 model_re_likert_sameday
 ```
@@ -81,5 +84,3 @@ Model Later
 ```{r}
 model_re_likert_later
 ```
-
-The variance of the random effect of repetition was higher in the data containing truth judgments from the same day as the exposure phase (number 1) vs. (number 2).

@@ -5,6 +5,8 @@ Our goal in developing TED was to address key challenges in open research data: 
 
 We also provide tools to facilitate access and use of the database. In particular, the R package `acdcquery` [@R-acdcquery] allows users to extract data from TED with flexible filtering criteria, supporting both simple and complex queries. Additionally, we have developed a web-based data entry interface that automatically checks for consistency and flags incorrect variable names or entries (https://slesche.github.io/truth-effect-database/). This helps maintain high standards for incoming data and ensures that TED remains a reliable resource for the community, while simplifying the submission process and lowering the barrier to entry.
 
+**Kannst du zu den folgenden Punkten bzgl. interpretation noch deine gedanken ergänzen? Ich habe schonmal ein bisschen die Struktur überlkegt, aber ich glaube das wird besser, wenn du da noch was zu sagst** 
+
 To illustrate the analytical potential of TED, we conducted multilevel models estimating random effects at the subject, statement, and publication levels to investigate where variance in the truth effect originates. This approach is only feasible with a dataset of TED’s size and granularity.
 
 In both the Likert-scale and dichotomous truth judgment data, we found that the random slopes of repetition on the statement level showed very little variance. This suggests that specific properties of individual statements (e.g., their semantic content or plausibility) have limited influence on the magnitude of the truth effect. However, statement-level variance in random intercepts was relatively large. This is consistent with expectations: some statements are objectively easier to judge as true or false, while others are more ambiguous, leading to baseline differences in overall truth ratings.
@@ -19,7 +21,7 @@ Thus, it remains an open question whether the variability in the truth effect re
 
 Lastly, we explored whether the magnitude of variance in the repetition effect differed depending on the delay between exposure and judgment—a key procedural variable in truth effect research. @schnuerch2021truth previously observed reduced individual differences in experiments with longer retention intervals. TED allowed us to extend their analysis to all included studies, estimating variability in the truth effect when the exposure and judgment occur on the same day as opposed to a delay of at least a day. Something about what we expected
 
-**also the overall size of truth effect here? 0.09 vs 0.06 fixed effect same vs. later**
+**also include discussion on the overall size of truth effect here? 0.09 vs 0.06 fixed effect same vs. later**
 
 In line with this expectation, we found that the variance in the random effect of repetition was indeed larger when judgments were made on the same day as exposure, compared to when judgments were delayed to a later day. 
 **Interpretation **

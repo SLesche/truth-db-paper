@@ -350,6 +350,10 @@ model_comp_dichotomous <- anova(
   model_full_re_dichotomous
 )
 
+model_summary_dichotomous <- parameters::model_parameters(model_full_re_dichotomous, exponentiate = TRUE)
+
+model_summary_scale <- parameters::model_parameters(model_full_re_scale)
+
 # tab_model(
 #   model_check_scale,
 #   model_full_re_scale,
@@ -409,6 +413,9 @@ if (compute_new == TRUE){
   load(file = "./markdown/data/model_re_likert_sameday.Rdata")
   load(file = "./markdown/data/model_re_likert_later.Rdata")
 }
+
+model_summary_sameday <- parameters::model_parameters(model_re_likert_sameday)
+model_summary_later <- parameters::model_parameters(model_re_likert_later)
 ```
 
 ```{r, eval = FALSE}
