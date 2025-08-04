@@ -55,6 +55,7 @@ analysis_data <- full_data %>%
       "delay", 
       "next_day"
     ),
+    repeated = repeated - 0.5
   )
 
 has_complete_data <- analysis_data %>% 
@@ -93,12 +94,13 @@ long_study_data <- study_overview %>%
   mutate(filler_task_type = case_when(
     filler_task_type == "" ~ "",
     filler_task_type == 0 ~ "non-verbal",
-    filler_task_type == 1 ~ "verbal"
+    filler_task_type == 1 ~ "verbal",
+    TRUE ~ filler_task_type
   )) %>% 
   mutate(
     filler_task_yesno = ifelse(filler_task_yesno == 1, "yes", "no")
   ) %>% 
-  select(truth_rating_scale, truth_rating_steps, filler_task_yesno, filler_task_type) %>% 
+  select(student_sample, truth_rating_scale, truth_rating_steps, filler_task_yesno, filler_task_type) %>% 
   pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
 
 plot_study_data <- long_study_data %>%
@@ -106,7 +108,7 @@ plot_study_data <- long_study_data %>%
   mutate(
     value = fct_relevel(
       factor(value),
-      "101", "range", "likert", "11", "6", "5", "4", "dichotomous", "2"
+      "101", "range", "likert", "11", "7", "6", "5", "4", "dichotomous", "2"
     )
   )
 
@@ -240,6 +242,39 @@ p2 <- ggplot(df_long, aes(x = delay_days)) +
 
 delay_plot <- gridExtra::grid.arrange(p1, p2, ncol = 2)
 
+```
+
+```{r}
+if (compute_new == TRUE){
+  
+  library(brms)
+  options(mc.cores = parallel::detectCores())
+
+  model_full_dichotomous_bayes = brms::brm(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = dichotomous_data,
+    family = brms::bernoulli(),
+    backend = "cmdstanr",
+    chains = 4,
+    cores = 4,
+    threads = threading(threads = 2),
+    warmup = 1000,
+    iter = 3000,
+    file = "./markdown/data/bayes_model_dichotomous"
+  )
+  
+  model_full_scale_bayes = brms::brm(
+    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    data = scale_data,
+    backend = "cmdstanr",
+    chains = 4,
+    cores = 4,
+    threads = threading(threads = 4),
+    warmup = 1000,
+    iter = 3000,
+    file = "./markdown/data/bayes_model_scale"
+  )
+}
 ```
 
 
