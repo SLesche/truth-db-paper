@@ -7,7 +7,7 @@ library(tidyverse)
 library(data.table)
 library(lme4)
 # library(afex)
-# library(brms)
+library(brms)
 library(sjPlot)
 
 compute_new = FALSE
@@ -31,7 +31,7 @@ analysis_data <- full_data %>%
     repetition_time_type = case_when(
       repetition_time <= 5 ~ "immediate",
       repetition_time > 5 & repetition_time <= 60 ~ "delay",
-      repetition_time > 60*24 ~ "next_day"
+      repetition_time >= 60*24 ~ "next_day"
     )
   ) %>% 
   mutate(
@@ -55,6 +55,7 @@ analysis_data <- full_data %>%
       "delay", 
       "next_day"
     ),
+    repetition_sameday = ifelse(repetition_time < 60*24, 1, 0),
     repeated = repeated - 0.5
   )
 
@@ -251,252 +252,85 @@ if (compute_new == TRUE){
   options(mc.cores = parallel::detectCores())
 
   model_full_dichotomous_bayes = brms::brm(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    response ~ repeated + (1 + repeated || subject) + (1 + repeated || statement_id) + (1 + repeated || procedure_id),
     data = dichotomous_data,
     family = brms::bernoulli(),
+    prior =  c(
+      prior(normal(0, 1), class = "b"),
+      prior(gamma(1, 4), class = "sd"),
+      prior(normal(0.5, 0.5), class = "Intercept")
+    ),
     backend = "cmdstanr",
     chains = 4,
     cores = 4,
     threads = threading(threads = 2),
+    control = list(adapt_delta = 0.90),
     warmup = 1000,
     iter = 3000,
     file = "./markdown/data/bayes_model_dichotomous"
   )
   
   model_full_scale_bayes = brms::brm(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
+    response ~ repeated + (1 + repeated || subject) + (1 + repeated || statement_id) + (1 + repeated || procedure_id),
     data = scale_data,
     backend = "cmdstanr",
+    prior =  c(
+      prior(normal(0, 1), class = "b"),
+      prior(gamma(1, 4), class = "sd"),
+      prior(normal(0.5, 0.5), class = "Intercept")
+    ),
     chains = 4,
     cores = 4,
     threads = threading(threads = 4),
+    control = list(adapt_delta = 0.90),
     warmup = 1000,
     iter = 3000,
     file = "./markdown/data/bayes_model_scale"
   )
+  
+  model_time_scale_bayes = brms::brm(
+    response ~ repeated + (1 + repeated || subject:repetition_sameday) + (1 + repeated || statement_id) + (1 + repeated || procedure_id),
+    data = scale_data,
+    backend = "cmdstanr",
+    prior =  c(
+      prior(normal(0, 1), class = "b"),
+      prior(gamma(1, 4), class = "sd"),
+      prior(normal(0.5, 0.5), class = "Intercept")
+    ),
+    chains = 4,
+    cores = 4,
+    threads = threading(threads = 4),
+    control = list(adapt_delta = 0.90),
+    warmup = 1000,
+    iter = 3000,
+    file = "./markdown/data/bayes_model_scale_time"
+  )
+  
 }
 ```
-
 
 ```{r}
-if (compute_new == TRUE){
-  model_check_dichotomous <- glmer(
-    response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-    data = dichotomous_data,
-    family = binomial()
-  )
-  
-  model_nosubject_re_dichotomous <- glmer(
-    response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-    data = dichotomous_data,
-    family = binomial()
-  )
-  
-  model_nostatement_re_dichotomous <- glmer(
-    response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
-    data = dichotomous_data,
-    family = binomial()
-  )
-  
-  model_noprocedure_re_dichotomous <- glmer(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
-    data = dichotomous_data,
-    family = binomial()
-  )
-  
-  model_full_re_dichotomous <- glmer(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-    data = dichotomous_data,
-    family = binomial()
-  )
-  
-  ## Scale data
-  model_check_scale <- lmer(
-    response ~ repeated + (1 | subject) + (1 | statement_id) + (1 | procedure_id),
-    data = scale_data, 
-    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = FALSE
-  )
-  
-  model_nosubject_re_scale <- lmer(
-    response ~ repeated + (1 | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-    data = scale_data, 
-    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = FALSE
-  )
-  
-  model_nostatement_re_scale <- lmer(
-    response ~ repeated + (1 + repeated | subject) + (1 | statement_id) + (1 + repeated | procedure_id),
-    data = scale_data, 
-    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = FALSE
-  )
-  
-  model_noprocedure_re_scale <- lmer(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 | procedure_id),
-    data = scale_data, 
-    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = FALSE
-  )
-  
-  model_full_re_scale <- lmer(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-    data = scale_data, 
-    control = lmerControl(optimizer = "bobyqa", optCtrl = list(maxfun = 1e5)),
-    REML = FALSE
-  )
-  
-  save(model_check_dichotomous, file = "./markdown/data/model_check_dichotomous.Rdata")
-  save(model_check_scale, file = "./markdown/data/model_check_scale.Rdata")
-  save(model_nosubject_re_dichotomous, file = "./markdown/data/model_nosubject_re_dichotomous.Rdata")
-  save(model_nosubject_re_scale, file = "./markdown/data/model_nosubject_re_scale.Rdata")
-  save(model_nostatement_re_dichotomous, file = "./markdown/data/model_nostatement_re_dichotomous.Rdata")
-  save(model_nostatement_re_scale, file = "./markdown/data/model_nostatement_re_scale.Rdata")
-  save(model_noprocedure_re_dichotomous, file = "./markdown/data/model_noprocedure_re_dichotomous.Rdata")
-  save(model_noprocedure_re_scale, file = "./markdown/data/model_noprocedure_re_scale.Rdata")
-  save(model_full_re_dichotomous, file = "./markdown/data/model_full_re_dichotomous.Rdata")
-  save(model_full_re_scale, file = "./markdown/data/model_full_re_scale.Rdata")   
-} else {
-  load(file = "./markdown/data/model_check_dichotomous.Rdata")
-  load(file = "./markdown/data/model_check_scale.Rdata")
-  load(file = "./markdown/data/model_nosubject_re_dichotomous.Rdata")
-  load(file = "./markdown/data/model_nosubject_re_scale.Rdata")
-  load(file = "./markdown/data/model_nostatement_re_dichotomous.Rdata")
-  load(file = "./markdown/data/model_nostatement_re_scale.Rdata")
-  load(file = "./markdown/data/model_noprocedure_re_dichotomous.Rdata")
-  load(file = "./markdown/data/model_noprocedure_re_scale.Rdata")
-  load(file = "./markdown/data/model_full_re_dichotomous.Rdata")
-  load(file = "./markdown/data/model_full_re_scale.Rdata") 
-}
+library(posterior)
 
-model_comp_scale <- anova(
-  model_check_scale, 
-  model_nosubject_re_scale,
-  model_noprocedure_re_scale, 
-  model_nostatement_re_scale,
-  model_full_re_scale
-  )
+# Get random slopes from the fitted model
+re <- ranef(model_time_scale_bayes, summary = FALSE)$`subject:repetition_sameday`
+slopes <- re[, , "repeated"]
 
-model_comp_dichotomous <- anova(
-  model_check_dichotomous, 
-  model_nosubject_re_dichotomous,
-  model_noprocedure_re_dichotomous, 
-  model_nostatement_re_dichotomous,
-  model_full_re_dichotomous
-)
+# Identify grouping levels
+group_labels <- dimnames(re)[[2]]
+rep_vals <- as.integer(gsub(".*_", "", group_labels))  # extract 0 or 1 from subject:0 or subject:1
 
-model_summary_dichotomous <- parameters::model_parameters(model_full_re_dichotomous, exponentiate = TRUE)
+# Separate by condition
+slopes_0 <- slopes[, rep_vals == 0]
+slopes_1 <- slopes[, rep_vals == 1]
 
-model_summary_scale <- parameters::model_parameters(model_full_re_scale)
+# Get posterior SD of slopes per condition
+sd_0 <- apply(slopes_0, 1, sd)
+sd_1 <- apply(slopes_1, 1, sd)
+sd_diff <- sd_1 - sd_0
 
-# tab_model(
-#   model_check_scale,
-#   model_full_re_scale,
-#   model_nosubject_re_scale,
-#   model_noprocedure_re_scale,
-#   model_nostatement_re_scale,
-#   show.re.var = TRUE,  # Show random effect variances
-#   show.icc = TRUE,     # Show ICC
-#   show.loglik = TRUE,
-#   show.aic = TRUE,
-#   show.bic = TRUE,
-#   dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
-#   title = "Multilevel Model Comparison: Scale Data"
-# )
-# 
-# tab_model(
-#   model_check_dichotomous, 
-#   model_nosubject_re_dichotomous,
-#   model_noprocedure_re_dichotomous, 
-#   model_nostatement_re_dichotomous,
-#   model_full_re_dichotomous
-#   # show.re.var = TRUE,  # Show random effect variances
-#   # # show.icc = TRUE,     # Show ICC
-#   # show.loglik = TRUE,
-#   # show.aic = TRUE,
-#   # show.bic = TRUE,
-#   # dv.labels = c("Check", "Full", "No Subject RE", "No Procedure RE", "No Statement RE"),
-#   # title = "Multilevel Model Comparison: Scale Data"
-# )
+hist(sd_diff)
+# Summarize
+summarise_draws(sd_0 = sd_0, sd_1 = sd_1, diff = sd_diff)
 ```
 
-
-```{r}
-if (compute_new == TRUE){
-  # Retentions-Intervall Länge noch mit aufnehmen?
-  model_re_likert_sameday <- lmer(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-    data = scale_data %>% filter(repetition_time <= 180),
-    REML = FALSE
-  )
-  
-  model_re_likert_later <- lmer(
-    response ~ repeated + (1 + repeated | subject) + (1 + repeated | statement_id) + (1 + repeated | procedure_id),
-    data = scale_data %>% filter(repetition_time > 180),
-    REML = FALSE
-  )
-  
-  # summary(model_re_likert_sameday)
-  # summary(model_re_likert_later)
-  # 
-  # VarCorr(model_re_likert_sameday)
-  # VarCorr(model_re_likert_later)
-  
-  save(model_re_likert_sameday, file = "./markdown/data/model_re_likert_sameday.Rdata")
-  save(model_re_likert_later, file = "./markdown/data/model_re_likert_later.Rdata")
-} else {
-  load(file = "./markdown/data/model_re_likert_sameday.Rdata")
-  load(file = "./markdown/data/model_re_likert_later.Rdata")
-}
-
-model_summary_sameday <- parameters::model_parameters(model_re_likert_sameday)
-model_summary_later <- parameters::model_parameters(model_re_likert_later)
-```
-
-```{r, eval = FALSE}
-prep_aov <- function(data){
-  data %>% 
-    group_by(subject, repeated) %>% 
-    summarize(mean_resp = mean(response, na.rm = FALSE))
-}
-
-run_simple_aov <- function(data) {
-  aov_ez(
-    id = "subject",
-    dv = "mean_resp",
-    within = "repeated",
-    data = data
-  )
-}
-
-run_lme4 <- function(data){
-  lme4::lmer(response ~ repeated + (1 | subject), data = data)
-}
-
-results <- analysis_data %>% 
-  nest(.by = c(procedure_id, repetition_time, n_statements)) %>% 
-  mutate(
-    aov_data = map(data, prep_aov),
-  )
-  
-results <- results %>% 
-  mutate(
-    n_trials = map_dbl(data, nrow),
-    n_subjects = map_dbl(data, ~length(unique(.$subject))),
-    aov_results = map(aov_data, run_simple_aov)
-  )
-
-results <- results %>% 
-  mutate(
-    eta_sq = map_dbl(aov_results, ~effectsize::eta_squared(.) %>% pull(Eta2_partial)),
-    omega_sq = map_dbl(aov_results, ~effectsize::omega_squared(.) %>% pull(Omega2_partial))
-  )
-
-results <- results %>% 
-  mutate(
-    mlm = map(data, run_lme4)
-  )
-
-results$eta_sq %>% hist(breaks = 10)
-results$omega_sq %>% hist()
-```
