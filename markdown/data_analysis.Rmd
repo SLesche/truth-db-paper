@@ -328,6 +328,7 @@ library(posterior)
 # Get random slopes from the fitted model
 re <- ranef(model_time_scale_bayes, summary = FALSE)$`subject:repetition_sameday`
 slopes <- re[, , "repeated"]
+intercept <- re[, , "Intercept"]
 
 # Identify grouping levels
 group_labels <- dimnames(re)[[2]]
@@ -336,6 +337,9 @@ rep_vals <- as.integer(gsub(".*_", "", group_labels))  # extract 0 or 1 from sub
 # Separate by condition
 slopes_0 <- slopes[, rep_vals == 0]
 slopes_1 <- slopes[, rep_vals == 1]
+
+intercept_0 <- apply(intercept[, rep_vals == 0], 1, sd)
+intercept_1 <- apply(intercept[, rep_vals == 1], 1, sd)
 
 # Get posterior SD of slopes per condition
 sd_0 <- apply(slopes_0, 1, sd)

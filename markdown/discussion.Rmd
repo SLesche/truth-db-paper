@@ -48,7 +48,7 @@ As TED continues to grow, we encourage researchers not only to contribute data b
 Taken together, these features position TED as a platform for cumulative science: one that supports rigorous replication, sophisticated cognitive modeling, empirical synthesis, and infrastructure reusability while lowering the barriers to collaboration and long-term research development.
 
 ## Conclusion
-In this paper, we introduced the Truth Effect Database (TED), a structured, large-scale resource for cumulative research on truth judgments. TED includes not only standardized, trial-level data but also open tools for user interaction, including a submission interface and an R package for flexible data extraction.
+In this paper, we introduced the Truth Effect Database (TED), a structured, large-scale resource for cumulative research on truth judgments. TED includes not only standardized, trial-level data but also open tools for user interaction, including a submission interface and an R package for flexible data extraction. Additional details can be found on TED's homepage (https://slesche.github.io/ted-site/).
 
 We illustrated the utility of TED through initial multilevel analyses, which highlighted substantial subject-level variance in the truth effect and provide new evidence that individual differences in susceptibility to the truth effect systematically vary due to the length of the retention interval. These finding point to the need for further theoretical and empirical work on individual differences in susceptibility to repetition.
 

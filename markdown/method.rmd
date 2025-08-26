@@ -1,12 +1,18 @@
 # Method
 ## The Truth Effect Database (TED)
-Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on Github (https://github.com/SLesche/truth-effect-database). 
+Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on Github (https://github.com/SLesche/truth-effect-database). We also provide a landing page with detailed information on the project and a user-guide for interacting with the database (https://slesche.github.io/ted-site/). 
 
 The database is implemented using Structured Query Language (SQL), specifically *SQLite* [@sqlite2020hipp]. A key advantage of SQLite is its serverless architecture—data is stored in a single, shareable file, allowing researchers to download, interact with, and modify the database locally without the need for a dedicated database server.
 
 As a relational database system, SQLite supports the use of multiple interconnected tables. This structure enables efficient organization of complex data relationships. For instance, each publication may include several studies, which themselves involve multiple experimental conditions. By organizing data across discrete, normalized tables rather than in a single flat file, TED minimizes redundancy and enhances both storage efficiency and query performance.
 
-The design of our database is illustrated in Figure \@ref(fig:database-overview-plot). Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a *publication_table* and raw data at the lowest level in the *observation_table*. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
+The design of our database is illustrated in Figure \@ref(fig:database-overview-plot). Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a *publication_table* and raw data at the lowest level in the *observation_table*. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables. 
+
+The *study_table* contains information about the participants, the use of a filler task, or the location of the raw data in an online repository.
+The *measure_table* contains information about additional measures collected during the experiment. As there are very few additional measurements collected by multiple studies, we chose not to include raw data on additional measures. Nonetheless, researchers can use TED as a tool to filter candidate studies that collected measures of interest and then retrieve the raw data for this subset of studies later on.
+The *statementset_table* and the *statement_table* contain information about the publication from which a set of statements was retrieved and the text and accuracy of a statement, respectively.
+The *procedure_table* contains information about the procedure of the experiment. The most common variables manipulated in truth effect studies, such as the type of repetition, delay between exposure and judgment phase, or warning about the truth effect, can be encoded here.
+All other manipulations can be encoded in the *between_table* or *within_table*.
 
 (ref:database-overview-plot) Overview of TED Structure
 ```{r database-overview-plot,  fig.cap = paste("(ref:database-overview-plot)"), out.width="100%"}
@@ -15,7 +21,7 @@ knitr::include_graphics(
 )
 ```
 
-We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only knownledge that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database. 
+This relational approach provides a clear and modular organization of data sources, linking tables through unique identifier variables. We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only knowledge that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database. 
 
 ### Data Submission
 To ease the process of submitting data to the database, we built a website (https://slesche.github.io/truth-effect-database/) that guides users through the submission process and checks submitted information for inconsistencies or errors. This website is designed to minimize both the effort of submitting new data to the database as well as identify potential errors in the submission process.
