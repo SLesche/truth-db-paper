@@ -6,7 +6,7 @@
 
 ```{r setup-libraries}
 # think about calling renv here to make sure everyone has the same packages installed
-list.of.packages <- c("tidyverse", "rmarkdown", "papaja", "knitr", "lme4")
+list.of.packages <- c("tidyverse", "rmarkdown", "papaja", "knitr", "brms", "rstan", "cmdstanr")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -14,14 +14,13 @@ library(papaja)
 library(tidyverse)
 library(rmarkdown)
 library(knitr)
-library(lme4)
 library(acdcquery)
 
 r_refs("markdown/r-references.bib")
 
 r_citations <- cite_r(
   file = "markdown/r-references.bib",
-  pkgs = c("papaja", "tidyverse", "knitr", "acdcquery", "lme4", "brms"),
+  pkgs = c("papaja", "tidyverse", "knitr", "acdcquery", "cmdstanr", "rstan", "brms"),
   omit = FALSE,
   footnote = TRUE
   )

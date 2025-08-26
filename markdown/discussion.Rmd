@@ -17,18 +17,15 @@ Indeed, the largest variance in the truth effect emerged at the subject level, i
 
 However, efforts to predict individual differences in the truth effect have so far produced mixed results **studies**. 
 
-Thus, it remains an open question whether the variability in the truth effect reflects reliable, trait-like differences **something with issues in other experimental tasks, Rouder & haaf 2019, Haaf 2025, Hedge 2018, Rouder 2023**   ,. TED provides a promising platform for revisiting the question of reliable individual differences in the truth effect in future work.
+Thus, it remains an open question whether the variability in the truth effect reflects reliable, trait-like differences **something with issues in other experimental tasks, Rouder & haaf 2019, Haaf 2025, Hedge 2018, Rouder 2023** **point to new preprint by Schnuerch**,. TED provides a promising platform for revisiting the question of reliable individual differences in the truth effect in future work.
 
-Lastly, we explored whether the magnitude of variance in the repetition effect differed depending on the delay between exposure and judgment—a key procedural variable in truth effect research. @schnuerch2021truth previously observed reduced individual differences in experiments with longer retention intervals. TED allowed us to extend their analysis to all included studies, estimating variability in the truth effect when the exposure and judgment occur on the same day as opposed to a delay of at least a day. Something about what we expected
+Lastly, we explored whether the magnitude of variance in the repetition effect differed depending on the delay between exposure and judgment—a key procedural variable in truth effect research. @schnuerch2021truth previously observed reduced individual differences in experiments with longer retention intervals. TED allowed us to extend their analysis to all included studies, estimating variability in the truth effect when the exposure and judgment occur on the same day as opposed to a delay of at least a day while taking variance at the procedure and statement level into account. Something about what we expected
 
-**also include discussion on the overall size of truth effect here? 0.09 vs 0.06 fixed effect same vs. later**
+In line with this expectation, we found that the variance in the random effect of repetition was indeed larger when judgments were made on the same day as exposure, compared to when judgments were delayed to a later day. Bayesian model analysis confirmed that this difference is indeed different from 0, indicating true differences in the subject-level variability of the truth effect depending on the delay between exposure and judgment phase.
 
-In line with this expectation, we found that the variance in the random effect of repetition was indeed larger when judgments were made on the same day as exposure, compared to when judgments were delayed to a later day. 
-**Interpretation **
+**Interpretation, memory effects etc. **
 
-However, these exploratory results should be interpreted cautiously. We did not test the delay-related differences for significance, and the analysis did not control for potential confounding factors such as sample composition, procedural variation, or other study-level covariates. **Something, in time with more data, this will become more representative. But it already points in one direction**
-
-**Something about how in the split data and dichotomous data, we have < 50 procedure ids, which is lower than recommended? (Maas & Hox, 2005)**
+However, these exploratory results should be interpreted cautiously. We did not control for potential confounding factors such as sample composition, procedural variation, or other study-level covariates. **Something, in time with more data, this will become more representative. But it already points in one direction**
 
 Taken together, these initial analyses demonstrate TED’s utility for modeling complex interactions and variance structures that would be difficult to assess using single-study data. The open, extensible nature of TED ensures that these questions can be revisited and refined as the database continues to grow. We see this as a first step toward more nuanced investigations of the truth effect grounded in large-scale, reproducible data.
 
@@ -36,7 +33,7 @@ Taken together, these initial analyses demonstrate TED’s utility for modeling 
 
 TED offers a unique foundation for advancing research through open, cumulative, and reproducible science. As the database grows in scope and depth, we anticipate several promising directions for future research and methodological development that TED is particularly well-positioned to support.
 
-One immediate application lies in enabling living meta-analyses of truth effect data that can evolve as new studies are contributed. **maybe add that this is different form meta-analysis, as the data is not true sample of all ITE studies** Closely related, TED can support customized power analyses based on empirical variance from real experimental data. Researchers designing new studies can use TED's trial-level data to simulate expected effects based on previously collected data with similar study characteristics, improving the precision and efficiency of future study planning.
+One immediate application lies in enabling living meta-analyses of truth effect data that can evolve as new studies are contributed. **maybe add that this is different form meta-analysis, as the data is not true sample of all ITE studies, add that we provide this in the overview website** Closely related, TED can support customized power analyses based on empirical variance from real experimental data. Researchers designing new studies can use TED's trial-level data to simulate expected effects based on previously collected data with similar study characteristics, improving the precision and efficiency of future study planning.
 
 TED’s reproducibility potential lies in its ability to support both the replication and reanalysis of existing studies using openly available, trial-level data. Researchers can directly replicate earlier truth effect experiments by matching procedural details drawn from the database, or they can reanalyze existing datasets to test new hypotheses, apply alternative statistical models, or verify published results. This facilitates both direct and conceptual replications and provides a foundation for transparent, data-driven reassessment of prior findings.
 

@@ -7,6 +7,7 @@ library(tidyverse)
 library(data.table)
 library(lme4)
 # library(afex)
+library(rstan)
 library(brms)
 library(sjPlot)
 
@@ -99,7 +100,8 @@ long_study_data <- study_overview %>%
     TRUE ~ filler_task_type
   )) %>% 
   mutate(
-    filler_task_yesno = ifelse(filler_task_yesno == 1, "yes", "no")
+    filler_task_yesno = ifelse(filler_task_yesno == 1, "yes", "no"),
+    student_sample = ifelse(is.na(student_sample), "NA", ifelse(student_sample == 1, "yes", "no"))
   ) %>% 
   select(student_sample, truth_rating_scale, truth_rating_steps, filler_task_yesno, filler_task_type) %>% 
   pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
@@ -144,12 +146,16 @@ long_procedure_data <- procedure_data %>%
     repetition_instructions, repetition_instruction_timing,
     truth_instructions, truth_instruction_timing,
     presentation_type, repetition_type, repetition_location,
-    percent_repeated
+    percent_repeated,
+    exposure_task_truth
     ) %>%  # Add more vars if needed
   mutate_all(as.character) %>% 
   mutate(
     repetition_instructions = ifelse(
       repetition_instructions == "1", "yes", "no"
+    ),
+    exposure_task_truth = ifelse(
+      exposure_task_truth == 1, "yes", "no"
     ),
     repetition_instruction_timing = ifelse(
       repetition_instruction_timing == "",
@@ -305,8 +311,15 @@ if (compute_new == TRUE){
     iter = 3000,
     file = "./markdown/data/bayes_model_scale_time"
   )
-  
+} else {
+  model_full_dichotomous_bayes <- readRDS("./markdown/data/bayes_model_dichotomous.rds")
+  model_full_scale_bayes <- readRDS("./markdown/data/bayes_model_scale.rds")
+  model_time_scale_bayes <- readRDS("./markdown/data/bayes_model_scale_time.rds")
 }
+
+summary_model_full_dichotomous_bayes <- summary(model_full_dichotomous_bayes)
+summary_model_full_scale_bayes <- summary(model_full_scale_bayes)
+summary_model_time_scale_bayes <- summary(model_time_scale_bayes)
 ```
 
 ```{r}
@@ -328,9 +341,5 @@ slopes_1 <- slopes[, rep_vals == 1]
 sd_0 <- apply(slopes_0, 1, sd)
 sd_1 <- apply(slopes_1, 1, sd)
 sd_diff <- sd_1 - sd_0
-
-hist(sd_diff)
-# Summarize
-summarise_draws(sd_0 = sd_0, sd_1 = sd_1, diff = sd_diff)
 ```
 
