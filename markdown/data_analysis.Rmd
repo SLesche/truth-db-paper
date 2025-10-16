@@ -10,6 +10,7 @@ library(lme4)
 library(rstan)
 library(brms)
 library(sjPlot)
+library(bayesplot)
 
 compute_new = FALSE
 ```
@@ -175,6 +176,16 @@ long_procedure_data <- procedure_data %>%
     repetition_type = ifelse(repetition_type == "some exact, some semantic (incongruent)", "mixed", repetition_type)
   ) %>% 
   mutate(
+    repetition_instruction_timing = ifelse(
+      repetition_instruction_timing == "test",
+      "judgment", repetition_instruction_timing
+    ),
+    truth_instruction_timing = ifelse(
+      truth_instruction_timing == "test",
+      "judgment", truth_instruction_timing
+    ),
+  ) %>% 
+  mutate(
     truth_instruction_timing = fct_relevel(
       factor(truth_instruction_timing),
       "both", "exposure", "test", "none"
@@ -195,7 +206,7 @@ plot_procedure_data <- long_procedure_data %>%
   mutate(
     value = fct_relevel(
       factor(value),
-      "paraphrase", "exact","no", "none", "yes", "both", "exposure", "test", 
+      "paraphrase", "exact","no", "none", "yes", "both","judgment", "exposure", 
       "100 %", "67 %", "66.67 %", "66 %", "50 %", "46.67 %", "33 %", "0", "mixed"
     )
   )

@@ -57,6 +57,23 @@ full_data <- query_db(
   "observation_table"
 )
 
+references_table <- query_db(
+  conn,
+  all_argument,
+  c("publication_id", "authors", "conducted", "peer_reviewed", "study_id", "n_participants"),
+  "publication_table"
+)
+
+trial_nums <- full_data %>% 
+  count(study_id) %>% 
+  rename("n_trials" = "n")
+
+references_table <- references_table %>% 
+  left_join(., trial_nums) %>% 
+  mutate(
+    peer_reviewed = ifelse(peer_reviewed == 1, "Yes", "No")
+  )
+
 # data.table::fwrite(full_data, "./markdown/data/full_data.csv")
 ```
 
