@@ -94,7 +94,7 @@ scale_data <- analysis_data %>%
 long_study_data <- study_overview %>% 
   mutate_all(as.character) %>% 
   mutate(filler_task_type = case_when(
-    filler_task_type == "" ~ "",
+    filler_task_type == "" ~ "none",
     filler_task_type == 0 ~ "non-verbal",
     filler_task_type == 1 ~ "verbal",
     TRUE ~ filler_task_type
@@ -111,14 +111,14 @@ plot_study_data <- long_study_data %>%
   mutate(
     value = fct_relevel(
       factor(value),
-      "101", "range", "likert", "11", "7", "6", "5", "4", "dichotomous", "2"
+      "101", "range", "likert", "11", "7", "6", "5", "4", "dichotomous", "2", "none"
     )
   )
 
 study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
-    aes(label = paste0(value, " (", n, ")")),
+    aes(label = paste0(value, "\n(", n, ")")),
     position = position_stack(vjust = 0.5),
     color = "black",
     size = 2.5
@@ -136,7 +136,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
   )+
   coord_flip()
 
-ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9, scale = 0.4)
+ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9, scale = 0.45)
 
 
 # Reshape data to long format
@@ -184,6 +184,9 @@ long_procedure_data <- procedure_data %>%
       "both", "exposure", "test", "none"
     )
   ) %>% 
+  mutate(
+    percent_repeated = paste0(percent_repeated, " %")
+  ) %>% 
   pivot_longer(cols = everything(), names_to = "variable", values_to = "value")
 
 # Count combinations of variable and value
@@ -193,7 +196,7 @@ plot_procedure_data <- long_procedure_data %>%
     value = fct_relevel(
       factor(value),
       "paraphrase", "exact","no", "none", "yes", "both", "exposure", "test", 
-      "100", "67", "66.67", "66", "50", "46.67", "33", "0", "mixed"
+      "100 %", "67 %", "66.67 %", "66 %", "50 %", "46.67 %", "33 %", "0", "mixed"
     )
   )
 
@@ -201,10 +204,10 @@ plot_procedure_data <- long_procedure_data %>%
 procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
-    aes(label = paste0(value, " (", n, ")")),
+    aes(label = paste0(value, "\n(", n, ")")),
     position = position_stack(vjust = 0.5),
     color = "black",
-    size = 2.5
+    size = 2.2
   ) +
   labs(
     title = "Breakdown of Procedure Variables",
@@ -219,7 +222,7 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
   )+
   coord_flip()
 
-ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9, scale = 0.4)
+ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9, scale = 0.45)
 
 ```
 
