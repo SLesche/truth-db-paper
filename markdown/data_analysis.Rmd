@@ -119,25 +119,31 @@ plot_study_data <- long_study_data %>%
 study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
-    aes(label = paste0(value, "\n(", n, ")")),
-    position = position_stack(vjust = 0.5),
-    color = "black",
-    size = 2.5
+    aes(
+      label = paste0(value, "\n(", n, ")")),
+      # label = paste0(value, " (", n, ")")),
+      position = position_stack(vjust = 0.5),
+      color = "black",
+      size = 6,
+      fontface = "bold",
+      lineheight = 0.8,
+      # family = "Times New Roman"   # set Times New Roman for labels
   ) +
   labs(
-    title = "Breakdown of Study Variables",
+    # title = "Breakdown of Study Variables",
     x = NULL,
     y = "Count"
-  ) +
-  scale_fill_grey(start = 0.3, end = 0.8) +  # Adjust range for lighter/darker contrast
-  theme_minimal(base_size = 11) +
+  )+
+  scale_fill_grey(start = 0.3, end = 0.9) +  # keep the contrast
+  theme_minimal(base_size = 20) +  # larger base font size for all text
   theme(
     legend.position = "none",
-    plot.title = element_text(hjust = 0.5)
-  )+
+  ) +
   coord_flip()
 
-ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9, scale = 0.45)
+study_overview_plot
+
+ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9, scale = 0.7)
 
 
 # Reshape data to long format
@@ -215,26 +221,28 @@ plot_procedure_data <- long_procedure_data %>%
 procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
-    aes(label = paste0(value, "\n(", n, ")")),
+    aes(label = ifelse(str_detect(value, "%") | value == "exposure" | value == "judgment" | value == "both" | value == "none", paste0(value, "\n(", n, ")"), paste0(value, " (", n, ")"))),
     position = position_stack(vjust = 0.5),
     color = "black",
-    size = 2.2
+    size = 5,
+    lineheight = 0.8,
+    fontface = "bold"
   ) +
   labs(
-    title = "Breakdown of Procedure Variables",
+    # title = "Breakdown of Procedure Variables",
     x = NULL,
     y = "Count"
   ) +
-  scale_fill_grey(start = 0.3, end = 0.8) +  # Adjust range for lighter/darker contrast
-  theme_minimal(base_size = 11) +
+  scale_fill_grey(start = 0.3, end = 0.9) +  # keep the contrast
+  theme_minimal(base_size = 20) +  # larger base font size for all text
   theme(
     legend.position = "none",
-    plot.title = element_text(hjust = 0.5)
-  )+
+  ) +
   coord_flip()
 
-ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9, scale = 0.45)
+procedure_overview_plot
 
+ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9, scale = 0.8)
 ```
 
 ```{r, eval = FALSE}
@@ -334,6 +342,34 @@ if (compute_new == TRUE){
 summary_model_full_dichotomous_bayes <- summary(model_full_dichotomous_bayes)
 summary_model_full_scale_bayes <- summary(model_full_scale_bayes)
 summary_model_time_scale_bayes <- summary(model_time_scale_bayes)
+
+main_eff_dich <- hypothesis(model_full_dichotomous_bayes, "repeated > 0")
+main_eff_scale <- hypothesis(model_full_scale_bayes, "repeated > 0")
+main_eff_time <- hypothesis(model_time_scale_bayes, "repeated > 0")
+
+# From LuSchumacher https://github.com/LuSchumacher/truth_ddm/blob/main/src/4_model_evaluation.R
+calc_BF <- function(posterior_samples, prior_sd = 0.5) {
+  post_density <- density(posterior_samples, bw = "nrd0")
+  posterior_at_zero <- approx(post_density$x, post_density$y, xout = 0)$y
+  if(is.na(posterior_at_zero) || posterior_at_zero < 1e-10) {
+    posterior_at_zero <- 1e-10
+  }
+  prior_at_zero <- dnorm(0, mean = 0, sd = prior_sd)
+  BF10 <- prior_at_zero / posterior_at_zero
+  return(BF10)
+}
+
+compute_BFs <- function(fit, param_names, prior_sd = 0.5) {
+  sapply(param_names, function(param) {
+    samples <- as.numeric(fit$draws(param))
+    calc_BF(samples, prior_sd)
+  })
+}
+
+calc_BF(as_draws_matrix(model_full_dichotomous_bayes, "b_repeated"), 1)
+calc_BF(as_draws_matrix(model_full_scale_bayes, "b_repeated"), 1)
+calc_BF(as_draws_matrix(model_time_scale_bayes, "b_repeated"), 1)
+
 ```
 
 ```{r}
@@ -359,5 +395,7 @@ intercept_1 <- apply(intercept[, rep_vals == 1], 1, sd)
 sd_0 <- apply(slopes_0, 1, sd)
 sd_1 <- apply(slopes_1, 1, sd)
 sd_diff <- sd_1 - sd_0
+
+posterior_prob <- mean(sd_diff > 0)
 ```
 
