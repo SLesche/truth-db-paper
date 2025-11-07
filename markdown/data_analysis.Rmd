@@ -11,6 +11,7 @@ library(rstan)
 library(brms)
 library(sjPlot)
 library(bayesplot)
+library(extrafont)
 
 compute_new = FALSE
 ```
@@ -124,7 +125,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
       # label = paste0(value, " (", n, ")")),
       position = position_stack(vjust = 0.5),
       color = "black",
-      size = 6,
+      size = 10,
       fontface = "bold",
       lineheight = 0.8,
       # family = "Times New Roman"   # set Times New Roman for labels
@@ -135,7 +136,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
     y = "Count"
   )+
   scale_fill_grey(start = 0.3, end = 0.9) +  # keep the contrast
-  theme_minimal(base_size = 20) +  # larger base font size for all text
+  theme_minimal(base_size = 25) +  # larger base font size for all text
   theme(
     legend.position = "none",
   ) +
@@ -143,7 +144,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
 
 study_overview_plot
 
-ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9, scale = 0.7)
+ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9)
 
 
 # Reshape data to long format
@@ -212,7 +213,7 @@ plot_procedure_data <- long_procedure_data %>%
   mutate(
     value = fct_relevel(
       factor(value),
-      "paraphrase", "exact","no", "none", "yes", "both","judgment", "exposure", 
+      "paraphrase", "exact","no", "none", "yes", "judgment", "exposure", "both",
       "100 %", "67 %", "66.67 %", "66 %", "50 %", "46.67 %", "33 %", "0", "mixed"
     )
   )
@@ -221,10 +222,10 @@ plot_procedure_data <- long_procedure_data %>%
 procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, fill = value)) +
   geom_bar(stat = "identity") +
   geom_text(
-    aes(label = ifelse(str_detect(value, "%") | value == "exposure" | value == "judgment" | value == "both" | value == "none", paste0(value, "\n(", n, ")"), paste0(value, " (", n, ")"))),
+    aes(label = paste0(value, "\n(", n, ")")),
     position = position_stack(vjust = 0.5),
     color = "black",
-    size = 5,
+    size = 9,
     lineheight = 0.8,
     fontface = "bold"
   ) +
@@ -233,8 +234,8 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
     x = NULL,
     y = "Count"
   ) +
-  scale_fill_grey(start = 0.3, end = 0.9) +  # keep the contrast
-  theme_minimal(base_size = 20) +  # larger base font size for all text
+  scale_fill_grey(start = 0.4, end = 0.9) +  # keep the contrast
+  theme_minimal(base_size = 25) +  # larger base font size for all text
   theme(
     legend.position = "none",
   ) +
@@ -242,7 +243,7 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
 
 procedure_overview_plot
 
-ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9, scale = 0.8)
+ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 24, height = 9)
 ```
 
 ```{r, eval = FALSE}

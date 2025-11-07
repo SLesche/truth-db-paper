@@ -188,15 +188,39 @@ sd_statement <- post$sd_statement_id__repeated
 sd_procedure <- post$sd_procedure_id__repeated
 
 sd_matrix <- cbind(
-  `Subject (same day)` = sd_1,
-  `Subject (later)` = sd_0,
-  `Procedure` = sd_procedure,
-  `Statement` = sd_statement
+  sd_1,
+  sd_0,
+  sd_procedure,
+  sd_statement
 )
+color_scheme_set("red")
 
-mcmc_areas(sd_matrix,
-           prob = 0.95,      # 80% credible interval
-           point_est = "mean") +
-  xlab("SD") +
-  ylab("Grouping Factor")
+sd_posterior_plot <- mcmc_areas(
+  sd_matrix,
+  prob = 0.95,      # 95% credible interval
+  prob_outer = 1,
+  border_size = 1,
+  point_est = "median") +
+  xlim(0, 0.12)+
+  xlab("Standard Deviation of the Repetition Effect") +
+  ylab("Level") +
+  scale_y_discrete(
+    labels = c(
+      "sd_1"= "Subject (retention interval < 1 day)",
+      "sd_0" = "Subject (retention interval ≥ 1 day)",
+      "sd_procedure" = "Procedure",
+      "sd_statement" = "Statement"
+    )
+  )+
+  theme_minimal(base_family = "Times New Roman", base_size = 20) +
+  theme(
+    text = element_text(family = "Times New Roman", colour = "black"),
+    axis.text = element_text(family = "Times New Roman"),
+    axis.title = element_text(family = "Times New Roman"),
+    legend.text = element_text(family = "Times New Roman"),
+    legend.title = element_text(family = "Times New Roman")
+  )
+
+ggsave("images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9, scale = 0.8)
+
 ```
