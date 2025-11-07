@@ -125,7 +125,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
       # label = paste0(value, " (", n, ")")),
       position = position_stack(vjust = 0.5),
       color = "black",
-      size = 10,
+      size = 8,
       fontface = "bold",
       lineheight = 0.8,
       # family = "Times New Roman"   # set Times New Roman for labels
@@ -140,7 +140,14 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
   theme(
     legend.position = "none",
   ) +
-  coord_flip()
+  coord_flip()+
+  theme(
+    text = element_text(family = "Times New Roman", colour = "black"),
+    axis.text = element_text(family = "Times New Roman", size = 25, color = "black"),
+    axis.title = element_text(family = "Times New Roman", size = 25, color = "black"),
+    legend.text = element_text(family = "Times New Roman"),
+    legend.title = element_text(family = "Times New Roman")
+  )
 
 study_overview_plot
 
@@ -225,7 +232,7 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
     aes(label = paste0(value, "\n(", n, ")")),
     position = position_stack(vjust = 0.5),
     color = "black",
-    size = 9,
+    size = 7,
     lineheight = 0.8,
     fontface = "bold"
   ) +
@@ -239,11 +246,18 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
   theme(
     legend.position = "none",
   ) +
-  coord_flip()
+  coord_flip()+
+  theme(
+    text = element_text(family = "Times New Roman", colour = "black"),
+    axis.text = element_text(family = "Times New Roman", size = 25, color = "black"),
+    axis.title = element_text(family = "Times New Roman", size = 25, color = "black"),
+    legend.text = element_text(family = "Times New Roman"),
+    legend.title = element_text(family = "Times New Roman")
+  )
 
 procedure_overview_plot
 
-ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 24, height = 9)
+ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9)
 ```
 
 ```{r, eval = FALSE}

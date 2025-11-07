@@ -202,8 +202,8 @@ sd_posterior_plot <- mcmc_areas(
   border_size = 1,
   point_est = "median") +
   xlim(0, 0.12)+
-  xlab("Standard Deviation of the Repetition Effect") +
-  ylab("Level") +
+  xlab("Standard Deviation") +
+  # ylab("Level") +
   scale_y_discrete(
     labels = c(
       "sd_1"= "Subject (retention interval < 1 day)",
@@ -212,11 +212,11 @@ sd_posterior_plot <- mcmc_areas(
       "sd_statement" = "Statement"
     )
   )+
-  theme_minimal(base_family = "Times New Roman", base_size = 20) +
+  theme_minimal(base_family = "Times New Roman", base_size = 25) +
   theme(
     text = element_text(family = "Times New Roman", colour = "black"),
-    axis.text = element_text(family = "Times New Roman"),
-    axis.title = element_text(family = "Times New Roman"),
+    axis.text = element_text(family = "Times New Roman", size = 25, color = "black"),
+    axis.title = element_text(family = "Times New Roman", size = 25, color = "black"),
     legend.text = element_text(family = "Times New Roman"),
     legend.title = element_text(family = "Times New Roman")
   )
