@@ -39,22 +39,26 @@ knitr::include_graphics("images/procedure_overview_plot.png")
 
 Detailed information on the statements presented is available for `r study_overview %>% filter(statementset_id != 1) %>% nrow()` out of `r study_overview %>% nrow()` studies. Data on the accuracy of a statement is available for `r length(analysis_data$statement_accuracy[which(!is.na(analysis_data$statement_accuracy))]) %>% apa_num` (`r (length(analysis_data$statement_accuracy[which(!is.na(analysis_data$statement_accuracy))]) / nrow(analysis_data)) %>% print_freq_percent()`) of trials, the exact statement text is available for `r length(analysis_data$statement_text[which(!is.na(analysis_data$statement_text))]) %>% apa_num` (`r (length(analysis_data$statement_text[which(!is.na(analysis_data$statement_text))]) / nrow(analysis_data)) %>% print_freq_percent()`) of trials, and response times are available for `r length(analysis_data$rt[which(!is.na(analysis_data$rt))]) %>% apa_num` (`r (length(analysis_data$rt[which(!is.na(analysis_data$rt))]) / nrow(analysis_data)) %>% print_freq_percent()`) of trials.
 
-## Multilevel Modelling
+## Bayesian Multilevel Modeling
 
-To illustrate the benefits of our large collection of trial-level data, we applied Bayesian multilevel models predicting truth judgments with repetition as a fixed effect and random intercepts and slopes at the subject, statement, and procedure levels. We chose to use the procedure level instead of the study level as meaningful study characteristics regarding the truth effect are captured in this part of the data. For example, the same study may have multiple judgment sessions, modify the percentage of repeated stimuli, or warn some participants about the truth effect. These different procedures will then also receive different procedure identifiers. The present analysis allows us to estimate the variance in the truth effect on three levels simultaneously: variance introduced through experimental manipulations (procedure_id), variance introduced through statements (statement_id), and variance due to individual differences (subject).
+To illustrate the benefits of our large collection of trial-level data, we fitted Bayesian multilevel models predicting truth judgments, with repetition as a fixed effect and random intercepts and slopes at the statement, subject, and experiment levels.
 
-We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-type responses (e.g., 1–5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a "true" judgment. The repetition status was mean-centered to aid model estimation, a new statement was coded -0.5 and a repeated statement 0.5.
+The experiment level is based on data from the procedure_table, as this table contains detailed information about each experimental setup (e.g., proportion of repeated items, presence of warnings, number of sessions) beyond what is available in the broader study_table. Each entry in the study_table corresponds to at least one entry in the procedure_table, but a single study may include several procedures that differ in these settings. For example, the same study may have multiple judgment sessions, modify the percentage of repeated stimuli, or warn some participants about the truth effect. These different procedures will then also receive different procedure identifiers, but the same study identifier.
 
-We ran all models using 4 chains with 3000 iterations per chain, 1000 of which were discarded as warmup-samples, leading to a total of 8000 posterior samples. There were no divergent transitions, no $\hat{R} > 1.05$, and visual inspection confirmed that the chains mixed well. We used weakly informative priors for the intercept, fixed effect, and standard deviations for all models.
+Thus, the experiment identifier (procedure_id) uniquely captures both the study context and its specific experimental conditions. This modeling approach allows us to estimate the variance in the truth effect at three levels simultaneously: (1) variance due to diverse statements (statement level), (2) variance due to individual differences (subject level), and (3) variance due to common experimental manipulations and study settings (experiment level).
+
+We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-scale responses (e.g., 1–5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a “true” judgment. The repetition status was effect coded with -0.5 for new and +0.5 for repeated statements.
+We ran all models using 4 chains with 3000 iterations per chain, 1000 of which were discarded as warmup-samples, leading to a total of 8000 posterior samples. There were no divergent transitions, no $\hat{R}>1.05$, and visual inspection confirmed that the chains mixed well. We used weakly informative priors for the intercept, fixed effect, and standard deviations for all models.
+
 
 $$Intercept \sim Normal(0.5, 0.5)$$
 $$b \sim Normal(0, 1)$$
 $$\sigma \sim Gamma(1, 4)$$
 
 ### Dichotomous Truth Judgments
-The analysis was based on `r nrow(dichotomous_data) %>% apa_num()` trials nested within `r length(unique(dichotomous_data$subject)) %>% apa_num()` subjects, `r length(unique(dichotomous_data$statement_id)) %>% apa_num()` statements, and `r length(unique(dichotomous_data$procedure_id)) %>% apa_num()` procedures.
+The analysis was based on `r nrow(dichotomous_data) %>% apa_num()` trials nested within `r length(unique(dichotomous_data$subject)) %>% apa_num()` subjects, `r length(unique(dichotomous_data$statement_id)) %>% apa_num()` statements, and `r length(unique(model_full_dichotomous_bayes$data$procedure_id)) %>% apa_num()` experiments.
 
-Table \@ref(tab:dichotomous-model-table) provides a summary of parameter estimates. As expected, the model indicated a significant fixed effect of repetition ($OR =$ `r summary_model_full_dichotomous_bayes$fixed$Estimate[2] %>% exp() %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$fixed[2, 3] %>% exp() %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$fixed[2, 4] %>% exp() %>% apa_num(), "]")`). Notably, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r summary_model_full_dichotomous_bayes$random$subject$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$random$subject[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$random$subject[2, 4] %>% apa_num(), "]")`), followed by the procedure level ($\sigma =$ `r summary_model_full_dichotomous_bayes$random$procedure_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$random$procedure_id[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$random$procedure_id[2, 4] %>% apa_num(), "]")`), and the statement level ($\sigma =$ `r summary_model_full_dichotomous_bayes$random$statement_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$random$statement_id[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$random$statement_id[2, 4] %>% apa_num(), "]")`).
+Table \@ref(tab:dichotomous-model-table) provides a summary of parameter estimates.As expected, the model indicated a significant fixed effect of repetition ($b =$ `r summary_model_full_scale_bayes$fixed$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$fixed[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$fixed[2, 4] %>% apa_num(), "]")`, $OR =$ `r summary_model_full_dichotomous_bayes$fixed$Estimate[2] %>% exp() %>% apa_num()`, $BF_{10} > 1 \times 10^{10}$). Notably, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r summary_model_full_dichotomous_bayes$random$subject$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$random$subject[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$random$subject[2, 4] %>% apa_num(), "]")`), followed by the experiment level ($\sigma =$ `r summary_model_full_dichotomous_bayes$random$procedure_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$random$procedure_id[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$random$procedure_id[2, 4] %>% apa_num(), "]")`), and the statement level ($\sigma =$ `r summary_model_full_dichotomous_bayes$random$statement_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_dichotomous_bayes$random$statement_id[2, 3] %>% apa_num(), ", ", summary_model_full_dichotomous_bayes$random$statement_id[2, 4] %>% apa_num(), "]")`).
 
 (ref:dichotomous-model-table) Variance in the truth effect at different levels
 
@@ -68,7 +72,7 @@ dichomotous_model_table <- summary_model_full_dichotomous_bayes$fixed %>%
 dichomotous_model_table <- rbind(dichomotous_model_table, 
                                  summary_model_full_dichotomous_bayes$random %>% 
                                    data.table::rbindlist() %>% 
-                                   mutate(Grouping = c("procedure", "procedure", "statement", "statement", "subject", "subject")) %>% 
+                                   mutate(Grouping = c("experiment", "experiment", "statement", "statement", "subject", "subject")) %>% 
                                    mutate(Effect = "random",
                                           Parameter = rep(c("Intercept (sd)", "repeated (sd)"), 3)) %>% 
                                    select(Effect, Grouping, Parameter, Estimate, `l-95% CI`, `u-95% CI`)
@@ -80,7 +84,7 @@ dichomotous_model_table <- rbind(dichomotous_model_table,
 apa_table(dichomotous_model_table, 
           caption = "Parameter Estimates of the Dichotomous Model", 
           note = paste0("N = ", summary_model_full_dichotomous_bayes$nobs,
-                        "; N Procedure = ", summary_model_full_dichotomous_bayes$ngrps$procedure_id,
+                        "; N Experiments = ", summary_model_full_dichotomous_bayes$ngrps$procedure_id,
                         "; N Subjects = ", summary_model_full_dichotomous_bayes$ngrps$subject,
                         "; N Statements = ", summary_model_full_dichotomous_bayes$ngrps$statement_id,
                         "; l_95_CrI refers to the lower boundary of the 95% credible interval, u_95_CrI refers to the upper boundary"))
@@ -96,9 +100,10 @@ mcmc_areas(draws_array,
 ```
 
 ### Scale Truth Judgments
-The analysis was based on `r nrow(scale_data) %>% apa_num()` trials nested within `r length(unique(scale_data$subject)) %>% apa_num()` subjects, `r length(unique(scale_data$statement_id)) %>% apa_num()` statements, and `r length(unique(scale_data$procedure_id)) %>% apa_num()` procedures.
+The analysis was based on `r nrow(scale_data) %>% apa_num()` trials nested within `r length(unique(scale_data$subject)) %>% apa_num()` subjects, `r length(unique(scale_data$statement_id)) %>% apa_num()` statements, and `r length(unique(model_full_scale_bayes$data$procedure_id)) %>% apa_num()` experiments.
 
-Table \@ref(tab:scale-model-table) provides a summary of parameter estimates. As expected, the model indicated a significant fixed effect of repetition ($b =$ `r summary_model_full_scale_bayes$fixed$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$fixed[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$fixed[2, 4] %>% apa_num(), "]")`). Again, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r summary_model_full_scale_bayes$random$subject$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$random$subject[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$random$subject[2, 4] %>% apa_num(), "]")`), followed by the procedure level ($\sigma =$ `r summary_model_full_scale_bayes$random$procedure_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$random$procedure_id[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$random$procedure_id[2, 4] %>% apa_num(), "]")`), and the statement level ($\sigma =$ `r summary_model_full_scale_bayes$random$statement_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$random$statement_id[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$random$statement_id[2, 4] %>% apa_num(), "]")`).
+Table \@ref(tab:scale-model-table) provides a summary of parameter estimates. As expected, the model indicated a significant fixed effect of repetition ($b =$ `r summary_model_full_scale_bayes$fixed$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$fixed[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$fixed[2, 4] %>% apa_num(), "]")`, $BF_{10} > 1 \times 10^{10}$). Again, the standard deviation of the random slope of repetition was highest at the subject level ($\sigma =$ `r summary_model_full_scale_bayes$random$subject$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$random$subject[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$random$subject[2, 4] %>% apa_num(), "]")`), followed by the experiment level ($\sigma =$ `r summary_model_full_scale_bayes$random$procedure_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$random$procedure_id[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$random$procedure_id[2, 4] %>% apa_num(), "]")`), and the statement level ($\sigma =$ `r summary_model_full_scale_bayes$random$statement_id$Estimate[2] %>% apa_num()`, $95\% \ CrI =$ `r paste0("[", summary_model_full_scale_bayes$random$statement_id[2, 3] %>% apa_num(), ", ", summary_model_full_scale_bayes$random$statement_id[2, 4] %>% apa_num(), "]")`).
+
 
 (ref:scale-model-table) Variance in the truth effect at different levels
 ```{r scale-model-table}
@@ -111,7 +116,7 @@ scale_model_table <- summary_model_full_scale_bayes$fixed %>%
 scale_model_table <- rbind(scale_model_table, 
                                  summary_model_full_scale_bayes$random %>% 
                                    data.table::rbindlist() %>% 
-                                   mutate(Grouping = c("procedure", "procedure", "statement", "statement", "subject", "subject")) %>% 
+                                   mutate(Grouping = c("experiment", "experiment", "statement", "statement", "subject", "subject")) %>% 
                                    mutate(Effect = "random",
                                           Parameter = rep(c("Intercept (sd)", "repeated (sd)"), 3)) %>% 
                                    select(Effect, Grouping, Parameter, Estimate, `l-95% CI`, `u-95% CI`)
@@ -137,9 +142,9 @@ mcmc_areas(draws_array,
            prob = 0.95)
 ```
 
-To further explore the influence of temporal delay between the exposure and judgment phases on inter-individual variability in the repetition effect, we included an interaction between subject and temporal delay (same-day vs. different day) in the random effect structure. The model then estimates two standard distributions for the random effect of repetition on the subject level. We can then investigate whether the difference in the standard deviation of the random effect of repetition on the subject-level is different depending on the temporal delay.
+As outlined above in the introduction, previous research findings suggest that the time interval between exposure and judgment phase may be a crucial factor in investigating the role of individual differences in the truth effect. To further explore the influence of temporal delay between the exposure and judgment phases on inter-individual variability in the repetition effect, we included an interaction between subject and temporal delay (same-day vs. different day) in the random effect structure. The model then estimates two standard distributions for the random effect of repetition on the subject level. Based on this, we examined whether variability in the repetition effect at the subject-level differ depending on the temporal delay.
 
-Table \@ref(tab:time-model-table) provides a summary of parameter estimates. The standard deviation of the random slope of repetition at the subject level for a same-day judgment phase was $\sigma_0 =$ `r mean(sd_1) %>% apa_num()` ($95\% \ CrI =$ `r paste0("[", quantile(sd_1, 0.025) %>% apa_num(), ", ", quantile(sd_1, 0.975) %>% apa_num(), "]")`). The standard deviation for the random slope on a later day judgment phase was $\sigma_1 =$ `r mean(sd_0) %>% apa_num()` ($95\% \ CrI =$ `r paste0("[", quantile(sd_0, 0.025) %>% apa_num(), ", ", quantile(sd_0, 0.975) %>% apa_num(), "]")`). The difference in standard deviations in the random effect of repetition at the subject level deviated substantially from zero $\sigma_0 - \sigma_1 =$ `r mean(sd_diff) %>% apa_num()` ($95\% \ CrI =$ `r paste0("[", quantile(sd_diff, 0.025) %>% apa_num(), ", ", quantile(sd_diff, 0.975) %>% apa_num(), "]")`).
+Table \@ref(tab:time-model-table) provides a summary of parameter estimates. The standard deviation of the random slope of repetition at the subject level for a same-day judgment phase was $\sigma_0 =$ `r mean(sd_1) %>% apa_num()` ($95\% \ CrI =$ `r paste0("[", quantile(sd_1, 0.025) %>% apa_num(), ", ", quantile(sd_1, 0.975) %>% apa_num(), "]")`). The standard deviation for the random slope on a later day judgment phase was $\sigma_1 =$ `r mean(sd_0) %>% apa_num()` ($95\% \ CrI =$ `r paste0("[", quantile(sd_0, 0.025) %>% apa_num(), ", ", quantile(sd_0, 0.975) %>% apa_num(), "]")`). The difference in standard deviations in the random effect of repetition at the subject level deviated substantially from zero $\sigma_0 - \sigma_1 =$ `r mean(sd_diff) %>% apa_num()` ($95\% \ CrI =$ `r paste0("[", quantile(sd_diff, 0.025) %>% apa_num(), ", ", quantile(sd_diff, 0.975) %>% apa_num(), "]")`, $BF_{10} > 1 \times 10^{10}$).
 
 (ref:time-model-table) Variance in the truth effect at different levels
 ```{r time-model-table}
@@ -152,7 +157,7 @@ time_model_table <- summary_model_time_scale_bayes$fixed %>%
 time_model_table <- rbind(time_model_table, 
                                  summary_model_time_scale_bayes$random %>% 
                                    data.table::rbindlist() %>% 
-                                   mutate(Grouping = c("procedure", "procedure", "statement", "statement", "subject", "subject")) %>% 
+                                   mutate(Grouping = c("experiment", "experiment", "statement", "statement", "subject", "subject")) %>% 
                                    mutate(Effect = "random",
                                           Parameter = rep(c("Intercept (sd)", "repeated (sd)"), 3)) %>% 
                                    select(Effect, Grouping, Parameter, Estimate, `l-95% CI`, `u-95% CI`) %>% 
@@ -165,7 +170,7 @@ time_model_table <- rbind(time_model_table,
 time_model_table <- rbind(time_model_table,
                           data.frame(
                             Effect = rep("random", 4),
-                            Grouping = c("subject (same day)", "subject (same day)", "subject (later)", "subject (later)"),
+                            Grouping = c("subject (same day)", "subject (same day)", "subject (>= 1 day)", "subject (>= 1 day)"),
                             Parameter = rep(c("Intercept (sd)", "repeated (sd)"), 2),
                             Estimate = c(mean(intercept_1), mean(sd_1), mean(intercept_0), mean(sd_0)),
                             `l_95_CrI` = c(quantile(intercept_1, 0.025), quantile(sd_1, 0.025), quantile(intercept_0, 0.025), quantile(sd_0, 0.025)),
@@ -207,7 +212,7 @@ sd_posterior_plot <- mcmc_areas(
   scale_y_discrete(
     labels = c(
       "sd_1"= "Subject (retention interval < 1 day)",
-      "sd_0" = "Subject (retention interval ≥ 1 day)",
+      "sd_0" = "Subject (retention interval >= 1 day)",
       "sd_procedure" = "Procedure",
       "sd_statement" = "Statement"
     )
@@ -221,6 +226,6 @@ sd_posterior_plot <- mcmc_areas(
     legend.title = element_text(family = "Times New Roman")
   )
 
-ggsave("images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9, scale = 0.8)
-
+# ggsave("images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9, scale = 0.8)
+sd_posterior_plot
 ```

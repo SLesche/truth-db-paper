@@ -199,7 +199,7 @@
   }
 {}{\PatchFailed}
 \makeatother
-\keywords{keyword, more keyword, crazy keyword\newline\indent Word count: X}
+\keywords{illusory truth effect, open science, open data, database, SQL, reproducibility}
 \usepackage{csquotes}
 \makeatletter
 \renewcommand{\paragraph}{\@startsection{paragraph}{4}{\parindent}%
@@ -229,7 +229,7 @@
   pdftitle={Introducing the Truth Effect Database (TED) - an open trial-level database promoting FAIR data in truth effect research},
   pdfauthor={Sven Lesche1 \& Annika Stump2},
   pdflang={en-EN},
-  pdfkeywords={keyword, more keyword, crazy keyword},
+  pdfkeywords={illusory truth effect, open science, open data, database, SQL, reproducibility},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 
@@ -242,10 +242,6 @@
 
 \authornote{
 
-Author Notes go here.
-
-The authors made the following contributions. Sven Lesche: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing; Annika Stump: Conceptualization, Writing - Original Draft Preparation, Writing - Review \& Editing.
-
 Correspondence concerning this article should be addressed to Sven Lesche, Hauptstraße 47-51, 69117 Heidelberg. E-mail: \href{mailto:sven.lesche@psychologie.uni-heidelberg.de}{\nolinkurl{sven.lesche@psychologie.uni-heidelberg.de}}
 
 }
@@ -253,19 +249,7 @@ Correspondence concerning this article should be addressed to Sven Lesche, Haupt
 \affiliation{\vspace{0.5cm}\textsuperscript{1} Ruprecht-Karls-University Heidelberg\\\textsuperscript{2} Albert-Ludwigs-University Freiburg}
 
 \abstract{%
-One or two sentences providing a \textbf{basic introduction} to the field, comprehensible to a scientist in any discipline.
-
-Two to three sentences of \textbf{more detailed background}, comprehensible to scientists in related disciplines.
-
-One sentence clearly stating the \textbf{general problem} being addressed by this particular study.
-
-One sentence summarizing the main result (with the words ``\textbf{here we show}'' or their equivalent).
-
-Two or three sentences explaining what the \textbf{main result} reveals in direct comparison to what was thought to be the case previously, or how the main result adds to previous knowledge.
-
-One or two sentences to put the results into a more \textbf{general context}.
-
-Two or three sentences to provide a \textbf{broader perspective}, readily comprehensible to a scientist in any discipline.
+The FAIR data principles form the foundation of the open data movement. However, while many current practices ensure data are findable and accessible, true interoperability and reusability remain limited. This paper introduces the Truth Effect Database (TED), a large-scale, trial-level, open database harmonizing data from illusory truth effect studies designed to enhance interoperability and reusability. TED currently integrates data from 56 studies in 27 publications, spanning 12,002 participants and 778,741 trials, accounting for a wide range of dispositional and contextual variables. To promote usability, TED focuses on user-friendly data submission using a custom entry website and data extraction using the R-package acdcquery. These tools guide researchers through both data entry and retrieval, eliminating the need for direct interaction with the database's internal structure. We illustrated the utility of TED through Bayesian multilevel analyses, highlighting substantial variance in the illusory truth effect at the subject level, moderated by the delay between exposure and judgment phases in truth effect paradigms. Beyond this first demonstration, TED provides the foundation for a wide range of future research. These include (living) meta-analyses, simulation-based power analyses, rigorous replication and reanalysis of existing studies, as well as the validation and development of formal cognitive models. As an open and extensible infrastructure, TED serves as a blueprint for sustainable, community-driven database development in psychological science.
 }
 
 
@@ -277,32 +261,40 @@ Two or three sentences to provide a \textbf{broader perspective}, readily compre
 ## [1] "Querying through observation table. Query times may be longer."
 \end{verbatim}
 
-\hypertarget{introduction}{%
-\section{Introduction}\label{introduction}}
+\includegraphics{C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/output/apa7_document_files/figure-latex/unnamed-chunk-18-1.pdf} \includegraphics{C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/output/apa7_document_files/figure-latex/unnamed-chunk-18-2.pdf}
 
-The open science movement has emerged in response to growing concerns about the replicability, transparency, and efficiency of scientific research (\protect\hyperlink{ref-ioannidis2005most}{Ioannidis, 2005}; \protect\hyperlink{ref-munafo2017manifesto}{Munafò et al., 2017}; \protect\hyperlink{ref-nosek2015promoting}{Nosek et al., 2015}). At its core, open science promotes practices that make research processes and outputs accessible, verifiable, and reusable. Practices such as preregistration, data sharing, and open materials aim to increase the trustworthiness of findings and to foster a more cumulative, collaborative scientific enterprise. These practices, coupled with platforms like the Open Science Framework - OSF (\protect\hyperlink{ref-fosterOpenScienceFramework2017}{Foster \& Deardorff, 2017}), have played a pivotal role in advancing openness through tools that support study registration, version control, and public sharing of data and materials. Transparency, once rare, is increasingly becoming the norm (\protect\hyperlink{ref-bauer2022psychological}{Bauer, 2022}).
+\begin{verbatim}
+## [1] 3989422804
+\end{verbatim}
 
-However, while transparency has improved markedly, efficiency and reusability have lagged behind. Research materials and datasets are often siloed within individual project pages, tailored to host single studies. As a result, even when data are technically open, they are rarely standardized in ways that facilitate reuse, integration, or cumulative analysis. Current open data practices focus primarily on the first two aspects of the FAIR (Findable, Accessible, Interoperable, and Reusable) principles of data sharing (\protect\hyperlink{ref-wilkinson2016fair}{Wilkinson et al., 2016}), while neglecting the latter. For example, the OSF is well-suited to documenting and finding individual projects, but its structure does not support the aggregation or harmonization of data across multiple related studies. In addition to structural limitations, researchers' practices like inconsistent file formats, project-specific codebooks, and divergent analytic pipelines continue to hinder interoperability.
+\begin{verbatim}
+## [1] 3989422804
+\end{verbatim}
 
-This inconsistency not only limits replicability, but also reusability. Should a researcher be interested in estimating an effect size, developing a new computational model or simply re-analyzing existing data instead of collecting an entirely new sample, they have to comb through OSF, pray for existing codebooks and hope for decipherable raw data. This is both tedious and often unsuccessful (\protect\hyperlink{ref-cruwell2023s}{Crüwell et al., 2023}; \protect\hyperlink{ref-hardwicke2021analytic}{Hardwicke et al., 2021}). However, reusability greatly improves scientific efficiency. It saves resources otherwise wasted by planning and collecting an entirely new set of data and helps efficiently allocate public resources as well as participants' and researchers' time.
+\begin{verbatim}
+## [1] 3989422804
+\end{verbatim}
 
-We argue that to make research outputs genuinely reusable, not just transparent, structure is essential. Reusability requires standardized organization: consistent variable naming, common data schemas, uniform documentation practices, and clear, accessible codebooks. In neuroscience, this principle has been successfully realized through the Brain Imaging Data Structure - BIDS (\protect\hyperlink{ref-gorgolewski2016brain}{Gorgolewski et al., 2016}), which provides a framework for organizing and annotating neuroimaging data. BIDS has enabled not just more efficient sharing, but also reproducible pipelines, automated analyses, and collaborative efforts at scale (\protect\hyperlink{ref-poldrack2024past}{Poldrack et al., 2024}).
+The open science movement has emerged in response to growing concerns about the replicability, transparency, and efficiency of scientific research (Ioannidis, 2005; Munafò et al., 2017; Nosek et al., 2015). At its core, open science promotes practices that make research processes and outputs accessible, verifiable, and reusable. Practices such as preregistration, data sharing, and open materials aim to increase the trustworthiness of findings and to foster a more cumulative, collaborative scientific enterprise. These practices, coupled with platforms like the Open Science Framework -- OSF (Foster \& Deardorff, 2017), have played a pivotal role in advancing openness through tools that support study registration, version control, and public sharing of data and materials. Transparency, once rare, is increasingly becoming the norm (Bauer, 2022).
 
-Structured approaches like BIDS are now gaining traction in cognitive psychology. The Attentional Control Data Collection (ACDC) introduced a trial-level database for data from attentional control experiments, providing standardized variable names, metadata, and analysis-ready formats that streamline cross-study comparisons (\protect\hyperlink{ref-haaf2025attentional}{Haaf et al., 2025}). Similarly, the FEARBASE project is building a large-scale, open-access repository for fear conditioning studies, adopting a shared structure to ensure comparability and long-term usability (Lohnsdorf \& Ehlers, 2025). Crucially, there is increasing institutional support for the development of infrastructure enabling data reuse. For example, the German research foundation \emph{DFG} issued an open funding call for projects developing infrastructure for scientific data management (DFG; \emph{Förderprogramm Informationsinfrastrukturen für Forschungsdaten}). These projects spearhead a changing culture of data-reusability but so far represent the exception, rather than the norm.
+However, while transparency has improved markedly, efficiency and reusability have lagged behind. Research materials and datasets are often siloed within individual project pages, tailored to host single studies. As a result, even when data are technically open, they are rarely standardized in ways that facilitate reuse, integration, or cumulative analysis. Current open data practices focus primarily on the first two aspects of the FAIR (Findable, Accessible, Interoperable, and Reusable) principles of data sharing (Wilkinson et al., 2016), while neglecting the latter. For example, the OSF is well-suited to documenting and finding individual projects, but its structure does not support the aggregation or harmonization of data across multiple related studies. In addition to structural limitations, researchers' practices like inconsistent file formats, project-specific codebooks, and divergent analytic pipelines continue to hinder interoperability.
 
-We believe that there is great potential in the development of structured databases integrating trial level data. Large and structured collections of raw data have several key applications, extending the general principle of data-reusability. They enable living meta-analyses that can update automatically as new data are added; allow researchers to find relevant raw data based on task characteristics or participant variables; facilitate the straightforward replication of published findings; and enable power analyses using pooled datasets from comparable studies.
+This inconsistency not only limits replicability, but also reusability. Should a researcher be interested in estimating an effect size, developing a new computational model or simply re-analyzing existing data instead of collecting an entirely new sample to investigate a further research question, they have to comb through OSF, pray for existing codebooks and hope for decipherable raw data. This is both tedious and often unsuccessful (Crüwell et al., 2023; Hardwicke et al., 2021). However, reusability greatly improves scientific efficiency. It saves resources otherwise wasted by planning and collecting an entirely new set of data and helps efficiently allocate public resources as well as participants' and researchers' time.
 
-Beyond these direct applications, structured datasets also support the development of new methods and models. Trial-level repositories allow for benchmarking existing analytic tools, training machine learning models, and exploring novel statistical approaches.
+We believe that structure is essential to make research results not only transparent, but also truly reusable. That is, reusability requires standardized organization: consistent variable naming, common data schemas, uniform documentation practices, and clear, accessible codebooks. In neuroscience, this principle has been successfully realized through the Brain Imaging Data Structure -- BIDS (Gorgolewski et al., 2016), which provides a framework for organizing and annotating neuroimaging data. BIDS has enabled not just more efficient sharing, but also reproducible pipelines, automated analyses, and collaborative efforts at scale (Poldrack et al., 2024).
+
+Structured approaches like BIDS are now gaining increasing attention in cognitive psychology. The Attentional Control Data Collection (ACDC) introduced a trial-level database for data from attentional control experiments, providing standardized variable names, metadata, and analysis-ready formats that streamline cross-study comparisons (Haaf et al., 2025). Similarly, the FEARBASE project is building a large-scale, open-access repository for fear conditioning studies, adopting a shared structure to ensure comparability and long-term usability (Lohnsdorf \& Ehlers, 2025). Crucially, there is increasing institutional support for the development of infrastructure enabling data reuse. For example, the German research foundation DFG issued an open funding call for projects developing infrastructure for scientific data management (DFG; Förderprogramm Informationsinfrastrukturen für Forschungsdaten). These projects spearhead a changing culture of data-reusability but so far represent the exception, rather than the norm.
+
+We believe that there is great potential in the development of structured databases integrating trial level data in the field of cognitive psychology. Large and structured collections of raw data have several key applications, extending the general principle of data-reusability. They enable living meta-analyses that can update automatically as new data are added; allow researchers to find relevant raw data based on task characteristics or participant variables; facilitate the straightforward replication of published findings; and enable power analyses using pooled datasets from comparable studies. Beyond these direct applications, structured datasets also support the development of new methods and models. Trial-level repositories allow for benchmarking existing analytic tools, training machine learning models, and exploring novel statistical approaches.
 
 To illustrate the potential of such structured and reusable databases, we focus on a particularly relevant and empirically rich phenomenon in cognitive and social psychology: the illusory truth effect (ITE). The ITE has been robustly demonstrated across numerous studies, yet substantial heterogeneity in effect sizes, experimental designs, and individual-level moderators complicates efforts to draw generalizable conclusions. These complexities make it an ideal case for a centralized, harmonized repository of trial-level data. In the following section, we provide a brief overview of the ITE and explain how its empirical challenges underscore the need for exactly the kind of infrastructure we propose.
 
 \hypertarget{the-illusory-truth-effect}{%
 \subsubsection{The illusory truth effect}\label{the-illusory-truth-effect}}
 
-The ITE exemplifies a psychological mechanism with both theoretical significance and pressing real-world relevance. In today's data-saturated and fast-paced information environment, individuals are routinely exposed to repeated content of uncertain credibility --- from benign repetition to coordinated misinformation. As such, understanding how repetition influences perceived truth is central to addressing challenges in belief formation, misinformation spread, and public trust. Originally demonstrated by Hasher et al.~(1977), the ITE refers to the tendency to perceive repeated information as more credible than novel ones, regardless of their actual accuracy. Since then, the effect has been robustly replicated in over 80 studies.
+The ITE exemplifies a psychological mechanism with both theoretical significance and pressing real-world relevance. In today's data-saturated and fast-paced information environment, individuals are routinely exposed to repeated content of uncertain credibility -- from benign repetition to coordinated misinformation. As such, understanding how repetition influences perceived truth is central to addressing challenges in belief formation, misinformation spread, and public trust. Originally demonstrated by Hasher et al.~(1977), the ITE refers to the tendency to perceive repeated information as more credible than novel ones, regardless of their actual accuracy. Since then, the effect has been robustly replicated in over 80 studies.
 
-Previous research indicates that the illusory truth effect is primarily driven by increased processing fluency as a result of repetition. That is, when evaluating the truthfulness of a statement, individuals often draw on their subjective sense of ease during processing as a heuristic cue (e.g., Dechêne et al., 2010). Crucially, the relative fluency appears to be decisive: Dechêne et al.~(2009) showed that the effect only reliably occurs when fluent and disfluent stimuli are presented together. In experimental paradigms investigating the ITE, fluency is typically manipulated by contrasting new statements with repeated ones which have been shown during a prior exposure phase.
-Although ITE has been observed across various domains and populations, prior research indicates that the illusory truth effect significantly varies among individuals (e.g., Nadarevic, 2010; Schnuerch et al., 2021).
+Previous research indicates that the illusory truth effect is primarily driven by increased processing fluency as a result of repetition. That is, when evaluating the truthfulness of a statement, individuals often draw on their subjective sense of ease during processing as a heuristic cue (e.g., Dechêne et al., 2010). Crucially, the relative fluency appears to be decisive: Dechêne et al.~(2009) showed that the effect only reliably occurs when fluent and disfluent stimuli are presented together. In experimental paradigms investigating the ITE, fluency is typically manipulated by contrasting new statements with repeated ones which have been shown during a prior exposure phase. Although ITE has been observed across various domains and populations, prior research indicates that the illusory truth effect significantly varies among individuals (e.g., Nadarevic, 2010; Schnuerch et al., 2021).
 
 Research examining dispositional factors that may account for individual differences in susceptibility to the illusory truth effect has yielded mixed and often inconclusive findings. For example, Arkes et al.~(1991) and Boehm (1994) investigated need for cognition (NFC) as a potential trait moderator of the effect but found no supporting evidence. Similarly, Newman et al.~(2020) explored whether NFC moderates the illusory truth effect and found that this relationship was contingent upon the nature of the experimental instructions. Specifically, the moderating influence of NFC emerged only when participants were not informed that the exposure phase contained both true and false statements; when such information was provided, the effect was no longer evident. In addition to NFC, other dispositional factors have been investigated with similarly inconsistent results. For instance, Kim (2002) examined whether skepticism moderates the effect and reported ambiguous findings, while DiFonzo et al.~(2016) found marginal evidence for such moderation. Sundar et al.~(2015), focusing on repeated health-related messages, observed that individuals with a high need for affect (i.e., the tendency to approach or avoid affect-inducing situations) were more susceptible to the ITE. More recently, De keersmaecker et al.~(2020) tested three further individual difference variables -- need for cognitive closure, thinking style preference (intuitive vs.~deliberative), and cognitive ability -- but found no evidence that any of these measures moderated the truth effect. In two experiments, Stump et al.~(2022) found evidence suggesting moderating effects for NCC on the illusory truth effect after a relatively short but not after a longer retention interval (10 minutes vs.~1 week). Crucially, De keersmaecker et al.~(2020) assessed NCC exclusively in one study, which employed a single, relatively long retention interval of five to seven days. The pattern of findings suggests that the temporal distance between exposure and judgment phase may be a key factor when assessing the role of individual differences in the truth effect. Further support for this interpretation comes from recent work by Schnuerch et al.~(2021), who conducted a comprehensive Bayesian reanalysis of multiple datasets examining individual differences in the illusory truth effect. Their results revealed robust evidence for such differences in five datasets, whereas at least two datasets provided evidence against them. Crucially, in the latter two studies, the retention interval spanned one week, while in the other datasets the judgment phase occurred within the same experimental session as the exposure phase.
 
@@ -311,7 +303,7 @@ Taken together, these findings offer preliminary insights into how individual di
 \hypertarget{the-present-study}{%
 \subsubsection{The present study}\label{the-present-study}}
 
-In the spirit of providing FAIR data to aid research on ITE, we introduce a centralized, trial-level database, drawing on resources and lessons learned from developing ACDC (\protect\hyperlink{ref-haaf2025attentional}{Haaf et al., 2025}). The truth effect database (TED) is designed not only with structured organization in mind, but also with an emphasis on ease of use. Particular attention has been given to lowering the barrier for data submission through an intuitive entry-mask, as well as to enabling simple data extraction via an R package. Our aim is to create a living, extensible resource that supports both contributors and users: researchers can add new studies with minimal friction, and others can search, filter, and analyze trial-level data without having to clean or realign disparate datasets. By combining structure with usability, this resource is intended to foster cumulative research on the illusory truth effect and to serve as a model for reusable psychological data infrastructures more broadly.
+In the spirit of providing FAIR data to aid research on ITE, we introduce a centralized, trial-level database, drawing on resources and lessons learned from developing ACDC (Haaf et al., 2025). The truth effect database (TED) is designed not only with structured organization in mind, but also with an emphasis on ease of use. Particular attention has been given to lowering the barrier for data submission through an intuitive entry-mask, as well as to enabling simple data extraction via an R package. Our aim is to create a living, extensible resource that supports both contributors and users: researchers can add new studies with minimal friction, and others can search, filter, and analyze trial-level data without having to clean or realign disparate datasets. By combining structure with usability, this resource is intended to foster cumulative research on the illusory truth effect and to serve as a model for reusable psychological data infrastructures more broadly. The accompanying website (\url{https://slesche.github.io/ted-site/}) aims to serve as both a guide towards using TED as well as a living example of analyses made possible through TED. In addition to a living version of the analysis provided in this paper, we provide a small, living meta-analysis -- in fact, the most recent meta-analysis published in the field of the illusory truth effect dates back more than 15 years (see Dechêne et al., 2010).
 
 \hypertarget{method}{%
 \section{Method}\label{method}}
@@ -319,13 +311,15 @@ In the spirit of providing FAIR data to aid research on ITE, we introduce a cent
 \hypertarget{the-truth-effect-database-ted}{%
 \subsection{The Truth Effect Database (TED)}\label{the-truth-effect-database-ted}}
 
-Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on Github (\url{https://github.com/SLesche/truth-effect-database}).
+Resources to build the database, restructure raw data, build the website and integrate the submitted data can be found on Github (\url{https://github.com/SLesche/truth-effect-database}). We also provide a landing page with detailed information on the project and a user-guide for interacting with the database (\url{https://slesche.github.io/ted-site/}).
 
-The database is implemented using Structured Query Language (SQL), specifically \emph{SQLite} (\protect\hyperlink{ref-sqlite2020hipp}{Hipp, 2020}). A key advantage of SQLite is its serverless architecture---data is stored in a single, shareable file, allowing researchers to download, interact with, and modify the database locally without the need for a dedicated database server.
+The database is implemented using Structured Query Language (SQL), specifically SQLite (Hipp, 2020). A key advantage of SQLite is its serverless architecture -- data is stored in a single, shareable file, allowing researchers to download, interact with, and modify the database locally without the need for a dedicated database server.
 
 As a relational database system, SQLite supports the use of multiple interconnected tables. This structure enables efficient organization of complex data relationships. For instance, each publication may include several studies, which themselves involve multiple experimental conditions. By organizing data across discrete, normalized tables rather than in a single flat file, TED minimizes redundancy and enhances both storage efficiency and query performance.
 
-The design of our database is illustrated in Figure \ref{fig:database-overview-plot}. Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a \emph{publication\_table} and raw data at the lowest level in the \emph{observation\_table}. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
+The design of our database is illustrated in Figure 1. Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a publication\_table and raw data at the lowest level in the observation\_table. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
+
+The study\_table contains information about the participants, the use of a filler task, or the location of the raw data in an online repository. The measure\_table contains information about additional measures collected during the experiment. As there are very few additional measurements collected by multiple studies, we chose not to include raw data on additional measures. Nonetheless, researchers can use TED as a tool to filter studies that collected measures of interest and then retrieve the raw data for this subset of studies later on. For example, researchers can filter the measure\_table to only include studies that also collected data on the individual need for cognitive closure (NCC) and then leverage TED's already harmonized trial data in further analyses. The statementset\_table and the statement\_table contain information about the publication from which a set of statements was retrieved and the text and accuracy of a statement, respectively. The procedure\_table contains information about the procedure of the experiment. The most common variables manipulated in truth effect studies, such as the type of repetition, delay between exposure and judgment phase, or warning about the truth effect, can be encoded here. All other manipulations can be found in the between\_table or within\_table.
 
 
 
@@ -333,7 +327,7 @@ The design of our database is illustrated in Figure \ref{fig:database-overview-p
 \includegraphics[width=1\linewidth]{./images/ted-overview} \caption{Overview of TED Structure}\label{fig:database-overview-plot}
 \end{figure}
 
-We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only knownledge that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database.
+This relational approach provides a clear and modular organization of data sources, linking tables through unique identifier variables. We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only knowledge that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database.
 
 \hypertarget{data-submission}{%
 \subsubsection{Data Submission}\label{data-submission}}
@@ -381,21 +375,98 @@ The R package will automatically construct the necessary SQL query and return th
 \hypertarget{data-selection}{%
 \subsubsection{Data Selection}\label{data-selection}}
 
-We included only data from studies specifically focused on the repetition-based illusory truth effect. To qualify for inclusion, studies had to involve participants making truth judgments about visual or auditory stimuli, with a subset of those stimuli having been presented previously to allow for repetition effects. Our data selection process was based in part on the work of Henderson et al. (\protect\hyperlink{ref-hendersonReproducibleSystematicMap2022}{2022}), who identified 17 publications with accessible raw data. Additionally, we contacted colleagues directly to request openly available datasets, further expanding the scope of included studies and conducted a literature search to find open data from the past 3 years.
+We included only data from studies specifically focused on the repetition-based illusory truth effect. To qualify for inclusion, studies had to involve participants making truth judgments about visual or auditory stimuli, with a subset of those stimuli having been presented previously to allow for repetition effects. Our data selection process was based in part on the work of Henderson et al.~(2022), who identified 17 publications with accessible raw data. Additionally, we contacted colleagues directly to request openly available datasets, further expanding the scope of included studies and conducted a literature search to find open data from the past years.
 
 \hypertarget{data-analysis}{%
 \subsubsection{Data Analysis}\label{data-analysis}}
 
-To illustrate the analytical potential of TED, we conducted a bayesian multilevel model predicting truth judgments, incorporating both fixed and random effects of repetition at the statement, subject, and procedure (i.e., study) levels. The scale and structure of TED enable us to estimate the variance in the repetition effect simultaneously across all three levels. This approach allows us to determine whether the size of the truth effect varies more substantially across individuals, across experimental procedures, or across the specific statements used.
+To illustrate the analytical potential of TED, we conducted a bayesian multilevel model predicting truth judgments, incorporating both fixed and random effects of repetition at the statement, subject, and procedure (i.e., experimental) levels. The scale and structure of TED enable us to estimate the variance in the repetition effect simultaneously across all three levels. This approach allows us to determine whether the size of the truth effect varies more substantially across individuals, across experimental procedures, or across the specific statements used.
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-All analysis were conducted using R {[}Version 4.4.1; R Core Team (\protect\hyperlink{ref-R-base}{2022}){]}\footnote{We, furthermore, used the R-packages \emph{acdcquery} (Version 1.0.1; \protect\hyperlink{ref-R-acdcquery}{Lesche, 2025}), \emph{brms} (Version 2.22.0; \protect\hyperlink{ref-R-brms_a}{Bürkner, 2017}, \protect\hyperlink{ref-R-brms_b}{2018}, \protect\hyperlink{ref-R-brms_c}{2021}), \emph{knitr} (Version 1.50; \protect\hyperlink{ref-R-knitr}{Xie, 2015}), \emph{lme4} (Version 1.1.35.4; \protect\hyperlink{ref-R-lme4}{Bates et al., 2015}), \emph{papaja} (Version 0.1.3; \protect\hyperlink{ref-R-papaja}{Aust \& Barth, 2022}) and \emph{tidyverse} (Version 2.0.0; \protect\hyperlink{ref-R-tidyverse}{Wickham et al., 2019}).}.
+All analysis were conducted using R {[}Version 4.4.1; R Core Team (\protect\hyperlink{ref-R-base}{2022}){]}\footnote{We, furthermore, used the R-packages \emph{acdcquery} (Version 1.0.1; \protect\hyperlink{ref-R-acdcquery}{Lesche, 2025}), \emph{brms} (Version 2.22.0; \protect\hyperlink{ref-R-brms_a}{Bürkner, 2017}, \protect\hyperlink{ref-R-brms_b}{2018}, \protect\hyperlink{ref-R-brms_c}{2021}), \emph{knitr} (Version 1.50; \protect\hyperlink{ref-R-knitr}{Xie, 2015}), \emph{papaja} (Version 0.1.3; \protect\hyperlink{ref-R-papaja}{Aust \& Barth, 2022}), \emph{rstan} (Version 2.32.6; \protect\hyperlink{ref-R-rstan}{Stan Development Team, 2024}) and \emph{tidyverse} (Version 2.0.0; \protect\hyperlink{ref-R-tidyverse}{Wickham et al., 2019}).}.
 
 .
 
-In the current version of the manuscript, we included 56 studies from 27 publications, spanning 12002 participants contributing 778741 trials. A complete list of the included publications can be found in Table \textbf{table with refs, studies, trials here}.
+In the current version of the manuscript, we included 56 studies from 27 publications, spanning 12002 participants contributing 778741 trials. A complete list of the included publications can be found in Table \ref{tab:table-db-overview}.
+
+
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:table-db-overview}Publications included in TED}
+
+\begin{tabular}{lllllll}
+\toprule
+publication\_id & \multicolumn{1}{c}{authors} & \multicolumn{1}{c}{conducted} & \multicolumn{1}{c}{peer\_reviewed} & \multicolumn{1}{c}{study\_id} & \multicolumn{1}{c}{n\_participants} & \multicolumn{1}{c}{n\_trials}\\
+\midrule
+1 & bena, carreras, terrier & 2019 & No & 1 & 186 & 10416\\
+2 & bena, carreras, terrier & 2020 & No & 2 & 138 & 4968\\
+3 & brashier, eliseev, marsh & 2020 & Yes & 3 & 103 & 12480\\
+3 & brashier, eliseev, marsh & 2020 & Yes & 4 & 99 & 19800\\
+3 & brashier, eliseev, marsh & 2020 & Yes & 5 & 68 & 13600\\
+3 & brashier, eliseev, marsh & 2020 & Yes & 6 & 89 & 18600\\
+4 & bena, corneille, mierop, unkelbach & 2022 & Yes & 7 & 380 & 15200\\
+5 & de keersmaecker, unkelbach, roets & 2024 & Yes & 8 & 283 & 5320\\
+5 & de keersmaecker, unkelbach, roets & 2024 & Yes & 9 & 271 & 5200\\
+5 & de keersmaecker, unkelbach, roets & 2024 & Yes & 10 & 200 & 11520\\
+5 & de keersmaecker, unkelbach, roets & 2024 & Yes & 11 & 299 & 11960\\
+5 & de keersmaecker, unkelbach, roets & 2024 & Yes & 12 & 291 & 11680\\
+6 & de keersmaecker, wiernik, roets, unkelbach & 2025 & No & 13 & 113 & 22600\\
+6 & de keersmaecker, wiernik, roets, unkelbach & 2025 & No & 14 & 430 & 86000\\
+7 & ecker, lewandowsky, chadwick & 2020 & Yes & 15 & 371 & 4476\\
+7 & ecker, lewandowsky, chadwick & 2020 & Yes & 16 & 939 & 11376\\
+7 & ecker, lewandowsky, chadwick & 2020 & Yes & 17 & 408 & 4932\\
+8 & fazio, rand, pennycook & 2019 & Yes & 18 & 503 & 40240\\
+9 & hatzidaki, santesteban, navarrete & 2025 & Yes & 19 & 82 & 9840\\
+9 & hatzidaki, santesteban, navarrete & 2025 & Yes & 20 & 68 & 8160\\
+10 & henderson, simons, barr & 2021 & Yes & 21 & 507 & 68800\\
+11 & jalbert, newman, schwarz & 2020 & Yes & 22 & 220 & 15840\\
+11 & jalbert, newman, schwarz & 2020 & Yes & 23 & 282 & 20376\\
+11 & jalbert, newman, schwarz & 2020 & Yes & 24 & 405 & 29088\\
+12 & lacassagne, bena, corneille & 2022 & Yes & 25 & 240 & 3712\\
+13 & lorenzoni, faccio, navarette & 2024 & Yes & 26 & 60 & 4960\\
+14 & murray, stanley, mcphetres, pennycook, seli & 2020 & No & 27 & 526 & 48825\\
+15 & nadarevic & 2007 & No & 28 & 54 & 9504\\
+16 & nadarevic, rinnewitz & 2011 & No & 29 & 139 & 2780\\
+17 & nadarevic, meckler, schmidt & 2012 & No & 30 & 267 & 5340\\
+18 & nadarevic, erdfelder & 2014 & Yes & 31 & 85 & 22968\\
+18 & nadarevic, erdfelder & 2014 & Yes & 32 & 66 & 6072\\
+19 & nadarevic, aßfalg & 2017 & Yes & 33 & 65 & 11440\\
+19 & nadarevic, aßfalg & 2017 & Yes & 34 & 202 & 14000\\
+20 & nadarevic, plier, thielmann, daranco & 2018 & Yes & 35 & 73 & 4088\\
+20 & nadarevic, plier, thielmann, daranco & 2018 & Yes & 36 & 79 & 8848\\
+21 & nadarevic, reber, helmecke, köse & 2020 & Yes & 37 & 91 & 5460\\
+21 & nadarevic, reber, helmecke, köse & 2020 & Yes & 38 & 64 & 3840\\
+21 & nadarevic, reber, helmecke, köse & 2020 & Yes & 39 & 80 & 4320\\
+22 & nadarevic, schnuerch, stegemann & 2021 & Yes & 40 & 70 & 11200\\
+22 & nadarevic, schnuerch, stegemann & 2021 & Yes & 41 & 149 & 26820\\
+22 & nadarevic, schnuerch, stegemann & 2021 & Yes & 42 & 98 & 4800\\
+23 & nadarevic, erdfelder & 2025 & Yes & 43 & 64 & 5376\\
+23 & nadarevic, erdfelder & 2025 & Yes & 44 & 64 & 5376\\
+23 & nadarevic, erdfelder & 2025 & Yes & 45 & 65 & 5200\\
+24 & newman, plier, thielmann, daranco & 2020 & Yes & 46 & 89 & 6624\\
+25 & pennycook, cannon, rand & 2017 & Yes & 47 & 409 & 11452\\
+25 & pennycook, cannon, rand & 2017 & Yes & 48 & 949 & 22776\\
+25 & pennycook, cannon, rand & 2017 & Yes & 49 & 940 & 28624\\
+26 & unkelbach, greifeneder & 2018 & Yes & 50 & 29 & 3240\\
+26 & unkelbach, greifeneder & 2018 & Yes & 51 & 41 & 4920\\
+26 & unkelbach, greifeneder & 2018 & Yes & 52 & 42 & 5040\\
+26 & unkelbach, greifeneder & 2018 & Yes & 53 & 37 & 3000\\
+27 & vogel, silva, thomas, wanke & 2020 & Yes & 54 & 132 & 7392\\
+27 & vogel, silva, thomas, wanke & 2020 & Yes & 55 & 102 & 2448\\
+27 & vogel, silva, thomas, wanke & 2020 & Yes & 56 & 104 & 5824\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
 
 Sample composition ranged from 29 to 949 participants. On average, studies included 218.04 participants (\(\mu_{age} =\) 33.17,\(\sigma_{age} =\) 7.22). An overview of the rating scale usage for truth judgments and the use of a filler task over all included studies can be found in Figure \ref{fig:study-overview-plot}.
 
@@ -414,16 +485,19 @@ participant in the judgment session and in 88.64 \% of procedure settings exactl
 \includegraphics[width=1\linewidth]{images/procedure_overview_plot} \caption{Overview of Procedure-related variables in TED}\label{fig:procedure-overview-plot}
 \end{figure}
 
-Detailed information on the statements presented is available for 53 out of 56 studies. Data on the accuracy of a statement is available for 52.41 \% of trials, the exact statement text is available for 44.72 \% of trials, and response times are available for 16.21 \% of trials.
+Detailed information on the statements presented is available for 53 out of 56 studies. Data on the accuracy of a statement is available for 359113 (52.41 \%) of trials, the exact statement text is available for 306387 (44.72 \%) of trials, and response times are available for 111077 (16.21 \%) of trials.
 
-\hypertarget{multilevel-modelling}{%
-\subsection{Multilevel Modelling}\label{multilevel-modelling}}
+\hypertarget{bayesian-multilevel-modeling}{%
+\subsection{Bayesian Multilevel Modeling}\label{bayesian-multilevel-modeling}}
 
-To illustrate the benefits of our large collection of trial-level data, we applied bayesian multilevel models predicting truth judgments with repetition as a fixed effect and random intercepts and slopes at the subject, statement, and procedure levels.
+To illustrate the benefits of our large collection of trial-level data, we fitted Bayesian multilevel models predicting truth judgments, with repetition as a fixed effect and random intercepts and slopes at the statement, subject, and experiment levels.
 
-We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-type responses (e.g., 1--5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a ``true'' judgment. The repetition status was mean-centered to aid model estimation, a new statement was coded -0.5 and a repeated statement 0.5.
+The experiment level is based on data from the procedure\_table, as this table contains detailed information about each experimental setup (e.g., proportion of repeated items, presence of warnings, number of sessions) beyond what is available in the broader study\_table. Each entry in the study\_table corresponds to at least one entry in the procedure\_table, but a single study may include several procedures that differ in these settings. For example, the same study may have multiple judgment sessions, modify the percentage of repeated stimuli, or warn some participants about the truth effect. These different procedures will then also receive different procedure identifiers, but the same study identifier.
 
-We ran all models using 4 chains with 3000 iterations per chain, 1000 of which were discarded as warmup-samples, leading to a total of 8000 posterior samples. There were no divergent transition, no \(\hat{R} > 1.1\), and visual inspection confirmed that the chains mixed well. We used weakly informative priors for the intercept, fixed effect, and standard deviations for all models.
+Thus, the experiment identifier (procedure\_id) uniquely captures both the study context and its specific experimental conditions. This modeling approach allows us to estimate the variance in the truth effect at three levels simultaneously: (1) variance due to diverse statements (statement level), (2) variance due to individual differences (subject level), and (3) variance due to common experimental manipulations and study settings (experiment level).
+
+We analyzed the dichotomous and Likert-type response formats separately due to differences in their scale characteristics. Dichotomous responses (e.g., true/false) require logistic models, whereas Likert-scale responses (e.g., 1--5 ratings) allow for linear models. All responses were maximum-normalized to the range 0-1 with one representing the maximum possible response indicating a ``true'' judgment. The repetition status was effect coded with -0.5 for new and +0.5 for repeated statements.
+We ran all models using 4 chains with 3000 iterations per chain, 1000 of which were discarded as warmup-samples, leading to a total of 8000 posterior samples. There were no divergent transitions, no \(\hat{R}>1.05\), and visual inspection confirmed that the chains mixed well. We used weakly informative priors for the intercept, fixed effect, and standard deviations for all models.
 
 \[Intercept \sim Normal(0.5, 0.5)\]
 \[b \sim Normal(0, 1)\]
@@ -432,97 +506,338 @@ We ran all models using 4 chains with 3000 iterations per chain, 1000 of which w
 \hypertarget{dichotomous-truth-judgments}{%
 \subsubsection{Dichotomous Truth Judgments}\label{dichotomous-truth-judgments}}
 
-The analysis was based on 112399 trials nested within 1576 subjects, 997 statements, and 14 procedures.
+The analysis was based on 112399 trials nested within 1576 subjects, 997 statements, and 14 experiments.
 
-Table TODO provides a summary of parameter estimates. As expected, the model indicated a significant fixed effect of repetition (\(OR =\) 1.79, \(95\% \ CrI =\) {[}1.51, 2.12{]}). Notably, the standard deviation of the random slope of repetition was highest at the subject level (\(\sigma =\) 0.72, \(95\% \ CrI =\) {[}0.68, 0.77{]}), followed by the procedure level (\(\sigma =\) 0.28, \(95\% \ CrI =\) {[}0.18, 0.44{]}), and the statement level (\(\sigma =\) 0.13, \(95\% \ CrI =\) {[}0.03, 0.19{]}).
+Table \ref{tab:dichotomous-model-table} provides a summary of parameter estimates.As expected, the model indicated a significant fixed effect of repetition (\(b =\) 0.08, \(95\% \ CrI =\) {[}0.41, 0.75{]}, \(OR =\) 1.79, \(BF_{10} > 1 \times 10^{10}\)). Notably, the standard deviation of the random slope of repetition was highest at the subject level (\(\sigma =\) 0.72, \(95\% \ CrI =\) {[}0.68, 0.77{]}), followed by the experiment level (\(\sigma =\) 0.28, \(95\% \ CrI =\) {[}0.18, 0.44{]}), and the statement level (\(\sigma =\) 0.13, \(95\% \ CrI =\) {[}0.03, 0.19{]}).
+
+
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:dichotomous-model-table}Parameter Estimates of the Dichotomous Model}
+
+\begin{tabular}{llllll}
+\toprule
+Effect & \multicolumn{1}{c}{Grouping} & \multicolumn{1}{c}{Parameter} & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{l\_95\_CrI} & \multicolumn{1}{c}{u\_95\_CrI}\\
+\midrule
+fixed &  & Intercept & 0.31 & 0.17 & 0.44\\
+fixed &  & repeated & 0.58 & 0.41 & 0.75\\
+random & experiment & Intercept (sd) & 0.20 & 0.11 & 0.32\\
+random & experiment & repeated (sd) & 0.28 & 0.18 & 0.44\\
+random & statement & Intercept (sd) & 0.88 & 0.84 & 0.93\\
+random & statement & repeated (sd) & 0.13 & 0.03 & 0.19\\
+random & subject & Intercept (sd) & 0.69 & 0.66 & 0.72\\
+random & subject & repeated (sd) & 0.72 & 0.68 & 0.77\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} N = 112399; N Experiments = 14; N Subjects = 1576; N Statements = 997; l\_95\_CrI refers to the lower boundary of the 95\% credible interval, u\_95\_CrI refers to the upper boundary}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
 
 \hypertarget{scale-truth-judgments}{%
 \subsubsection{Scale Truth Judgments}\label{scale-truth-judgments}}
 
-The analysis was based on 572775 trials nested within 8309 subjects, 2872 statements, and 65 procedures.
+The analysis was based on 572775 trials nested within 8309 subjects, 2872 statements, and 66 experiments.
 
-Table TODO provides a summary of parameter estimates. As expected, the model indicated a significant fixed effect of repetition (\(b =\) 0.08, \(95\% \ CrI =\) {[}0.07, 0.10{]}). Again, the standard deviation of the random slope of repetition was highest at the subject level (\(\sigma =\) 0.10, \(95\% \ CrI =\) {[}0.10, 0.10{]}), followed by the procedure level (\(\sigma =\) 0.07, \(95\% \ CrI =\) {[}0.05, 0.08{]}), and the statement level (\(\sigma =\) 0.03, \(95\% \ CrI =\) {[}0.02, 0.03{]}).
+Table \ref{tab:scale-model-table} provides a summary of parameter estimates. As expected, the model indicated a significant fixed effect of repetition (\(b =\) 0.08, \(95\% \ CrI =\) {[}0.07, 0.10{]}, \(BF_{10} > 1 \times 10^{10}\)). Again, the standard deviation of the random slope of repetition was highest at the subject level (\(\sigma =\) 0.10, \(95\% \ CrI =\) {[}0.10, 0.10{]}), followed by the experiment level (\(\sigma =\) 0.07, \(95\% \ CrI =\) {[}0.05, 0.08{]}), and the statement level (\(\sigma =\) 0.03, \(95\% \ CrI =\) {[}0.02, 0.03{]}).
 
-To further explore the influence of temporal delay between the exposure and judgment phases on inter-individual variability in the repetition effect, we included an interaction between subject and temporal delay (same-day vs.~different day) in the random effect structure. This effectively introduces two sources of variance in the intercept and repetition effect with separate standard deviations. We can then investigate whether the difference in the standard deviation of the random effect of repetition on the subject-level is different depending on the temporal delay.
 
-Table TODO provides a summary of parameter estimates. The standard deviation of the random slope of repetition at the subject level for a same-day judgment phase was \(\sigma_0 =\) 0.11 (\(95\% \ CrI =\) {[}0.10, 0.11{]}). The standard deviation for the random slope on a later day judgment phase was \(\sigma_1 =\) 0.08 (\(95\% \ CrI =\) {[}0.08, 0.09{]}). The difference in standard deviations in the random effect of repetition at the subject level deviated substantially from zero \(\sigma_0 - \sigma_1 =\) 0.02 (\(95\% \ CrI =\) {[}0.02, 0.02{]}).
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:scale-model-table}Parameter Estimates of the Scale Model}
+
+\begin{tabular}{llllll}
+\toprule
+Effect & \multicolumn{1}{c}{Grouping} & \multicolumn{1}{c}{Parameter} & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{l\_95\_CrI} & \multicolumn{1}{c}{u\_95\_CrI}\\
+\midrule
+fixed &  & Intercept & 0.54 & 0.52 & 0.56\\
+fixed &  & repeated & 0.08 & 0.07 & 0.10\\
+random & experiment & Intercept (sd) & 0.07 & 0.06 & 0.09\\
+random & experiment & repeated (sd) & 0.07 & 0.05 & 0.08\\
+random & statement & Intercept (sd) & 0.11 & 0.11 & 0.12\\
+random & statement & repeated (sd) & 0.03 & 0.02 & 0.03\\
+random & subject & Intercept (sd) & 0.10 & 0.09 & 0.10\\
+random & subject & repeated (sd) & 0.10 & 0.10 & 0.10\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} N = 587999; N Procedure = 66; N Subjects = 8397; N Statements = 2872; l\_95\_CrI refers to the lower boundary of the 95\% credible interval, u\_95\_CrI refers to the upper boundary}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+As outlined above in the introduction, previous research findings suggest that the time interval between exposure and judgment phase may be a crucial factor in investigating the role of individual differences in the truth effect. To further explore the influence of temporal delay between the exposure and judgment phases on inter-individual variability in the repetition effect, we included an interaction between subject and temporal delay (same-day vs.~different day) in the random effect structure. The model then estimates two standard distributions for the random effect of repetition on the subject level. Based on this, we examined whether variability in the repetition effect at the subject-level differ depending on the temporal delay.
+
+Table \ref{tab:time-model-table} provides a summary of parameter estimates. The standard deviation of the random slope of repetition at the subject level for a same-day judgment phase was \(\sigma_0 =\) 0.11 (\(95\% \ CrI =\) {[}0.10, 0.11{]}). The standard deviation for the random slope on a later day judgment phase was \(\sigma_1 =\) 0.08 (\(95\% \ CrI =\) {[}0.08, 0.09{]}). The difference in standard deviations in the random effect of repetition at the subject level deviated substantially from zero \(\sigma_0 - \sigma_1 =\) 0.02 (\(95\% \ CrI =\) {[}0.02, 0.02{]}, \(BF_{10} > 1 \times 10^{10}\)).
+
+
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:time-model-table}Parameter Estimates of the Time-based Scale Model}
+
+\begin{tabular}{llllll}
+\toprule
+Effect & \multicolumn{1}{c}{Grouping} & \multicolumn{1}{c}{Parameter} & \multicolumn{1}{c}{Estimate} & \multicolumn{1}{c}{l\_95\_CrI} & \multicolumn{1}{c}{u\_95\_CrI}\\
+\midrule
+fixed &  & Intercept & 0.54 & 0.52 & 0.56\\
+fixed &  & repeated & 0.08 & 0.07 & 0.10\\
+random & experiment & Intercept (sd) & 0.07 & 0.06 & 0.09\\
+random & experiment & repeated (sd) & 0.07 & 0.06 & 0.08\\
+random & statement & Intercept (sd) & 0.11 & 0.11 & 0.12\\
+random & statement & repeated (sd) & 0.03 & 0.02 & 0.03\\
+random & subject (same day) & Intercept (sd) & 0.10 & 0.10 & 0.10\\
+random & subject (same day) & repeated (sd) & 0.11 & 0.10 & 0.11\\
+random & subject (>= 1 day) & Intercept (sd) & 0.08 & 0.08 & 0.08\\
+random & subject (>= 1 day) & repeated (sd) & 0.08 & 0.08 & 0.09\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} N = 587999; N Procedure = 66; N Subjects = 9592; N Statements = 2872; l\_95\_CrI refers to the lower boundary of the 95\% credible interval, u\_95\_CrI refers to the upper boundary}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+
+
+\begin{figure}
+\includegraphics[width=1\linewidth]{C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/output/apa7_document_files/figure-latex/time-model-plot-1} \caption{Variance in the truth effect at different levels}\label{fig:time-model-plot}
+\end{figure}
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-In this paper, we introduce the Truth Effect Database (TED), a large-scale, open-access repository of trial-level data on truth judgments. TED is designed to support cumulative, reproducible research on the truth effect by standardizing and centralizing data from a wide range of studies. It currently aggregates data from 27 publications, spanning 12002 participants and 778741 trials, accounting for a wide range of dispositional and contextual variables -- including experimental instructions, task during initial exposure, number of repetitions, and length of the retention interval. With its growing size, TED provides a critical resource for investigating how repetition shapes belief formation -- a process of increasing relevance in the digital age, where repeated exposure to false or misleading information is pervasive.
+In this paper, we introduce the Truth Effect Database (TED), a large-scale, open-access repository of trial-level data on truth judgments. TED is designed to support cumulative, reproducible research on the illusory truth effect (ITE) by standardizing and centralizing data from a wide range of studies. It currently aggregates data from 56 studies in 27 publications, spanning 12,002 participants and 778,741 trials, accounting for a wide range of dispositional and contextual variables -- including experimental instructions, task during initial exposure, number of repetitions, and length of the retention interval. With its growing size, TED provides a critical resource for investigating how repetition shapes belief formation -- a process of increasing relevance in the digital age, where repeated exposure to false or misleading information is pervasive.
 
-Our goal in developing TED was to address key challenges in open research data: the fragmentation of data across studies, the lack of standard formats for sharing experimental data, and the resulting lack of interoperability and reusability (\protect\hyperlink{ref-cruwell2023s}{Crüwell et al., 2023}; \protect\hyperlink{ref-hardwicke2021analytic}{Hardwicke et al., 2021}). To meet these challenges, we provide a structured SQL-based schema that organizes data at multiple levels---including publications, studies, participants, and individual trials. This structure allows for fine-grained analysis while maintaining consistency across diverse datasets.
+Our goal in developing TED was to address key challenges in open research data: the fragmentation of data across studies, the lack of standard formats for sharing experimental data, and the resulting lack of interoperability and reusability (Crüwell et al., 2023; Hardwicke et al., 2021). To meet these challenges, we provide a structured SQL-based schema that organizes data at multiple levels -- including publications, experiments, participants, and individual trials. This structure allows for fine-grained analysis while maintaining consistency across diverse datasets.
 
-We also provide tools to facilitate access and use of the database. In particular, the R package \texttt{acdcquery} (\protect\hyperlink{ref-R-acdcquery}{Lesche, 2025}) allows users to extract data from TED with flexible filtering criteria, supporting both simple and complex queries. Additionally, we have developed a web-based data entry interface that automatically checks for consistency and flags incorrect variable names or entries (\url{https://slesche.github.io/truth-effect-database/}). This helps maintain high standards for incoming data and ensures that TED remains a reliable resource for the community, while simplifying the submission process and lowering the barrier to entry.
+We also provide tools to facilitate access and use of the database. In particular, the R package acdcquery (Lesche, 2025) allows users to extract data from TED with flexible filtering criteria, supporting both simple and complex queries. Additionally, we have developed a web-based data entry interface that automatically checks for consistency and flags incorrect variable names or entries (\url{https://slesche.github.io/truth-effect-database/}). This helps maintain high standards for incoming data and ensures that TED remains a reliable resource for the community, while simplifying the submission process and lowering the barrier to entry.
 
-\textbf{Kannst du zu den folgenden Punkten bzgl. interpretation noch deine gedanken ergänzen? Ich habe schonmal ein bisschen die Struktur überlkegt, aber ich glaube das wird besser, wenn du da noch was zu sagst}
-
-To illustrate the analytical potential of TED, we conducted multilevel models estimating random effects at the subject, statement, and publication levels to investigate where variance in the truth effect originates. This approach is only feasible with a dataset of TED's size and granularity.
+To illustrate the analytical potential of TED, we fitted multilevel models predicting truth judgments. By estimating random effects at the statement, subject, and experiment levels, we investigated where variance in the truth effect originates.
 
 In both the Likert-scale and dichotomous truth judgment data, we found that the random slopes of repetition on the statement level showed very little variance. This suggests that specific properties of individual statements (e.g., their semantic content or plausibility) have limited influence on the magnitude of the truth effect. However, statement-level variance in random intercepts was relatively large. This is consistent with expectations: some statements are objectively easier to judge as true or false, while others are more ambiguous, leading to baseline differences in overall truth ratings.
 
-We also observed substantial variance in the publication-level random effect of repetition. This is unsurprising, as studies varied considerably in design features such as the number of statements, delay between exposure and judgment, or whether participants were warned about repetition. Nevertheless, the publication-level variance in the effect of repetition was smaller than at the subject level.
+We also observed substantial variance in the experiment-level random effect of repetition. This is unsurprising, as experiments varied considerably in design features such as the number of statements, delay between exposure and judgment phase, or whether participants were warned about repetition. Nevertheless, the experiment-level variance in the effect of repetition was still smaller than at the subject level.
 
-Indeed, the largest variance in the truth effect emerged at the subject level, indicating substantial individual differences in susceptibility to the repetition effect. This finding aligns with growing interest in understanding the psychological traits or cognitive mechanisms that moderate the truth effect at the individual level. Some studies \textbf{include studies here}.
+In fact, the largest variance in the truth effect emerged at the subject level, indicating substantial individual differences in susceptibility to the repetition effect. This finding aligns with growing interest in understanding the psychological traits or cognitive mechanisms that moderate the truth effect at the individual level. However, efforts to study individual differences in the truth effect have so far produced mixed results (for an overview, see the introduction).
 
-However, efforts to predict individual differences in the truth effect have so far produced mixed results \textbf{studies}.
+In this exemplary use of TED, we furthermore explored whether the individual variance in the ITE is moderated by the delay between exposure and judgment phase -- a key design feature in truth effect experiments. TED allowed us to perform an analysis using a large number of ITE data sets, estimating individual variability in the truth effect when the exposure and judgment occur on the same day, as opposed to a delay of at least one day, while additionally taking variance at the experiment and statement level into account. The results revealed that the variance in the repetition effect at the subject level was larger when truth judgments for repeated (vs.~new) statements were made on the same day as the exposure phase, compared to when the judgment phases were postponed to a later date (i.e., at least one day later). Based on the posterior distributions, we compared these random effects between conditions (retention interval \textless{} 1 day vs.~retention interval \textgreater= 1 day). Results demonstrated that this difference is different from 0, indicating credible differences in the subject-level variability in the illusory truth effect as a function of the delay between exposure and judgment phase. On a theoretical level, these differences as a function of retention interval length may reflect variations in memory strength. After a relatively short delay, memory traces are likely still robust, making it easier for individuals to identify the earlier presentation as the source of the familiarity experience. On a theoretical level, these differences as a function of retention interval length may reflect variations in memory strength. Arkes et al.~(1989) found that the illusory truth effect increases when repeated statements are attributed to sources external to the experiment. We argue that after a relatively short delay, memory traces are likely still robust, making it easier for individuals to identify the earlier presentation as the source of the familiarity experience. Consequently, as long as the feeling of fluency can be traced back to repetition within the experimental context, certain dispositional factors may reduce the likelihood of relying on repetition-based fluency (e.g., a higher preference for deliberation, a lower need for cognitive closure). After longer intervals (e.g., one week), the source of familiarity likely becomes less distinct, reducing the interaction between repetition and dispositional factors. Once the familiarity can no longer be attributed to the experimental context, reliance on repetition-induced fluency may serve as a valid cue for truth evaluation under uncertainty (Reber \& Unkelbach, 2010). This idea aligns well with prior research demonstrating that dispositional effects (e.g., Need for Cognitive Closure) tend to emerge after relatively short retention intervals (e.g., 10 minutes) rather than longer ones (e.g., one week; Stump et al., 2022).
 
-Thus, it remains an open question whether the variability in the truth effect reflects reliable, trait-like differences \textbf{something with issues in other experimental tasks, Rouder \& haaf 2019, Haaf 2025, Hedge 2018, Rouder 2023} \textbf{point to new preprint by Schnuerch},. TED provides a promising platform for revisiting the question of reliable individual differences in the truth effect in future work.
+Finally, although our findings align well with previous research, we emphasize that these preliminary results and theoretical assumptions should be interpreted with caution, as we did not control for potential confounding factors such as sample composition, procedural variation, or other study-level covariates. Overall, these initial analyses were primarily intended to demonstrate the usefulness of TED for addressing complex research questions that would be difficult to examine using data from a single study. The open and extensible nature of TED ensures that these questions can be revisited and refined as the database continues to grow. We see this as a first step toward more nuanced investigations of the truth effect grounded in large-scale, reproducible data.
 
-Lastly, we explored whether the magnitude of variance in the repetition effect differed depending on the delay between exposure and judgment---a key procedural variable in truth effect research. Schnuerch et al. (\protect\hyperlink{ref-schnuerch2021truth}{2021}) previously observed reduced individual differences in experiments with longer retention intervals. TED allowed us to extend their analysis to all included studies, estimating variability in the truth effect when the exposure and judgment occur on the same day as opposed to a delay of at least a day while taking variance at the procedure and statement level into account. Something about what we expected
+\hypertarget{limitations}{%
+\subsection{Limitations}\label{limitations}}
 
-In line with this expectation, we found that the variance in the random effect of repetition was indeed larger when judgments were made on the same day as exposure, compared to when judgments were delayed to a later day. Bayesian model analysis confirmed that this difference is indeed different from 0, indicating true differences in the subject-level variability of the truth effect depending on the delay between exposure and judgment phase.
+Different limitations of the current version of TED should be acknowledged. First, TED is not a comprehensive repository of all truth effect studies. The dataset is based primarily on the systematic review by Henderson et al.~(2022), and we have updated the database through our own literature searches. Consequently, any inferences drawn from analyses of TED should be interpreted in light of this selection bias: TED includes only those studies that have already made their data publicly available. To fully resolve issues of selection and interoperability, all original data would need to be made publicly accessible and well-documented. Nevertheless, TED represents a step toward this goal and is uniquely positioned to facilitate data harmonization; the entry mask and harmonization efforts implemented in the database reduce barriers to interoperable data for future research.
 
-\textbf{Interpretation, memory effects etc. }
-
-However, these exploratory results should be interpreted cautiously. We did not control for potential confounding factors such as sample composition, procedural variation, or other study-level covariates. \textbf{Something, in time with more data, this will become more representative. But it already points in one direction}
-
-Taken together, these initial analyses demonstrate TED's utility for modeling complex interactions and variance structures that would be difficult to assess using single-study data. The open, extensible nature of TED ensures that these questions can be revisited and refined as the database continues to grow. We see this as a first step toward more nuanced investigations of the truth effect grounded in large-scale, reproducible data.
+Second, the submission process still requires contributors to send data directly to the maintainers via email. Although this procedure is relatively low-tech, it was deliberately designed to minimize points of failure and attack, avoid server hosting costs, and foster direct contact between contributors and maintainers, which can support follow-up and clarification. Similarly, TED currently does not provide API or server access. Instead, data are accessible via a downloadable file and an accompanying R package, allowing researchers to interact with the database at their own pace and modify it as needed while limiting project complexity and costs.
 
 \hypertarget{future-research}{%
 \subsection{Future research}\label{future-research}}
 
 TED offers a unique foundation for advancing research through open, cumulative, and reproducible science. As the database grows in scope and depth, we anticipate several promising directions for future research and methodological development that TED is particularly well-positioned to support.
 
-One immediate application lies in enabling living meta-analyses of truth effect data that can evolve as new studies are contributed. \textbf{maybe add that this is different form meta-analysis, as the data is not true sample of all ITE studies, add that we provide this in the overview website} Closely related, TED can support customized power analyses based on empirical variance from real experimental data. Researchers designing new studies can use TED's trial-level data to simulate expected effects based on previously collected data with similar study characteristics, improving the precision and efficiency of future study planning.
+One immediate application lies in enabling living meta-analyses of truth effect data that can evolve as new studies are contributed. Importantly, the present data does not represent a random or comprehensive sample of all published ITE studies and therefore does not support a formal meta-analysis. Nevertheless, TED can be used to estimate average effect sizes among studies with openly available data. Given these limitations, we chose not to report an aggregate effect size in the current paper. However, we provide a proof-of-concept meta-analysis on TED's website (\url{https://slesche.github.io/ted-site/explore.html\#meta-analysis}).
 
-TED's reproducibility potential lies in its ability to support both the replication and reanalysis of existing studies using openly available, trial-level data. Researchers can directly replicate earlier truth effect experiments by matching procedural details drawn from the database, or they can reanalyze existing datasets to test new hypotheses, apply alternative statistical models, or verify published results. This facilitates both direct and conceptual replications and provides a foundation for transparent, data-driven reassessment of prior findings.
+Closely related, TED can support customized power analyses based on empirical variance from real experimental data. Researchers designing new studies can use TED's trial-level data to simulate expected effects based on previously collected data with similar study characteristics, improving the precision and efficiency of future study planning.
 
-Beyond replication, TED also enables the development of formal cognitive models of the truth effect. With detailed trial-level data and metadata on procedural variables, researchers can test and compare models such as drift diffusion models (\protect\hyperlink{ref-ratcliff2008diffusion}{Ratcliff \& McKoon, 2008}) or multinomial processing tree models (\protect\hyperlink{ref-calio2020explicit}{Calio et al., 2020}; \protect\hyperlink{ref-unkelbach2009multinomial}{Unkelbach \& Stahl, 2009}) of truth judgments. The scale and granularity of TED make it possible to fit hierarchical models across subjects, statements, or studies, and to split data into independent training and testing sets---supporting robust model evaluation and cross-validation. This opens the door for developing and benchmarking cognitive theories of truth judgments with strong empirical support.
+TED's reproducibility potential lies in its ability to support both the replication and reanalysis of existing studies using openly available, trial-level data. Researchers can directly replicate earlier truth effect experiments by matching procedural details drawn from the database, or they can reanalyze existing datasets to test new hypotheses, apply alternative statistical models, or verify published results. Thus, TED facilitates both direct and conceptual replications and provides a foundation for transparent, data-driven reassessment of prior findings.
+
+Beyond supporting replications, TED offers a foundation for formal modeling approaches to the truth effect. Its detailed trial-level data and metadata allow researchers to fit and validate cognitive process models -- such as drift diffusion (see e.g., Ratcliff \& McKoon, 2008) or multinomial processing tree models (see e.g., Calio et al., 2020; Unkelbach \& Stahl, 2009).
 
 Importantly, these efforts are supported by TED's intentional focus on long-term sustainability. The database is built with minimal reliance on proprietary infrastructure or paid software. All tools and data are hosted on open platforms, primarily GitHub, and contributions are made through transparent, version-controlled workflows. This lightweight architecture was chosen to promote longevity and ensure that TED remains accessible and modifiable regardless of funding cycles or institutional changes.
 
 To ensure proper attribution and foster community investment, users of TED data are expected to cite all original publications corresponding to the datasets they use. In return, contributions to TED not only extend the utility of existing research but also amplify the visibility of individual studies, creating a mutually reinforcing incentive structure for both data sharing and reuse.
 
-As TED continues to grow, we encourage researchers not only to contribute data but also to build on TED's infrastructure itself. TED itself is an extension of the Attentional Control Data Collection (ACDC) project (\protect\hyperlink{ref-haaf2025attentional}{Haaf et al., 2025}), improving on data submission and ease-of-use. Both projects can serve as a jumping-off point for future database development. All aspects of our project---including the SQL schema, submission interface, R extraction package, and the interactive overview website---are open source and fully forkable. Researchers are invited to reuse or adapt these components to develop similar infrastructures for other domains of psychological or behavioral science. In doing so, TED can help establish a broader culture of open, scalable, and sustainable data practices in experimental research.
+As TED continues to grow, we encourage researchers not only to contribute data but also to build on TED's infrastructure itself. TED itself is an extension of the Attentional Control Data Collection (ACDC) project (Haaf et al., 2025), improving on data submission and ease-of-use. Both projects can serve as a jumping-off point for future database development. All aspects of our project, including the SQL schema, submission interface, R extraction package, and the interactive overview website, are open source and fully forkable. Researchers are invited to reuse or adapt these components to develop similar infrastructures for other domains of psychological or behavioral science. In doing so, TED can help establish a broader culture of open, scalable, and sustainable data practices in experimental research.
 
-Taken together, these features position TED as a platform for cumulative science: one that supports rigorous replication, sophisticated cognitive modeling, empirical synthesis, and infrastructure reusability while lowering the barriers to collaboration and long-term research development.
+Taken together, these features position TED as a blueprint for cumulative science: one that supports rigorous replication, sophisticated cognitive modeling, empirical synthesis, and infrastructure reusability while lowering the barriers to collaboration and long-term research development.
 
 \hypertarget{conclusion}{%
 \subsection{Conclusion}\label{conclusion}}
 
-In this paper, we introduced the Truth Effect Database (TED), a structured, large-scale resource for cumulative research on truth judgments. TED includes not only standardized, trial-level data but also open tools for user interaction, including a submission interface and an R package for flexible data extraction.
+In this paper, we introduced the Truth Effect Database (TED), a structured, large-scale resource for cumulative research on truth judgments. TED includes not only standardized, trial-level data but also open tools for user interaction, including a submission interface and an R package for flexible data extraction. Additional details can be found on TED's homepage (\url{https://slesche.github.io/ted-site/}).
 
-We illustrated the utility of TED through initial multilevel analyses, which highlighted substantial subject-level variance in the truth effect and provide new evidence that individual differences in susceptibility to the truth effect systematically vary due to the length of the retention interval. These finding point to the need for further theoretical and empirical work on individual differences in susceptibility to repetition.
+We illustrated the utility of TED through Bayesian multilevel analyses, which highlighted substantial variance in the illusory truth effect at the subject level and provided new evidence that individual differences in susceptibility to the truth effect systematically vary as a function of the retention interval length. These findings point to the need for further theoretical and empirical work on individual differences in susceptibility to information repetition.
 
-Beyond this first demonstration, TED provides the foundation for a wide range of future research. These include living meta-analyses that evolve as new data are added, simulation-based power analyses informed by real-world variance, rigorous replication and reanalysis of existing studies, and the development of formal cognitive models. As an open and extensible infrastructure, TED also serves as a blueprint for sustainable, community-driven database development in psychological science.
+Beyond this first demonstration, TED provides the foundation for a wide range of future research. These include (living) meta-analyses, simulation-based power analyses, rigorous replication and reanalysis of existing studies, and the development of formal cognitive models. As an open and extensible infrastructure, TED also serves as a blueprint for sustainable, community-driven database development in psychological science.
 
 \newpage
 
 \hypertarget{references}{%
 \section{References}\label{references}}
 
+Arkes, H. R., Hackett, C., \& Boehm, L. (1989). The generality of the relation between
+familiarity and judged validity. Journal of Behavioral Decision Making, 2(2), 81--
+94. \url{https://doi.org/10.1002/bdm.3960020203}
+
+Aust, F., \& Barth, M. (2022). papaja: Prepare reproducible APA journal articles with R Markdown. \url{https://github.com/crsh/papaja}
+Bauer, P. J. (2022). Psychological science stepping up a level (2; Vol. 33, pp.~179--183). SAGE Publications Sage CA: Los Angeles, CA. \url{https://doi.org/10.1177/09567976221078527}
+
+Béna, J., Carreras, O., Terrier, P. (2019). Attention division and the truth effect: A case of moderation by source credibility manipulation. Unpublished.
+
+Béna, J., Carreras, O., Terrier, P. (2020). Does delay between exposure and truth judgement decrease the truth effect through a recollection impairment? A Remember/Know study''. Unpublished data
+
+Boehm, L. E. (1994). The validity effect: A search for mediating variables. Personality and Social Psychology Bulletin, 20(3), 285--293. \url{https://doi.org/10.1177/0146167294203006}
+
+Brashier, N. M., Eliseev, E. D., \& Marsh, E. J. (2020). An initial accuracy focus prevents illusory truth. Cognition, 194, 104054. \url{https://doi.org/10.1016/j.cognition.2019.104054}
+
+Bürkner, P.-C. (2017). brms: An R package for Bayesian multilevel models using Stan. Journal of Statistical Software, 80(1), 1--28. \url{https://doi.org/10.18637/jss.v080.i01}
+
+Bürkner, P.-C. (2018). Advanced Bayesian multilevel modeling with the R package brms. The R Journal, 10(1), 395--411. \url{https://doi.org/10.32614/RJ-2018-017}
+
+Bürkner, P.-C. (2021). Bayesian item response modeling in R with brms and Stan. Journal of Statistical Software, 100(5), 1--54. \url{https://doi.org/10.18637/jss.v100.i05}
+
+Calio, F., Nadarevic, L., \& Musch, J. (2020). How explicit warnings reduce the truth effect: A multinomial modeling approach. Acta Psychologica, 211, 103185. \url{https://doi.org/10.1016/j.actpsy.2020.103185}
+
+Corneille, O., Mierop, A., \& Unkelbach, C. (2020). Repetition increases both the perceived truth and fakeness of information: An ecological account. Cognition, 205, 104470. \url{https://doi.org/10.1016/j.cognition.2020.104470}
+
+Crüwell, S., Apthorp, D., Baker, B. J., Colling, L., Elson, M., Geiger, S. J., Lobentanzer, S., Monéger, J., Patterson, A., Schwarzkopf, D. S., et al.~(2023). What's in a badge? A computational reproducibility investigation of the open data badge policy in one issue of Psychological Science. Psychological Science, 34(4), 512--522. \url{https://doi.org/10.1177/09567976221140828}
+
+Dechêne, A., Stahl, C., Hansen, J., \& Wänke, M. (2009). Mix me a list: Context moderates the truth effect and the mere-exposure effect. Journal of Experimental Social Psychology, 45(5), 1117--1122. \url{https://doi.org/10.1016/j.jesp.2009.06.019}
+
+Dechêne, A., Stahl, C., Hansen, J., \& Wänke, M. (2010). The truth about the truth: A meta-analytic review of the truth effect. Personality and Social Psychology Review, 14(2), 238--257. \url{https://doi.org/10.1177/1088868309352251}
+
+De Keersmaecker, J., Dunning, D., Pennycook, G., Rand, D. G., Sanchez, C., Unkelbach, C., \& Roets, A. (2020). Investigating the robustness of the illusory truth effect across individual differences in cognitive ability, need for cognitive closure, and cognitive style. Personality and Social Psychology Bulletin, 46(2), 204--215. \url{https://doi.org/10.1177/0146167219853844}
+
+De keersmaecker, J., Unkelbach, C., \& Roets, A. (2024). Truth-by-repetition across languages.. Journal of Applied Research in Memory and Cognition. Advance online publication. \url{https://dx.doi.org/10.1037/} mac0000175
+
+De Keersmaecker, J., Wiernik, B. M., Roets, A., \& Unkelbach, C. (2025). Truth by repetition reliably differs between people over time. \url{https://doi.org/10.31234/osf.io/aeukr_v1}
+
+Deutsche Forschungsgemeinschaft. (2025, 3. April). Förderprogramm „Informationsinfrastrukturen für Forschungsdaten``. \url{https://www.dfg.de/de/foerderung/foerdermoeglichkeiten/programme/infrastruktur/lis/lis-foerderangebote/forschungsdaten}
+
+DiFonzo, N., Beckstead, J. W., Stupak, N., \& Walders, K. (2016). Validity judgments of rumors heard multiple times: The shape of the truth effect. Social Influence, 11(1), 22--39. \url{https://doi.org/10.1080/15534510.2015.1137224}
+
+Ecker, U., Lewandowsky, S., \& Chadwick, M. (2020). Can corrections spread misinformation to new audiences? Testing for the elusive familiarity backfire effect. \url{https://doi.org/10.31234/osf.io/qrm69}
+
+Fazio, L. K., Rand, D. G., \& Pennycook, G. (2019). Repetition increases perceived truth equally for plausible and implausible statements. Psychonomic Bulletin \& Review, 26(5), 1705-1710. \url{https://doi.org/10.3758/s13423-019-01651-4}
+
+Foster, E. D., \& Deardorff, A. (2017). Open Science Framework (OSF). Journal of the Medical Library Association, 105(2). \url{https://doi.org/10.5195/jmla.2017.88}
+
+Gorgolewski, K. J., Auer, T., Calhoun, V. D., Craddock, R. C., Das, S., Duff, E. P., Flandin, G., Ghosh, S. S., Glatard, T., Halchenko, Y. O., et al.~(2016). The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Scientific Data, 3(1), 1--9. \url{https://doi.org/10.1038/sdata.2016.44}
+
+Haaf, J. M., Hoffstadt, M., \& Lesche, S. (2025). Attentional control data collection: A resource for efficient data reuse. Behavior Research Methods, 57(8), 208. \url{https://doi.org/10.3758/s13428-025-02717-z}
+
+Hardwicke, T. E., Bohn, M., MacDonald, K., Hembacher, E., Nuijten, M. B., Peloquin, B. N., DeMayo, B. E., Long, B., Yoon, E. J., \& Frank, M. C. (2021). Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: An observational study. Royal Society Open Science, 8(1), 201494. \url{https://doi.org/10.1098/rsos.201494}
+
+Hasher, L., Goldstein, D., \& Toppino, T. (1977). Frequency and the conference of referential validity. Journal of Verbal Learning and Verbal Behavior, 16(1), 107--112. \url{https://doi.org/10.1016/S0022-5371(77)80012-1}
+
+Hatzidaki, A., Santesteban, M., \& Navarrete, E. (2025). Illusory truth effect across languages and scripts. Psychonomic Bulletin \& Review, 32 (3), 1231--1239. \url{https://doi.org/10.3758/s13423-024-02596-z}
+
+Henderson, E. L., Simons, D. J., \& Barr, D. J. (2021). The trajectory of truth: A longitudinal study of the illusory truth effect. Journal of Cognition, 4 (1), 29. \url{https://doi.org/10.5334/joc.161}
+
+Henderson, E. L., Westwood, S. J., \& Simons, D. J. (2022). A reproducible systematic map of research on the illusory truth effect. Psychonomic Bulletin \& Review, 29(3), 1065--1088. \url{https://doi.org/10.3758/s13423-021-01995-w}
+
+Hipp, R. D. (2020). SQLite (Version 3.31.1).
+
+Ioannidis, J. P. (2005). Why most published research findings are false. PLoS Medicine, 2(8), e124. \url{https://doi.org/10.1371/journal.pmed.0020124}
+
+Jalbert, M., Newman, E., \& Schwarz, N. (2020). Only half of what i'll tell you is true: Expecting to encounter falsehoods reduces illusory truth. Journal of Applied Research in Memory and Cognition, 9(4), 602-613. \url{https://doi.org/10.1016/j.jarmac.2020.08.010}
+
+Kim, C. (2002). The role of individual differences in general skepticism in the illusory truth effect {[}Doctoral dissertation, University of Cincinnati{]}. ProQuest. \url{https://search.proquest.com/docview/304789925}
+
+Lacassagne, D., Béna, J., \& Corneille, O. (2022). Is Earth a perfect square? Repetition increases the perceived truth of highly implausible statements. Cognition, 223, 105052. \url{https://doi.org/10.1016/j.cognition.2022.105052}
+
+Lesche, S. (2025). Acdcquery: Query the attentional control data collection. \url{https://github.com/SLesche/acdc-query}
+
+Lonsdorf, T. B., \& Ehlers, M. R. (2025, April 5). curated data collection (the FEAR BASE). Retrieved from osf.io/rkp3a
+
+Lorenzoni, A., Faccio, R., \& Navarrete, E. (2024). Does foreign-accented speech affect credibility? Evidence from the illusory-truth paradigm. Journal of Cognition, 7 (1), 26. \url{https://doi.org/10.5334/joc.353}
+
+Munafò, M. R., Nosek, B. A., Bishop, D. V., Button, K. S., Chambers, C. D., Percie du Sert, N., Simonsohn, U., Wagenmakers, E.-J., Ware, J. J., \& Ioannidis, J. P. (2017). A manifesto for reproducible science. Nature Human Behaviour, 1(1), 0021. \url{https://doi.org/10.1038/s41562-016-0021}
+
+Murray, S., Stanley, M., McPhetres, J., Pennycook, G., \& Seli, P. (2020). ``I've said it before and I will say it again'': Repeating statements made by Donald Trump increases perceived truthfulness for individuals across the political spectrum. \url{https://doi.org/10.31234/osf.io/9evzc}
+
+Nadarevic, L. (2007). A failed replication of the truth effect. Unpublished raw data. doi: 10.17605/OSF.IO/FW2QE
+
+Nadarevic, L. (2010). Die Wahrheitsillusion \protect\hyperlink{the-illusory-truth-effect}{The illusory truth effect}. Berlin: Verlag Dr.~Köster.
+
+Nadarevic, L. \& Rinnewitz, L. (2011). Judgment mode instructions do not moderate the truth effect. Unpublished raw data. doi: 10.17605/OSF.IO/3UAJ7
+
+Nadarevic L., Meckler D., \& Schmidt, A. (2012). An investigation of the truth effect and different personality traits. Unpublished raw data. doi: 10.17605/OSF.IO/6WV4Z
+
+Nadarevic, L., \& Erdfelder, E. (2014). Initial judgment task and delay of the final validity-rating task moderate the truth effect. Consciousness and cognition, 23, 74-84. \url{https://doi.org/10.1016/j.concog.2013.12.002}
+
+Nadarevic, L., \& Aßfalg, A. (2017). Unveiling the truth: Warnings reduce the repetition-based truth effect. Psychological Research, 81, 814-826. \url{https://doi.org/10.1007/s00426-016-0777-y}
+
+Nadarevic, L., Plier, S., Thielmann, I., \& Darancó, S. (2018). Foreign language reduces the longevity of the repetition-based truth effect. Acta psychologica, 191, 149-159. \url{https://doi.org/10.1016/j.actpsy.2018.08.019}
+
+Nadarevic, L., Reber, R., Helmecke, A. J., \& Köse, D. (2020). Perceived truth of statements and simulated social media postings: an experimental investigation of source credibility, repeated exposure, and presentation format. Cognitive Research: Principles and Implications, 5(1), 1-16. \url{https://doi.org/10.1186/s41235-020-00251-4}
+
+Nadarevic, L., Schnuerch, M., \& Stegemann, M. J. (2021). Judging fast and slow: The truth effect does not increase under time-pressure conditions. Judgment and Decision Making, 16(5), 1234-1266. \url{http://journal.sjdm.org/21/210111b/jdm210111b.pdf}
+
+Nadarevic, L., \& Erdfelder, E. (2025). On the relationship between recognition judgments and truth judgments: Memory states moderate the recognition-based truth effect. Journal of Experimental Psychology: Learning, Memory, and Cognition. \url{https://doi.org/10.31234/osf.io/2vzpx_v2}
+
+Newman, E. J., Jalbert, M. C., Schwarz, N., \& Ly, D. P. (2020). Truthiness, the illusory truth effect, and the role of need for cognition. Consciousness and Cognition, 78, 102866. \url{https://doi.org/10.1016/j.concog.2019.102866}
+
+Nosek, B. A., Alter, G., Banks, G. C., Borsboom, D., Bowman, S. D., Breckler, S. J., Buck, S., Chambers, C. D., Chin, G., Christensen, G., et al.~(2015). Promoting an open research culture. Science, 348(6242), 1422--1425. \url{https://doi.org/10.1126/science.aab2374}
+
+Pennycook, G., Cannon, T. D., \& Rand, D. G. (2018). Prior exposure increases perceived accuracy of fake news. Journal of Experimental Psychology: General, 147(12), 1865. \url{https://doi.org/10.1037/xge0000465}
+
+Poldrack, R. A., Markiewicz, C. J., Appelhoff, S., Ashar, Y. K., Auer, T., Baillet, S., Bansal, S., Beltrachini, L., Benar, C. G., Bertazzoli, G., et al.~(2024). The past, present, and future of the brain imaging data structure (BIDS). Imaging Neuroscience, 2, 1--19. \url{https://doi.org/10.1162/imag_a_00103}
+
+R Core Team. (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing. \url{https://www.R-project.org/}
+
+Ratcliff, R., \& McKoon, G. (2008). The diffusion decision model: Theory and data for two-choice decision tasks. Neural Computation, 20(4), 873--922. \url{https://doi.org/10.1162/neco.2008.12-06-420}
+
+Reber, R. \& Unkelbach, C. (2010). The epistemic status of processing fluency as source
+for judgments of truth. Review of Philosophy and Psychology, 1, 563--581.
+\url{https://doi.org/10.1007/s13164-010-0039-7}
+
+Schnuerch, M., Nadarevic, L., \& Rouder, J. N. (2021). The truth revisited: Bayesian analysis of individual differences in the truth effect. Psychonomic Bulletin \& Review, 28(3), 750--765. \url{https://doi.org/10.3758/s13423-020-01814-8}
+
+Stan Development Team. (2024). RStan: The R interface to Stan. \url{https://mc-stan.org/}
+
+Stump, A., Rummel, J., \& Voss, A. (2022). Is it all about the feeling? Affective and (meta-) cognitive mechanisms underlying the truth effect. Psychological Research, 86, 12--36. \url{https://doi.org/10.1007/s00426-020-01459-1}
+
+Sundar, A., Kardes, F. R., \& Wright, S. A. (2015). The influence of repetitive health messages and sensitivity to fluency on the truth effect in advertising. Journal of Advertising, 44(4), 375--387. \url{https://doi.org/10.1080/00913367.2015.1045154}
+
+Unkelbach, C., \& Stahl, C. (2009). A multinomial modeling approach to dissociate different components of the truth effect. Consciousness and Cognition, 18(1), 22--38. \url{https://doi.org/10.1016/j.concog.2008.09.006}
+
+Unkelbach, C., \& Greifeneder, R. (2018). Experiential fluency and declarative advice jointly inform judgments of truth. Journal of Experimental Social Psychology, 79, 78-86. \url{https://doi.org/10.1016/j.jesp.2018.06.010}
+
+Vogel, T., Silva, R. R., Thomas, A., \& Wänke, M. (2020). Truth is in the mind, but beauty is in the eye: Fluency effects are moderated by a match between fluency source and judgment dimension. Journal of Experimental Psychology: General. \url{https://doi.org/10.1037/xge0000731}
+
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+
+Wilkinson, M. D., Dumontier, M., Aalbersberg, Ij. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.-W., da Silva Santos, L. B., Bourne, P. E., et al.~(2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, 3(1), 1--9. \url{https://doi.org/10.1038/sdata.2016.18}
+
+Xie, Y. (2015). Dynamic documents with R and knitr (2nd ed.). Chapman; Hall/CRC. \url{https://yihui.org/knitr/} \url{https://doi.org/10.1201/b15166}
+
+Zajdler, S., \& Schnuerch, M. (2025). A psychometrics of individual differences in the truth
+effect. PsyArXiv. \url{https://doi.org/10.31234/osf.io/y67qt_v1}
+
 \hypertarget{refs}{}
 \begin{CSLReferences}{1}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-R-papaja}{}}%
 Aust, F., \& Barth, M. (2022). \emph{{papaja}: {Prepare} reproducible {APA} journal articles with {R Markdown}}. \url{https://github.com/crsh/papaja}
-
-\leavevmode\vadjust pre{\hypertarget{ref-R-lme4}{}}%
-Bates, D., Mächler, M., Bolker, B., \& Walker, S. (2015). Fitting linear mixed-effects models using {lme4}. \emph{Journal of Statistical Software}, \emph{67}(1), 1--48. \url{https://doi.org/10.18637/jss.v067.i01}
-
-\leavevmode\vadjust pre{\hypertarget{ref-bauer2022psychological}{}}%
-Bauer, P. J. (2022). \emph{Psychological science stepping up a level} (2; Vol. 33, pp. 179--183). SAGE Publications Sage CA: Los Angeles, CA.
 
 \leavevmode\vadjust pre{\hypertarget{ref-R-brms_a}{}}%
 Bürkner, P.-C. (2017). {brms}: An {R} package for {Bayesian} multilevel models using {Stan}. \emph{Journal of Statistical Software}, \emph{80}(1), 1--28. \url{https://doi.org/10.18637/jss.v080.i01}
@@ -533,76 +848,22 @@ Bürkner, P.-C. (2018). Advanced {Bayesian} multilevel modeling with the {R} pac
 \leavevmode\vadjust pre{\hypertarget{ref-R-brms_c}{}}%
 Bürkner, P.-C. (2021). Bayesian item response modeling in {R} with {brms} and {Stan}. \emph{Journal of Statistical Software}, \emph{100}(5), 1--54. \url{https://doi.org/10.18637/jss.v100.i05}
 
-\leavevmode\vadjust pre{\hypertarget{ref-calio2020explicit}{}}%
-Calio, F., Nadarevic, L., \& Musch, J. (2020). How explicit warnings reduce the truth effect: {A} multinomial modeling approach. \emph{Acta Psychologica}, \emph{211}, 103185.
-
-\leavevmode\vadjust pre{\hypertarget{ref-cruwell2023s}{}}%
-Crüwell, S., Apthorp, D., Baker, B. J., Colling, L., Elson, M., Geiger, S. J., Lobentanzer, S., Monéger, J., Patterson, A., Schwarzkopf, D. S., et al. (2023). What's in a badge? {A} computational reproducibility investigation of the open data badge policy in one issue of {Psychological Science}. \emph{Psychological Science}, \emph{34}(4), 512--522.
-
-\leavevmode\vadjust pre{\hypertarget{ref-fosterOpenScienceFramework2017}{}}%
-Foster, E. D., \& Deardorff, A. (2017). Open {Science Framework} ({OSF}). \emph{Journal of the Medical Library Association}, \emph{105}(2). \url{https://doi.org/10.5195/jmla.2017.88}
-
-\leavevmode\vadjust pre{\hypertarget{ref-gorgolewski2016brain}{}}%
-Gorgolewski, K. J., Auer, T., Calhoun, V. D., Craddock, R. C., Das, S., Duff, E. P., Flandin, G., Ghosh, S. S., Glatard, T., Halchenko, Y. O., et al. (2016). The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. \emph{Scientific Data}, \emph{3}(1), 1--9.
-
-\leavevmode\vadjust pre{\hypertarget{ref-haaf2025attentional}{}}%
-Haaf, J. M., Hoffstadt, M., \& Lesche, S. (2025). Attentional control data collection: {A} resource for efficient data reuse. \emph{Behavior Research Methods}, \emph{57}(8), 208.
-
-\leavevmode\vadjust pre{\hypertarget{ref-hardwicke2021analytic}{}}%
-Hardwicke, T. E., Bohn, M., MacDonald, K., Hembacher, E., Nuijten, M. B., Peloquin, B. N., DeMayo, B. E., Long, B., Yoon, E. J., \& Frank, M. C. (2021). Analytic reproducibility in articles receiving open data badges at the journal {Psychological Science}: {An} observational study. \emph{Royal Society Open Science}, \emph{8}(1), 201494.
-
-\leavevmode\vadjust pre{\hypertarget{ref-hendersonReproducibleSystematicMap2022}{}}%
-Henderson, E. L., Westwood, S. J., \& Simons, D. J. (2022). A reproducible systematic map of research on the illusory truth effect. \emph{Psychonomic Bulletin \& Review}, \emph{29}(3), 1065--1088. \url{https://doi.org/10.3758/s13423-021-01995-w}
-
-\leavevmode\vadjust pre{\hypertarget{ref-sqlite2020hipp}{}}%
-Hipp, R. D. (2020). \emph{{SQLite}} (Version 3.31.1).
-
-\leavevmode\vadjust pre{\hypertarget{ref-ioannidis2005most}{}}%
-Ioannidis, J. P. (2005). Why most published research findings are false. \emph{PLoS Medicine}, \emph{2}(8), e124.
-
 \leavevmode\vadjust pre{\hypertarget{ref-R-acdcquery}{}}%
 Lesche, S. (2025). \emph{Acdcquery: Query the attentional control data collection}. \url{https://github.com/SLesche/acdc-query}
-
-\leavevmode\vadjust pre{\hypertarget{ref-munafo2017manifesto}{}}%
-Munafò, M. R., Nosek, B. A., Bishop, D. V., Button, K. S., Chambers, C. D., Percie du Sert, N., Simonsohn, U., Wagenmakers, E.-J., Ware, J. J., \& Ioannidis, J. P. (2017). A manifesto for reproducible science. \emph{Nature Human Behaviour}, \emph{1}(1), 0021.
-
-\leavevmode\vadjust pre{\hypertarget{ref-nosek2015promoting}{}}%
-Nosek, B. A., Alter, G., Banks, G. C., Borsboom, D., Bowman, S. D., Breckler, S. J., Buck, S., Chambers, C. D., Chin, G., Christensen, G., et al. (2015). Promoting an open research culture. \emph{Science}, \emph{348}(6242), 1422--1425.
-
-\leavevmode\vadjust pre{\hypertarget{ref-poldrack2024past}{}}%
-Poldrack, R. A., Markiewicz, C. J., Appelhoff, S., Ashar, Y. K., Auer, T., Baillet, S., Bansal, S., Beltrachini, L., Benar, C. G., Bertazzoli, G., et al. (2024). The past, present, and future of the brain imaging data structure ({BIDS}). \emph{Imaging Neuroscience}, \emph{2}, 1--19.
 
 \leavevmode\vadjust pre{\hypertarget{ref-R-base}{}}%
 R Core Team. (2022). \emph{R: A language and environment for statistical computing}. R Foundation for Statistical Computing. \url{https://www.R-project.org/}
 
-\leavevmode\vadjust pre{\hypertarget{ref-ratcliff2008diffusion}{}}%
-Ratcliff, R., \& McKoon, G. (2008). The diffusion decision model: Theory and data for two-choice decision tasks. \emph{Neural Computation}, \emph{20}(4), 873--922.
-
-\leavevmode\vadjust pre{\hypertarget{ref-schnuerch2021truth}{}}%
-Schnuerch, M., Nadarevic, L., \& Rouder, J. N. (2021). The truth revisited: {Bayesian} analysis of individual differences in the truth effect. \emph{Psychonomic Bulletin \& Review}, \emph{28}(3), 750--765.
-
-\leavevmode\vadjust pre{\hypertarget{ref-unkelbach2009multinomial}{}}%
-Unkelbach, C., \& Stahl, C. (2009). A multinomial modeling approach to dissociate different components of the truth effect. \emph{Consciousness and Cognition}, \emph{18}(1), 22--38.
+\leavevmode\vadjust pre{\hypertarget{ref-R-rstan}{}}%
+Stan Development Team. (2024). \emph{{RStan}: The {R} interface to {Stan}}. \url{https://mc-stan.org/}
 
 \leavevmode\vadjust pre{\hypertarget{ref-R-tidyverse}{}}%
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., \ldots{} Yutani, H. (2019). Welcome to the {tidyverse}. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
-
-\leavevmode\vadjust pre{\hypertarget{ref-wilkinson2016fair}{}}%
-Wilkinson, M. D., Dumontier, M., Aalbersberg, Ij. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.-W., da Silva Santos, L. B., Bourne, P. E., et al. (2016). The {FAIR Guiding Principles} for scientific data management and stewardship. \emph{Scientific Data}, \emph{3}(1), 1--9.
 
 \leavevmode\vadjust pre{\hypertarget{ref-R-knitr}{}}%
 Xie, Y. (2015). \emph{Dynamic documents with {R} and knitr} (2nd ed.). Chapman; Hall/CRC. \url{https://yihui.org/knitr/}
 
 \end{CSLReferences}
-
-\newpage
-
-\hypertarget{appendix-appendix}{%
-\appendix}
-
-
-\hypertarget{talking-about-appendices}{%
-\section{Talking about appendices}\label{talking-about-appendices}}
 
 
 \end{document}
