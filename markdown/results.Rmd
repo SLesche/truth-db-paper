@@ -226,6 +226,8 @@ sd_posterior_plot <- mcmc_areas(
     legend.title = element_text(family = "Times New Roman")
   )
 
-# ggsave("images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9, scale = 0.8)
-sd_posterior_plot
+ggsave("markdown/images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9)
+knitr::include_graphics("images/sd_posterior_plot.png")
 ```
+
+

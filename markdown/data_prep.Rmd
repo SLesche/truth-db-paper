@@ -50,11 +50,26 @@ procedure_data <- query_db(
   "procedure_table"
 )
 
-full_data <- query_db(
-  conn,
-  all_argument,
-  c("default", "study_id", "publication_id", "statement_text", "statement_accuracy", "statementset_id", "statementset_publication", "within_description", "between_description", "repetition_time", "n_statements", "phase", "truth_instructions", "repetition_instructions", "truth_instruction_timing", "repetition_instruction_timing", "truth_rating_scale", "truth_rating_steps"),
-  "observation_table"
+full_data <- suppressMessages(
+  suppressWarnings(
+    { 
+      invisible(
+        capture.output(
+          result <- query_db(
+            conn,
+            all_argument,
+            c("default", "study_id", "publication_id", "statement_text", "statement_accuracy", 
+              "statementset_id", "statementset_publication", "within_description", 
+              "between_description", "repetition_time", "n_statements", "phase", 
+              "truth_instructions", "repetition_instructions", "truth_instruction_timing", 
+              "repetition_instruction_timing", "truth_rating_scale", "truth_rating_steps"),
+            "observation_table"
+          )
+        )
+      )
+      result
+    }
+  )
 )
 
 references_table <- query_db(

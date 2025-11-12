@@ -149,7 +149,7 @@ study_overview_plot <- ggplot(plot_study_data, aes(x = variable, y = n, fill = v
     legend.title = element_text(family = "Times New Roman")
   )
 
-study_overview_plot
+# study_overview_plot
 
 ggsave("markdown/images/study_overview_plot.png", study_overview_plot, width = 16, height = 9)
 
@@ -255,7 +255,7 @@ procedure_overview_plot <- ggplot(plot_procedure_data, aes(x = variable, y = n, 
     legend.title = element_text(family = "Times New Roman")
   )
 
-procedure_overview_plot
+# procedure_overview_plot
 
 ggsave("markdown/images/procedure_overview_plot.png", procedure_overview_plot, width = 16, height = 9)
 ```
@@ -353,9 +353,9 @@ compute_BFs <- function(fit, param_names, prior_sd = 0.5) {
   })
 }
 
-calc_BF(as_draws_matrix(model_full_dichotomous_bayes, "b_repeated"), 1)
-calc_BF(as_draws_matrix(model_full_scale_bayes, "b_repeated"), 1)
-calc_BF(as_draws_matrix(model_time_scale_bayes, "b_repeated"), 1)
+# calc_BF(as_draws_matrix(model_full_dichotomous_bayes, "b_repeated"), 1)
+# calc_BF(as_draws_matrix(model_full_scale_bayes, "b_repeated"), 1)
+# calc_BF(as_draws_matrix(model_time_scale_bayes, "b_repeated"), 1)
 
 ```
 

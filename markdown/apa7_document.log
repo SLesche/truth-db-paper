@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.11)  11 NOV 2025 18:38
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (MiKTeX 25.4) (preloaded format=pdflatex 2025.9.11)  12 NOV 2025 17:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1153,47 +1153,10 @@ n/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}
 ]
 
 [2]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-60.
-(C:\Users\Sven\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-<C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/output/a
-pa7_document_files/figure-latex/unnamed-chunk-18-1.pdf, id=22, 469.755pt x 325.
-215pt>
-File: C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/out
-put/apa7_document_files/figure-latex/unnamed-chunk-18-1.pdf Graphic file (type 
-pdf)
-<use C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/outp
-ut/apa7_document_files/figure-latex/unnamed-chunk-18-1.pdf>
-Package pdftex.def Info: C:/Users/Sven/Documents/projects/research/ted/truth-db
--paper/markdown/output/apa7_document_files/figure-latex/unnamed-chunk-18-1.pdf 
- used on input line 264.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/output/a
-pa7_document_files/figure-latex/unnamed-chunk-18-2.pdf, id=23, 469.755pt x 325.
-215pt>
-File: C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/out
-put/apa7_document_files/figure-latex/unnamed-chunk-18-2.pdf Graphic file (type 
-pdf)
-<use C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/outp
-ut/apa7_document_files/figure-latex/unnamed-chunk-18-2.pdf>
-Package pdftex.def Info: C:/Users/Sven/Documents/projects/research/ted/truth-db
--paper/markdown/output/apa7_document_files/figure-latex/unnamed-chunk-18-2.pdf 
- used on input line 264.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Overfull \hbox (36.13383pt too wide) in paragraph at lines 264--265
-[][] 
- []
+[3]
 
-
-
-[3 <C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/outpu
-t/apa7_document_files/figure-latex/unnamed-chunk-18-1.pdf>]
-
-[4 <C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/outpu
-t/apa7_document_files/figure-latex/unnamed-chunk-18-2.pdf>]
+[4]
 
 [5]
 
@@ -1202,90 +1165,85 @@ t/apa7_document_files/figure-latex/unnamed-chunk-18-2.pdf>]
 [7]
 
 [8]
-
-[9]
-
-[10]
-<./images/ted-overview.png, id=85, 2910.875pt x 2103.86pt>
+<./images/ted-overview.png, id=60, 2910.875pt x 2103.86pt>
 File: ./images/ted-overview.png Graphic file (type png)
 <use ./images/ted-overview.png>
-Package pdftex.def Info: ./images/ted-overview.png  used on input line 327.
+Package pdftex.def Info: ./images/ted-overview.png  used on input line 309.
 (pdftex.def)             Requested size: 469.747pt x 339.51369pt.
 
 
-[11 <./images/ted-overview.png>]
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 346.
+[9]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
+22.
+(C:\Users\Sven\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 
-Underfull \vbox (badness 10000) detected at line 371
+[10 <./images/ted-overview.png>]
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <12> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 328.
+
+
+[11]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 370.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 370.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 370.
+
+Overfull \hbox (205.70654pt too wide) in paragraph at lines 382--449
+ [] 
  []
+
+
+LaTeX Warning: Float too large for page by 804.14177pt on input line 451.
 
 
 
 [12]
 
 [13]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 388.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 388.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 388.
-
-Overfull \hbox (205.70654pt too wide) in paragraph at lines 400--467
- [] 
- []
-
-
-LaTeX Warning: Float too large for page by 804.14177pt on input line 469.
-
-<images/study_overview_plot.png, id=127, 1156.32pt x 650.43pt>
+<images/study_overview_plot.png, id=128, 1156.32pt x 650.43pt>
 File: images/study_overview_plot.png Graphic file (type png)
 <use images/study_overview_plot.png>
-Package pdftex.def Info: images/study_overview_plot.png  used on input line 476
+Package pdftex.def Info: images/study_overview_plot.png  used on input line 458
 .
 (pdftex.def)             Requested size: 422.76788pt x 237.80693pt.
-<images/procedure_overview_plot.png, id=129, 1156.32pt x 650.43pt>
+<images/procedure_overview_plot.png, id=130, 1156.32pt x 650.43pt>
 File: images/procedure_overview_plot.png Graphic file (type png)
 <use images/procedure_overview_plot.png>
 Package pdftex.def Info: images/procedure_overview_plot.png  used on input line
- 485.
+ 467.
 (pdftex.def)             Requested size: 469.75385pt x 264.23653pt.
 
 
 [14{C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.en
-c}{C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
+c}{C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc} <.
+/images/study_overview_plot.png>]
 
-[15]
+[15 <./images/procedure_overview_plot.png>]
 
-[16 <./images/study_overview_plot.png>]
-
-[17 <./images/procedure_overview_plot.png>]
-
-[18{C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
+[16{C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
 c}]
 
+[17]
+
+[18]
+<images/sd_posterior_plot.png, id=174, 1156.32pt x 650.43pt>
+File: images/sd_posterior_plot.png Graphic file (type png)
+<use images/sd_posterior_plot.png>
+Package pdftex.def Info: images/sd_posterior_plot.png  used on input line 613.
+(pdftex.def)             Requested size: 469.75385pt x 264.23653pt.
+
+
 [19]
-<C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/output/a
-pa7_document_files/figure-latex/time-model-plot-1.pdf, id=193, 469.755pt x 325.
-215pt>
-File: C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/out
-put/apa7_document_files/figure-latex/time-model-plot-1.pdf Graphic file (type p
-df)
-<use C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/outp
-ut/apa7_document_files/figure-latex/time-model-plot-1.pdf>
-Package pdftex.def Info: C:/Users/Sven/Documents/projects/research/ted/truth-db
--paper/markdown/output/apa7_document_files/figure-latex/time-model-plot-1.pdf  
-used on input line 631.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-
-[20]
+[20 <./images/sd_posterior_plot.png>]
 
 [21]
 
-[22 <C:/Users/Sven/Documents/projects/research/ted/truth-db-paper/markdown/outp
-ut/apa7_document_files/figure-latex/time-model-plot-1.pdf>]
+[22]
 
 [23]
 
@@ -1309,26 +1267,22 @@ ut/apa7_document_files/figure-latex/time-model-plot-1.pdf>]
 
 [33]
 
-[34]
+[34] AED endfloat: Processing end Figures and Tables
 
-[35]
-
-[36] AED endfloat: Processing end Figures and Tables
-
-[37] (apa7_document.aux)
+[35] (apa7_document.aux)
  ***********
 LaTeX2e <2025-06-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 29794 strings out of 468149
- 554250 string characters out of 5431566
- 1006855 words of memory out of 5000000
- 57617 multiletter control sequences out of 15000+600000
+ 29778 strings out of 468149
+ 551301 string characters out of 5431566
+ 1005854 words of memory out of 5000000
+ 57603 multiletter control sequences out of 15000+600000
  709028 words of font info for 168 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 99i,12n,105p,3049b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 99i,12n,105p,3093b,599s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb
 ><C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb
 ><C:/Users/Sven/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb>
@@ -1343,9 +1297,9 @@ n/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/Sven
 AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtk10.pfb><C:/Users/Sven/A
 ppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/Sven/Ap
 pData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtti10.pfb>
-Output written on apa7_document.pdf (37 pages, 1579357 bytes).
+Output written on apa7_document.pdf (35 pages, 1764221 bytes).
 PDF statistics:
- 507 PDF objects out of 1000 (max. 8388607)
- 98 named destinations out of 1000 (max. 500000)
- 41139 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 474 PDF objects out of 1000 (max. 8388607)
+ 96 named destinations out of 1000 (max. 500000)
+ 41129 words of extra memory for PDF output out of 42996 (max. 10000000)
 
