@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/1006411199.svg)](https://doi.org/10.5281/zenodo.17592982)
+
 # Introducing the Truth Effect Database (TED)
 This repository contains the data and code for reproducing all results reported in our paper "Introducing the Truth Effect Database
 (TED): An Open Trial-Level Resource Promoting FAIR Data in Truth Effect Research".
