@@ -47,7 +47,7 @@ Once all required information has been entered and validated, contributors final
 Data can be submitted at any stage of the research process (e.g. immediately after data collection, upon release of a preprint, or following formal publication). If the status of the associated manuscript changes, contributors can easily update this information by contacting the TED maintainers and informing them of the new status.
 
 ### Data Extraction
-We extended the R package *acdcquery* [@R-acdcquery] to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can define filter arguments using `add_argument()` and request specific variables from any table in the database using `query_db()`. 
+We extended the R package *acdcquery* [@R-acdcquery] to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can download the latest version of the database using `download_ted()`, connect to the database using `connect_to_db()`, define filter arguments using `add_argument()` and request specific variables from any table in the database using `query_db()`.
 
 For example, users may request all available trial-level data from studies with greater than 200 participants from the test phase using the code below:
 
