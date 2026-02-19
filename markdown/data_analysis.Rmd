@@ -17,6 +17,8 @@ compute_new = FALSE
 ```
 
 ```{r}
+# full_data <- data.table::fread("./markdown/data/full_data.csv")
+
 analysis_data <- full_data %>% 
   filter(phase == "test") %>% 
   filter(!is.na(repeated), !is.na(response)) %>% 

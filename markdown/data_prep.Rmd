@@ -10,7 +10,18 @@ library(acdcquery)
 ```
 
 ```{r}
-conn <- connect_to_db("./markdown/data/ted.db")
+path_to_db <- "./markdown/data/ted.db"
+if (!file.exists(path_to_db)){
+  download_ted(dirname(path_to_db))
+} else {
+  update_ted(path_to_db, update = TRUE)
+}
+
+if (!check_ted(path_to_db)){
+  stop("TED is not up-to-date")
+}
+  
+conn <- connect_to_db(path_to_db)
 
 all_argument <- list() %>% 
   add_argument(
