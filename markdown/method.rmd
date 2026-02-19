@@ -7,9 +7,17 @@ The database is implemented using Structured Query Language (SQL), specifically 
 
 As a relational database system, SQLite supports the use of multiple interconnected tables. This structure enables efficient organization of complex data relationships. For instance, each publication may include several studies, which themselves involve multiple experimental conditions. By organizing data across discrete, normalized tables rather than in a single flat file, TED minimizes redundancy and enhances both storage efficiency and query performance.
 
-The design of our database is illustrated in Figure 1. Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a publication_table and raw data at the lowest level in the observation_table. In addition, we included information on the study, the conditions, the procedure, the statements used, their origin, and additional variables collected in the experiment in respective tables.
+The design of our database is illustrated in Figure 1. Broadly, we make use of a table for each part of data related to truth effect experiments. Meta-data concerning the publications themselves as the highest order are stored in a publication_table and raw data at the lowest level in the observation_table. Between these two levels, additional tables capture detailed information about studies, procedures, materials, and collected measures:
+•	*publication_table*: Contains meta-data about the publication (e.g., authors, year, journal).
+•	*study_table*: Includes study-level information such as participant characteristics, use of filler tasks, and the location of raw data in online repositories.
+•	*procedure_table*: Describes the experimental procedure, including commonly manipulated variables in truth effect research (e.g., type of repetition, delay between exposure and judgment phase, warnings about the truth effect).
+•	*between_table*: Lists between-subject manipulations not already encoded in the *procedure_table.*
+•	*within_table*: Lists within-subject manipulations not already encoded in the *procedure_table.*
+•	*statementset_table*: Provides information about the publication or source from which a set of statements was retrieved.
+•	*statement_table*: Contains the text of each statement and its accuracy classification.
+•	*measure_table*: Includes information about additional measures collected during the experiment. Although raw data for these measures are not included due to limited overlap across studies, researchers can use this table to filter relevant studies and retrieve corresponding raw data separately.
+•	*observation_table*: Stores the harmonized raw trial-level data, representing the lowest level of the database structure.
 
-The study_table contains information about the participants, the use of a filler task, or the location of the raw data in an online repository. The measure_table contains information about additional measures collected during the experiment. As there are very few additional measurements collected by multiple studies, we chose not to include raw data on additional measures. Nonetheless, researchers can use TED as a tool to filter studies that collected measures of interest and then retrieve the raw data for this subset of studies later on. For example, researchers can filter the measure_table to only include studies that also collected data on the individual need for cognitive closure (NCC) and then leverage TED’s already harmonized trial data in further analyses. The statementset_table and the statement_table contain information about the publication from which a set of statements was retrieved and the text and accuracy of a statement, respectively. The procedure_table contains information about the procedure of the experiment. The most common variables manipulated in truth effect studies, such as the type of repetition, delay between exposure and judgment phase, or warning about the truth effect, can be encoded here. All other manipulations can be found in the between_table or within_table.
 
 (ref:database-overview-plot) Overview of TED Structure
 ```{r database-overview-plot,  fig.cap = paste("(ref:database-overview-plot)"), out.width="100%"}
@@ -31,27 +39,38 @@ For example, users may request all available trial-level data from studies with 
 ```{r, eval = FALSE, echo = TRUE}
 library(acdcquery)
 
+download_ted("path/to/")
+
+# OR check whether your version is up-to-date using check_ted("path/to/ted.db")
+# and update it using update_ted("path/to/ted.db")
+
 conn <- connect_to_db("path/to/ted.db")
 
-arguments <- list() %>% 
-  add_argument(
-    conn,
-    "n_participants",
-    "greater",
-    200
-  ) %>% 
-  add_argument(
-    conn,
-    "phase",
-    "equal",
-    "test"
+arguments <- list() %>% add_argument(
+    conn = conn,
+    variable = "publication_id", # You can use any variable name from TED, no need to specify its table
+    operator = "greater",
+    values = 0
+  ) %>%
+  add_argument(  # You can chain together multiple arguments
+    conn = conn,
+    variable = "phase", # You can use any variable name from TED, no need to specify its table
+    operator = "equal",
+    values = "test"
   )
 
-results <- query_db(
-  conn, 
-  arguments,
-  target_vars = "default", # Returns all variables in target_table
-  target_table = "observation table"
+procedure_results <- query_db(
+  conn = conn,
+  arguments = arguments,
+  target_vars = c("default", "publication_id"), # "default" will automatically return all vars in "target_table"
+  target_table = "procedure_table"
+)
+
+trial_results <- query_db(
+  conn = conn,
+  arguments = arguments,
+  target_vars = c("default", "phase"), # You can add any variable from any table to be added to the result
+  target_table = "observation_table"
 )
 ```
 
