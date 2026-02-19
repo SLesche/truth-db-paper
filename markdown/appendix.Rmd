@@ -2,139 +2,73 @@
 Arkes, H. R., Hackett, C., & Boehm, L. (1989). The generality of the relation between
 familiarity and judged validity. Journal of Behavioral Decision Making, 2(2), 81–
 94. https://doi.org/10.1002/bdm.3960020203
-
 Aust, F., & Barth, M. (2022). papaja: Prepare reproducible APA journal articles with R Markdown. https://github.com/crsh/papaja
 Bauer, P. J. (2022). Psychological science stepping up a level (2; Vol. 33, pp. 179–183). SAGE Publications Sage CA: Los Angeles, CA. https://doi.org/10.1177/09567976221078527
-
 Béna, J., Carreras, O., Terrier, P. (2019). Attention division and the truth effect: A case of moderation by source credibility manipulation. Unpublished.
-
 Béna, J., Carreras, O., Terrier, P. (2020). Does delay between exposure and truth judgement decrease the truth effect through a recollection impairment? A Remember/Know study". Unpublished data
-
 Boehm, L. E. (1994). The validity effect: A search for mediating variables. Personality and Social Psychology Bulletin, 20(3), 285–293. https://doi.org/10.1177/0146167294203006
-
 Brashier, N. M., Eliseev, E. D., & Marsh, E. J. (2020). An initial accuracy focus prevents illusory truth. Cognition, 194, 104054. https://doi.org/10.1016/j.cognition.2019.104054
-
 Bürkner, P.-C. (2017). brms: An R package for Bayesian multilevel models using Stan. Journal of Statistical Software, 80(1), 1–28. https://doi.org/10.18637/jss.v080.i01
-
 Bürkner, P.-C. (2018). Advanced Bayesian multilevel modeling with the R package brms. The R Journal, 10(1), 395–411. https://doi.org/10.32614/RJ-2018-017
-
 Bürkner, P.-C. (2021). Bayesian item response modeling in R with brms and Stan. Journal of Statistical Software, 100(5), 1–54. https://doi.org/10.18637/jss.v100.i05
-
 Calio, F., Nadarevic, L., & Musch, J. (2020). How explicit warnings reduce the truth effect: A multinomial modeling approach. Acta Psychologica, 211, 103185. https://doi.org/10.1016/j.actpsy.2020.103185
-
 Corneille, O., Mierop, A., & Unkelbach, C. (2020). Repetition increases both the perceived truth and fakeness of information: An ecological account. Cognition, 205, 104470. https://doi.org/10.1016/j.cognition.2020.104470
-
 Crüwell, S., Apthorp, D., Baker, B. J., Colling, L., Elson, M., Geiger, S. J., Lobentanzer, S., Monéger, J., Patterson, A., Schwarzkopf, D. S., et al. (2023). What’s in a badge? A computational reproducibility investigation of the open data badge policy in one issue of Psychological Science. Psychological Science, 34(4), 512–522. https://doi.org/10.1177/09567976221140828
-
 Dechêne, A., Stahl, C., Hansen, J., & Wänke, M. (2009). Mix me a list: Context moderates the truth effect and the mere-exposure effect. Journal of Experimental Social Psychology, 45(5), 1117–1122. https://doi.org/10.1016/j.jesp.2009.06.019
-
 Dechêne, A., Stahl, C., Hansen, J., & Wänke, M. (2010). The truth about the truth: A meta-analytic review of the truth effect. Personality and Social Psychology Review, 14(2), 238–257. https://doi.org/10.1177/1088868309352251
-
 De Keersmaecker, J., Dunning, D., Pennycook, G., Rand, D. G., Sanchez, C., Unkelbach, C., & Roets, A. (2020). Investigating the robustness of the illusory truth effect across individual differences in cognitive ability, need for cognitive closure, and cognitive style. Personality and Social Psychology Bulletin, 46(2), 204–215. https://doi.org/10.1177/0146167219853844
-
 De keersmaecker, J., Unkelbach, C., & Roets, A. (2024). Truth-by-repetition across languages.. Journal of Applied Research in Memory and Cognition. Advance online publication. https://dx.doi.org/10.1037/ mac0000175
-
 De Keersmaecker, J., Wiernik, B. M., Roets, A., & Unkelbach, C. (2025). Truth by repetition reliably differs between people over time. https://doi.org/10.31234/osf.io/aeukr_v1
-
 Deutsche Forschungsgemeinschaft. (2025, 3. April). Förderprogramm „Informationsinfrastrukturen für Forschungsdaten“. https://www.dfg.de/de/foerderung/foerdermoeglichkeiten/programme/infrastruktur/lis/lis-foerderangebote/forschungsdaten 
-
 DiFonzo, N., Beckstead, J. W., Stupak, N., & Walders, K. (2016). Validity judgments of rumors heard multiple times: The shape of the truth effect. Social Influence, 11(1), 22–39. https://doi.org/10.1080/15534510.2015.1137224
-
 Ecker, U., Lewandowsky, S., & Chadwick, M. (2020). Can corrections spread misinformation to new audiences? Testing for the elusive familiarity backfire effect. https://doi.org/10.31234/osf.io/qrm69
-
 Fazio, L. K., Rand, D. G., & Pennycook, G. (2019). Repetition increases perceived truth equally for plausible and implausible statements. Psychonomic Bulletin & Review, 26(5), 1705-1710. https://doi.org/10.3758/s13423-019-01651-4
-
 Foster, E. D., & Deardorff, A. (2017). Open Science Framework (OSF). Journal of the Medical Library Association, 105(2). https://doi.org/10.5195/jmla.2017.88
-
 Gorgolewski, K. J., Auer, T., Calhoun, V. D., Craddock, R. C., Das, S., Duff, E. P., Flandin, G., Ghosh, S. S., Glatard, T., Halchenko, Y. O., et al. (2016). The brain imaging data structure, a format for organizing and describing outputs of neuroimaging experiments. Scientific Data, 3(1), 1–9. https://doi.org/10.1038/sdata.2016.44
-
 Haaf, J. M., Hoffstadt, M., & Lesche, S. (2025). Attentional control data collection: A resource for efficient data reuse. Behavior Research Methods, 57(8), 208. https://doi.org/10.3758/s13428-025-02717-z
-
 Hardwicke, T. E., Bohn, M., MacDonald, K., Hembacher, E., Nuijten, M. B., Peloquin, B. N., DeMayo, B. E., Long, B., Yoon, E. J., & Frank, M. C. (2021). Analytic reproducibility in articles receiving open data badges at the journal Psychological Science: An observational study. Royal Society Open Science, 8(1), 201494. https://doi.org/10.1098/rsos.201494
-
 Hasher, L., Goldstein, D., & Toppino, T. (1977). Frequency and the conference of referential validity. Journal of Verbal Learning and Verbal Behavior, 16(1), 107–112. https://doi.org/10.1016/S0022-5371(77)80012-1
-
 Hatzidaki, A., Santesteban, M., & Navarrete, E. (2025). Illusory truth effect across languages and scripts. Psychonomic Bulletin & Review, 32 (3), 1231–1239. https://doi.org/10.3758/s13423-024-02596-z
-
 Henderson, E. L., Simons, D. J., & Barr, D. J. (2021). The trajectory of truth: A longitudinal study of the illusory truth effect. Journal of Cognition, 4 (1), 29. https://doi.org/10.5334/joc.161
-
 Henderson, E. L., Westwood, S. J., & Simons, D. J. (2022). A reproducible systematic map of research on the illusory truth effect. Psychonomic Bulletin & Review, 29(3), 1065–1088. https://doi.org/10.3758/s13423-021-01995-w
-
 Hipp, R. D. (2020). SQLite (Version 3.31.1).
-
 Ioannidis, J. P. (2005). Why most published research findings are false. PLoS Medicine, 2(8), e124. https://doi.org/10.1371/journal.pmed.0020124
-
 Jalbert, M., Newman, E., & Schwarz, N. (2020). Only half of what i’ll tell you is true: Expecting to encounter falsehoods reduces illusory truth. Journal of Applied Research in Memory and Cognition, 9(4), 602-613. https://doi.org/10.1016/j.jarmac.2020.08.010
-
 Kim, C. (2002). The role of individual differences in general skepticism in the illusory truth effect [Doctoral dissertation, University of Cincinnati]. ProQuest. https://search.proquest.com/docview/304789925
-
 Lacassagne, D., Béna, J., & Corneille, O. (2022). Is Earth a perfect square? Repetition increases the perceived truth of highly implausible statements. Cognition, 223, 105052. https://doi.org/10.1016/j.cognition.2022.105052
-
 Lesche, S. (2025). Acdcquery: Query the attentional control data collection. https://github.com/SLesche/acdc-query
-
 Lonsdorf, T. B., & Ehlers, M. R. (2025, April 5). curated data collection (the FEAR BASE). Retrieved from osf.io/rkp3a
-
 Lorenzoni, A., Faccio, R., & Navarrete, E. (2024). Does foreign-accented speech affect credibility? Evidence from the illusory-truth paradigm. Journal of Cognition, 7 (1), 26. https://doi.org/10.5334/joc.353
-
 Munafò, M. R., Nosek, B. A., Bishop, D. V., Button, K. S., Chambers, C. D., Percie du Sert, N., Simonsohn, U., Wagenmakers, E.-J., Ware, J. J., & Ioannidis, J. P. (2017). A manifesto for reproducible science. Nature Human Behaviour, 1(1), 0021. https://doi.org/10.1038/s41562-016-0021
-
 Murray, S., Stanley, M., McPhetres, J., Pennycook, G., & Seli, P. (2020). "I’ve said it before and I will say it again": Repeating statements made by Donald Trump increases perceived truthfulness for individuals across the political spectrum. https://doi.org/10.31234/osf.io/9evzc
-
 Nadarevic, L. (2007). A failed replication of the truth effect. Unpublished raw data. doi: 10.17605/OSF.IO/FW2QE
-
 Nadarevic, L. (2010). Die Wahrheitsillusion [The illusory truth effect]. Berlin: Verlag Dr. Köster.
-
 Nadarevic, L. & Rinnewitz, L. (2011). Judgment mode instructions do not moderate the truth effect. Unpublished raw data. doi: 10.17605/OSF.IO/3UAJ7
-
 Nadarevic L., Meckler D., & Schmidt, A. (2012). An investigation of the truth effect and different personality traits. Unpublished raw data. doi: 10.17605/OSF.IO/6WV4Z
-
 Nadarevic, L., & Erdfelder, E. (2014). Initial judgment task and delay of the final validity-rating task moderate the truth effect. Consciousness and cognition, 23, 74-84. https://doi.org/10.1016/j.concog.2013.12.002
-
 Nadarevic, L., & Aßfalg, A. (2017). Unveiling the truth: Warnings reduce the repetition-based truth effect. Psychological Research, 81, 814-826. https://doi.org/10.1007/s00426-016-0777-y
-
 Nadarevic, L., Plier, S., Thielmann, I., & Darancó, S. (2018). Foreign language reduces the longevity of the repetition-based truth effect. Acta psychologica, 191, 149-159. https://doi.org/10.1016/j.actpsy.2018.08.019
-
 Nadarevic, L., Reber, R., Helmecke, A. J., & Köse, D. (2020). Perceived truth of statements and simulated social media postings: an experimental investigation of source credibility, repeated exposure, and presentation format. Cognitive Research: Principles and Implications, 5(1), 1-16. https://doi.org/10.1186/s41235-020-00251-4
-
 Nadarevic, L., Schnuerch, M., & Stegemann, M. J. (2021). Judging fast and slow: The truth effect does not increase under time-pressure conditions. Judgment and Decision Making, 16(5), 1234-1266. http://journal.sjdm.org/21/210111b/jdm210111b.pdf
-
 Nadarevic, L., & Erdfelder, E. (2025). On the relationship between recognition judgments and truth judgments: Memory states moderate the recognition-based truth effect. Journal of Experimental Psychology: Learning, Memory, and Cognition. https://doi.org/10.31234/osf.io/2vzpx_v2
-
 Newman, E. J., Jalbert, M. C., Schwarz, N., & Ly, D. P. (2020). Truthiness, the illusory truth effect, and the role of need for cognition. Consciousness and Cognition, 78, 102866. https://doi.org/10.1016/j.concog.2019.102866
-
 Nosek, B. A., Alter, G., Banks, G. C., Borsboom, D., Bowman, S. D., Breckler, S. J., Buck, S., Chambers, C. D., Chin, G., Christensen, G., et al. (2015). Promoting an open research culture. Science, 348(6242), 1422–1425. https://doi.org/10.1126/science.aab2374
-
 Pennycook, G., Cannon, T. D., & Rand, D. G. (2018). Prior exposure increases perceived accuracy of fake news. Journal of Experimental Psychology: General, 147(12), 1865. https://doi.org/10.1037/xge0000465
-
 Poldrack, R. A., Markiewicz, C. J., Appelhoff, S., Ashar, Y. K., Auer, T., Baillet, S., Bansal, S., Beltrachini, L., Benar, C. G., Bertazzoli, G., et al. (2024). The past, present, and future of the brain imaging data structure (BIDS). Imaging Neuroscience, 2, 1–19. https://doi.org/10.1162/imag_a_00103
-
 R Core Team. (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing. https://www.R-project.org/
-
 Ratcliff, R., & McKoon, G. (2008). The diffusion decision model: Theory and data for two-choice decision tasks. Neural Computation, 20(4), 873–922. https://doi.org/10.1162/neco.2008.12-06-420
-
 Reber, R. & Unkelbach, C. (2010). The epistemic status of processing fluency as source
 for judgments of truth. Review of Philosophy and Psychology, 1, 563–581.
 https://doi.org/10.1007/s13164-010-0039-7
-
 Schnuerch, M., Nadarevic, L., & Rouder, J. N. (2021). The truth revisited: Bayesian analysis of individual differences in the truth effect. Psychonomic Bulletin & Review, 28(3), 750–765. https://doi.org/10.3758/s13423-020-01814-8
-
 Stan Development Team. (2024). RStan: The R interface to Stan. https://mc-stan.org/
-
 Stump, A., Rummel, J., & Voss, A. (2022). Is it all about the feeling? Affective and (meta-) cognitive mechanisms underlying the truth effect. Psychological Research, 86, 12–36. https://doi.org/10.1007/s00426-020-01459-1
-
-Sundar, A., Kardes, F. R., & Wright, S. A. (2015). The influence of repetitive health messages and sensitivity to fluency on the truth effect in advertising. Journal of Advertising, 44(4), 375–387. https://doi.org/10.1080/00913367.2015.1045154
-
+Stump, A., Voss, A., & Rummel, J. (2024). The illusory certainty: Information repetition and impressions of truth enhance subjective confidence in validity judgments independently of the factual truth. Psychological Research, 88(4), 1288–1297. https://doi.org/10.1007/s00426-024-01956-7
+ Sundar, A., Kardes, F. R., & Wright, S. A. (2015). The influence of repetitive health messages and sensitivity to fluency on the truth effect in advertising. Journal of Advertising, 44(4), 375–387. https://doi.org/10.1080/00913367.2015.1045154
 Unkelbach, C., & Stahl, C. (2009). A multinomial modeling approach to dissociate different components of the truth effect. Consciousness and Cognition, 18(1), 22–38. https://doi.org/10.1016/j.concog.2008.09.006
-
 Unkelbach, C., & Greifeneder, R. (2018). Experiential fluency and declarative advice jointly inform judgments of truth. Journal of Experimental Social Psychology, 79, 78-86. https://doi.org/10.1016/j.jesp.2018.06.010
-
 Vogel, T., Silva, R. R., Thomas, A., & Wänke, M. (2020). Truth is in the mind, but beauty is in the eye: Fluency effects are moderated by a match between fluency source and judgment dimension. Journal of Experimental Psychology: General. https://doi.org/10.1037/xge0000731
-
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., Grolemund, G., Hayes, A., Henry, L., Hester, J., Kuhn, M., Pedersen, T. L., Miller, E., Bache, S. M., Müller, K., Ooms, J., Robinson, D., Seidel, D. P., Spinu, V., … Yutani, H. (2019). Welcome to the tidyverse. Journal of Open Source Software, 4(43), 1686. https://doi.org/10.21105/joss.01686
-
 Wilkinson, M. D., Dumontier, M., Aalbersberg, Ij. J., Appleton, G., Axton, M., Baak, A., Blomberg, N., Boiten, J.-W., da Silva Santos, L. B., Bourne, P. E., et al. (2016). The FAIR Guiding Principles for scientific data management and stewardship. Scientific Data, 3(1), 1–9. https://doi.org/10.1038/sdata.2016.18
-
 Xie, Y. (2015). Dynamic documents with R and knitr (2nd ed.). Chapman; Hall/CRC. https://yihui.org/knitr/ https://doi.org/10.1201/b15166
 
-Zajdler, S., & Schnuerch, M. (2025). A psychometrics of individual differences in the truth
-effect. PsyArXiv. https://doi.org/10.31234/osf.io/y67qt_v1
