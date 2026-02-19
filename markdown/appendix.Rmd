@@ -55,6 +55,7 @@ Newman, E. J., Jalbert, M. C., Schwarz, N., & Ly, D. P. (2020). Truthiness, the 
 Nosek, B. A., Alter, G., Banks, G. C., Borsboom, D., Bowman, S. D., Breckler, S. J., Buck, S., Chambers, C. D., Chin, G., Christensen, G., et al. (2015). Promoting an open research culture. Science, 348(6242), 1422–1425. https://doi.org/10.1126/science.aab2374
 Pennycook, G., Cannon, T. D., & Rand, D. G. (2018). Prior exposure increases perceived accuracy of fake news. Journal of Experimental Psychology: General, 147(12), 1865. https://doi.org/10.1037/xge0000465
 Poldrack, R. A., Markiewicz, C. J., Appelhoff, S., Ashar, Y. K., Auer, T., Baillet, S., Bansal, S., Beltrachini, L., Benar, C. G., Bertazzoli, G., et al. (2024). The past, present, and future of the brain imaging data structure (BIDS). Imaging Neuroscience, 2, 1–19. https://doi.org/10.1162/imag_a_00103
+Psychometric Society. (2026, January 15). Call for Papers: Psychometrika Special Issue — Data Intensive Methods in Psychometrics. Retrieved [19.02.2026], from https://www.psychometricsociety.org/post/call-special-issue-intensive-methods
 R Core Team. (2022). R: A language and environment for statistical computing. R Foundation for Statistical Computing. https://www.R-project.org/
 Ratcliff, R., & McKoon, G. (2008). The diffusion decision model: Theory and data for two-choice decision tasks. Neural Computation, 20(4), 873–922. https://doi.org/10.1162/neco.2008.12-06-420
 Reber, R. & Unkelbach, C. (2010). The epistemic status of processing fluency as source
