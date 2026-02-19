@@ -29,7 +29,22 @@ knitr::include_graphics(
 This relational approach provides a clear and modular organization of data sources, linking tables through unique identifier variables. We argue that while the use of a relational database adds some complexity, it also introduces an intuitive naming system and structure for variables of interest. Importantly, our goal is that variable names and their table location are the only knowledge that users need to have in order to interact with the database. To this end, we have developed tools that require little to no understanding of the database structure or SQL in order to submit and extract data from the database.
 
 ### Data Submission
-To ease the process of submitting data to the database, we built a website (https://slesche.github.io/truth-effect-database/) that guides users through the submission process and checks submitted information for inconsistencies or errors. This website is designed to minimize both the effort of submitting new data to the database as well as identify potential errors in the submission process.
+To ease the process of submitting data to the database, we built a website (https://slesche.github.io/truth-effect-database/) that guides users through the submission process and checks submitted information for inconsistencies or errors (see Figure \@ref(fig:submission-overview-png)). This website is designed to minimize both the effort of submitting new data to the database as well as proactively identify potential errors in the submission process. 
+
+(ref:submission-overview-png) Screenshot of the TED data entry webpage
+```{r submission-overview-png,  fig.cap = paste("(ref:submission-overview-png)"), out.width="100%"}
+knitr::include_graphics(
+ path = "./images/screenshot_submission_homepage.png"
+)
+```
+
+Contributors are prompted to provide information across all levels of the database, including publication metadata, study characteristics, experimental conditions, statements, and raw trial data. Importantly, this also requires formatting the raw data according to the documented TED variable names. By placing the responsibility for mapping and labeling variables on the researchers most familiar with the dataset, ambiguities about variable meaning are resolved at the source and the data are directly translated into a standardized format that is transparent and usable for the broader community. 
+
+The system cross-checks entered metadata against the uploaded raw data (e.g., verifying the number and coding of conditions or statements) and provides immediate feedback if inconsistencies arise. These automated validation steps ensure that submissions are internally coherent and can be smoothly integrated into the harmonized database structure, while maintaining a low barrier to contribution.
+
+Once all required information has been entered and validated, contributors finalize their submission by clicking the “Submit Data” button. This action generates and downloads a finalized JSON file containing the complete submission package. Contributors then send this file to the TED maintainers for review and final approval, after which the data are integrated into the database.
+
+Data can be submitted at any stage of the research process (e.g. immediately after data collection, upon release of a preprint, or following formal publication). If the status of the associated manuscript changes, contributors can easily update this information by contacting the TED maintainers and informing them of the new status.
 
 ### Data Extraction
 We extended the R package *acdcquery* [@R-acdcquery] to simplify the process of extracting data. This package provides functions to facilitate connection to the database and extraction of data. Users can define filter arguments using `add_argument()` and request specific variables from any table in the database using `query_db()`. 
