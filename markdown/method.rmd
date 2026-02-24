@@ -53,6 +53,7 @@ For example, users may request all available trial-level data from studies with 
 
 ```{r, eval = FALSE, echo = TRUE}
 library(acdcquery)
+library(magrittr) # for pipes
 
 download_ted("path/to/")
 
