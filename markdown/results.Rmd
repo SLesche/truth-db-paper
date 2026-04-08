@@ -213,7 +213,7 @@ sd_posterior_plot <- mcmc_areas(
     labels = c(
       "sd_1"= "Subject (retention interval < 1 day)",
       "sd_0" = "Subject (retention interval >= 1 day)",
-      "sd_procedure" = "Procedure",
+      "sd_procedure" = "Experiment",
       "sd_statement" = "Statement"
     )
   )+
@@ -226,7 +226,7 @@ sd_posterior_plot <- mcmc_areas(
     legend.title = element_text(family = "Times New Roman")
   )
 
-ggsave("markdown/images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9)
+ggsave("images/sd_posterior_plot.png", sd_posterior_plot, width = 16, height = 9)
 knitr::include_graphics("images/sd_posterior_plot.png")
 ```
 
